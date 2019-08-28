@@ -1,13 +1,19 @@
 class OrdersController < ApplicationController
+
   def last
   end
 
   def recommended
   end
+  
+   def new
+    @order = Order.new
+  end
+
 
   def create
-    @shopping_list = ["3560070435210", "3083681055269", "5000159404259", "5900311003996"]
-    @order = Order.new(user: User.first, purchase_date: Time.now)
+    @order = Order.new(user: current_user, purchase_date: Time.now)
+    @shopping_list = order_params[:shopping_list]
     @shopping_list.each do |item|
       if Product.where(code: item).any?
         product = Product.where(code: item).first
@@ -18,6 +24,13 @@ class OrdersController < ApplicationController
     end
     @order.save
     @order.product_facts
+    redirect_to root_path
+  end
+
+private 
+  
+  def order_params
+    params.require(:order).permit(:shopping_list)
   end
 
 end
