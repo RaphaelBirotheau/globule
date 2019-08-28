@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     shopping_list = order_params[:shopping_list]
+    redirect_to root_path
   end
 
   private
