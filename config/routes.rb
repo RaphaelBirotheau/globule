@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   resources :user_profiles, only: [:show, :new, :create]
 
+
+
   resources :orders, only: [:show, :new, :create]
+
 
   resources :products, only: [:show]
 

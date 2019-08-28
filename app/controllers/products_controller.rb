@@ -1,2 +1,4 @@
+
 class ProductsController < ApplicationController
+
 end
