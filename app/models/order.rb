@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
 
+
   def product_facts
       nutrition_score_array = []
       packaging_array = []
@@ -14,12 +15,13 @@ class Order < ApplicationRecord
       additives_array = []
 
     self.products.each do | product |
-      nutrition_score_array << Product.where(code: product[:code]).first.nutrition_grades_tags
-      packaging_array << Product.where(code: product[:code]).first.nutrition_grades_tags
-      product_category_array << Product.where(code: product[:code]).first.pnns_group_1
-      product_sub_category_array << Product.where(code: product[:code]).first.nutrition_grades_tags
-      country_origin_repartion << Product.where(code: product[:code]).first.nutrition_grades_tags
-      additives_array << Product.where(code: product[:code]).first.additives_tags
+      current_product = Product.where(code: product[:code])
+      nutrition_score_array << current_product.first.nutrition_grades_tags
+      packaging_array << current_product.first.packaging_tags
+      product_category_array << current_product.first.pnns_group_1
+      product_sub_category_array << current_product.first.pnns_group_2
+      country_origin_repartion << current_product.first.countries_tags
+      additives_array << current_product.first.additives_tags
     end
 
     self.nutrition_score_repartition = nutrition_score_array
