@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   resources :products, only: [:show]
 
-  resources :baskets, only:[:show]
+  root to: 'orders#last'
 
-  root to: 'pages#home'
+  get "/basket", to: "orders#recommended"
 
   get "/my_profile", to: "users#profile"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
