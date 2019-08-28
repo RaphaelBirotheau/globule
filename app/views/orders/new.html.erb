@@ -1,0 +1,8 @@
+<div class="offset-2 col-8">
+    <h2 class="mt-5 mb-5 text-center">Create your order</h2>
+
+  <%= simple_form_for @order do |f|%>
+    <%= f.input :shopping_list %>
+    <%= f.submit %>
+    <% end %>
+</div>
