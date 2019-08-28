@@ -21,7 +21,7 @@ class Product < ApplicationRecord
     self.brands = product["product"]["brands"]
     self.stores_tags = product["product"]["stores_tags"]
     self.labels_tags = product["product"]["labels_tags"]
-    self.countries_tags = product["product"]["countries_tags"]
+    self.countries_tags = product["product"]["countries"]
     self.ingredients_tags = product["product"]["ingredients_tags"]
     self.packaging_tags = product["product"]["packaging_tags"]
     self.product_quantity = product["product"]["product_quantity"]
@@ -31,11 +31,8 @@ class Product < ApplicationRecord
     self.pnns_group_1 = product["product"]["pnns_groups_1"]
     self.pnns_group_2 = product["product"]["pnns_groups_2"]
     self.image_front_url = product["product"]["image_front_url"]
-
-    print self.ingredients_tags
-
-
-    # self.remote_image_front_url_url = product["product"]
     self.save
+    # self.remote_image_front_url_url = product["product"]
+
   end
 end
