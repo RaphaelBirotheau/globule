@@ -1,4 +1,22 @@
 <h2>C'est ici qu'on va display la dernière liste du user</h2>
 <%= link_to "Create order", new_order_path %>
 
-    <%= render 'shared/footer' %>
+<div class="accordion" id="accordionExample">
+<% Order.last.products.each do |product| %>
+  <div class="card">
+    <div class="card-header" id="heading<%= product.id %>">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="false" aria-controls="collapse<%= product.id %>">
+          <%= product.generic_name_fr %>
+        </button>
+      </h2>
+    </div>
+    <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
+      <div class="card-body">
+        <%= product.nutrition_grades_tags %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<% Order.last.products.each do |product| %>
