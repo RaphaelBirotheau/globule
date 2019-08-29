@@ -13,7 +13,6 @@
 //   });
 // }
 
-A METTRE DANS LE HTML
 //  <button class="collapsible"><p><%= product.generic_name_fr %></p></button>
 // <div class="content">
 //   <p><%= product.nutrition_grades_tags %></p>
