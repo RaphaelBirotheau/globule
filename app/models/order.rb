@@ -32,5 +32,4 @@ class Order < ApplicationRecord
     self.additives_repartition = additives_array
     self.save
   end
-
 end
