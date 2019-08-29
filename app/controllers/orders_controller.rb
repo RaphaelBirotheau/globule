@@ -7,6 +7,7 @@ after_action :create_user_profile, only: [:create]
   def recommended
   end
 
+
   def create_user_profile
     UserProfile.create!(user: current_user) if !current_user.user_profile
   end
@@ -18,7 +19,7 @@ after_action :create_user_profile, only: [:create]
 
   def create
     @order = Order.new(user: current_user, purchase_date: Time.now)
-    @shopping_list = order_params[:shopping_list].gsub(" ","").split(',')
+    @shopping_list = order_params[:shopping_list].gsub(" ", "").split(',')
     @shopping_list.each do |item|
       if Product.where(code: item).any?
         product = Product.where(code: item).first
