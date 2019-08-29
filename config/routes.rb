@@ -3,13 +3,16 @@ Rails.application.routes.draw do
 
   resources :user_profiles, only: [:show, :new, :create]
 
-  resources :orders, only: [:show]
+
+
+  resources :orders, only: [:show, :new, :create]
+
 
   resources :products, only: [:show]
 
   resources :profiles, only: [:show]
 
-  root to: 'orders#last'
+  root to: 'pages#home'
 
   get "/recommandations", to: "orders#recommended"
   get "/lastbasket", to: "orders#last"

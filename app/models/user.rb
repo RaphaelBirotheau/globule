@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  has_one :user_profile
-  has_many :orders
+  after_commit :create_user_profile
+
+  has_one :user_profile, dependent: :destroy
+  has_many :orders, dependent: :destroy
   has_many :order_items, through: :orders
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -5,7 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'csv'
 
-csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
-filepath    = 'biocoop.csv'
+User.destroy_all
+
+carrefour_user = User.new(email: "carrefour@gmail.com", password: "carrefour")
+
+biocoop_user = User.new(email: "biocoop@gmail.com", password: "biocoop")
