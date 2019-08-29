@@ -1,9 +1,15 @@
 class OrdersController < ApplicationController
-
+after_action :global_facts, only: [:create]
+after_action :create_user_profile, only: [:create]
   def last
   end
 
   def recommended
+  end
+
+
+  def create_user_profile
+    UserProfile.create!(user: current_user) if !current_user.user_profile
   end
 
    def new

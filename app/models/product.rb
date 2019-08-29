@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   after_create :call_open_food_fact
 
   def call_open_food_fact
+
     barcode = self.code
     url = "https://fr.openfoodfacts.org/api/v0/produit/#{barcode}.json"
     product_serialized = open(url).read

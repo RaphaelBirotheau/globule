@@ -6,9 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# carrefour_user = User.new(email: "carrefour@gmail.com", password: "carrefour")
+User.destroy_all
 
-# biocoop_user = User.new(email: "biocoop@gmail.com", password: "biocoop")
+carrefour_user = User.new(email: "carrefour@gmail.com", password: "carrefour")
 
-# UserProfile.new()
-
+biocoop_user = User.new(email: "biocoop@gmail.com", password: "biocoop")
