@@ -1,17 +1,16 @@
 .btn-mid-size {
   color: $dark-blue;
   border: 1px solid $blue;
-  background: rgb(240,240,240);
-  padding: 35px 45px;
+  padding: 10px 10px;
   border-radius: 3px;
-  font-weight: lighter;
+  font-weight: normal;
   font-size: 20px;
   margin-top: 10px;
   opacity: 0.6
 }
 
 .btn-mid-size:hover {
-  background-image: url(https://media.giphy.com/media/C8OGiVp4BIjXW/giphy.gif);
-  color: rgba(0,0,0,0);
-  background-position: center
+  color: $blue;
+  background-position: center;
+  text-decoration: none;
 }
