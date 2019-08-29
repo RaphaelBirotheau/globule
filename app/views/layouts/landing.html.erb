@@ -10,13 +10,8 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <div class="container-global" style="height: 73vh;">
-      <%= yield %>
-    </div>
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
-    <%= render 'shared/footer' %>
   </body>
 </html>
