@@ -7,6 +7,7 @@ after_action :create_user_profile, only: [:create]
   end
 
   def recommended
+    @order = Order.last
   end
 
   def create_user_profile

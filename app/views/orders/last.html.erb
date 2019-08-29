@@ -1,5 +1,8 @@
-<%= link_to "Create order", new_order_path %>
-<p>MY LAST BASKET</p>
+<div class="container-global" style="height: 73vh;">
+
+
+  <%= link_to "Create order", new_order_path %>
+  <h1>MY LAST BASKET</h1>
 
 
 <div class="accordion" id="accordionExample">
@@ -105,6 +108,10 @@
       </div>
     </div>
   </div>
+  <% end %>
 </div>
-<% end %>
-
+<div class="footer-position">
+  <input type="checkbox" id="switch" />
+  <label for="switch"></label>
+  <%= link_to "", recommandations_path, class: "d-none hidden-link" %>
+</div>

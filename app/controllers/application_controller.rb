@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     global_country_origin_repartion = []
     global_additives_array = []
 
-
     current_user.orders.each do |order|
       global_nutrition_score_array << order.nutrition_score_repartition
       global_packaging_array << order.packaging_repartition
