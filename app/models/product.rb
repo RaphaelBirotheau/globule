@@ -2,7 +2,7 @@ require 'json'
 require 'open-uri'
 
 class Product < ApplicationRecord
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_items
 
   after_create :call_open_food_fact

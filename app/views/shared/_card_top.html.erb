@@ -1,0 +1,6 @@
+<% Order.last.products.each do |product| %>
+
+  <h1><%= product.generic_name_fr %></h1>
+  <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>">
+<% end %>
+

@@ -1,0 +1,16 @@
+.btn-mid-size {
+  color: $dark-blue;
+  border: 1px solid $blue;
+  padding: 10px 10px;
+  border-radius: 3px;
+  font-weight: normal;
+  font-size: 20px;
+  margin-top: 10px;
+  opacity: 0.6
+}
+
+.btn-mid-size:hover {
+  color: $blue;
+  background-position: center;
+  text-decoration: none;
+}

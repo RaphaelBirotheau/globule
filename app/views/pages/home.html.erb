@@ -1,14 +1,23 @@
 
-<div class="text-center">
-  <h1>Globule</h1>
-  <p>Improve your impact</p>
-</div>
-
-<%= link_to "Get Started", "new_user_session_path", class: "btn-mid-size" %>
-
-
-      <h1>Button Sprint</h1>
-      <a href="#" class="btn-medium">Write a story</a>
-      <a href="#" class="btn-treehouse">Start now</a>
-      <a href="https://www.youtube.com/watch?v=IHluAtzHmi4?t=2" class="btn" target="_blank">COUCOU !</a>
+<div class="container">
+  <div class="text-center">
+    <div class="row">
+      <div class="col-12">
+        <%= image_tag "logo.png", id: "logo-homepage" %>
+      </div>
     </div>
+    <div class="row">
+      <div class='col-12'>
+        <h1>Globule</h1>
+      </div>
+      <div class='col-12 mb-40'>
+        <p>Improve your impact</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <%= link_to "Get Started", "new_user_session_path", class: "btn-mid-size", id: 'btn-homepage' %>
+      </div>
+    </div>
+  </div>
+</div>
