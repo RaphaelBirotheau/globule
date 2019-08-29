@@ -1,16 +1,18 @@
 .footer {
-position: absolute;
-left: -0.53%;
-right: 0.53%;
-top: 93.25%;
-bottom: 0%;
-background-color: rgba(220, 220, 220, 0.8);;
-display: flex;
-justify-content: space-between;
-padding: 0px 40px;
-font-size: 25px;
-align-items: center;
-  .fas {
+  position: absolute;
+  left: -0.53%;
+  right: 0.53%;
+  top: 93.25%;
+  bottom: 0%;
+  background-color: rgba(220, 220, 220, 0.8);;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 40px;
+  font-size: 25px;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+    .fas {
     color: rgba(150, 150, 150, 0.8);
     text-decoration: none;
   }
