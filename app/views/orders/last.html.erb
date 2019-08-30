@@ -30,107 +30,112 @@
 
 
   <%= link_to "Create order", new_order_path %>
+  <h1>MY LAST BASKET</h1>
+
 
 
   <div class="accordion" id="accordionExample">
     <% @order.products.each do |product| %>
-    <% if product.image_front_url != nil  %>
-    <div class="card">
-      <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="false" aria-controls="collapse<%= product.id %>">
-        <div class="card-header m-0 p-0" id="heading<%= product.id %>">
-          <div class="col-6">
-            <p><%= product.generic_name_fr %></p>
-            <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs">
-            <p> Produit précédent </p>
-          </div>
+      <% if product.image_front_url != nil  %>
+        <div class="card">
+          <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
+            <div class="card-header m-0 p-0" id="heading<%= product.id %>">
 
-          <div class="col-6">
-            <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {boderWidth: 7}) %>
-          </div>
+              <div class="col-6">
+                <p><%= product.generic_name_fr %></p>
+                <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs">
+                <p> Produit précédent </p>
+              </div>
 
+              <div class="col-6">
+                <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {boderWidth: 33}) %>
+              </div>
+
+            </div>
+          </button>
+
+
+          <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
+            <div class="card-body p-3 m-0">
+
+              <div class="row">
+                <div class="col-4"> <p> Type </p> </div>
+                <div class="col-4"> <p> <%= product.pnns_group_2 %></p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4"> <p> Nutri-score</p> </div>
+                <div class="col-4"> <p>
+                  <% if product.nutrition_grades_tags == "unknown" || nil %>
+                  <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
+                  <% else %>
+                  <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
+                  <% end %>
+                </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4"> <p> Additives </p> </div>
+                <div class="col-4"> <p>
+                  <%= JSON.parse(product.additives_tags).count %> </p>
+                </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4"> <p> Packaging </p> </div>
+                <div class="col-4"> <p>
+                  <% if  product.packaging_tags != nil %>
+                  <% JSON.parse(product.packaging_tags).each do |add| %>
+                  <%= add.gsub('-', " ") %>
+                  <% end %>
+                  <% end %> </p>
+                </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4"> <p> Origin </p> </div>
+                <div class="col-4"> <p> <%= product.countries_tags %></p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4"> <p> Labels </p> </div>
+                <div class="col-4"> <p>
+                  <% if  product.labels_tags != nil %>
+                    <% JSON.parse(product.labels_tags).each do |add| %>
+                      <% if add.match("agriculture")%>
+                        <%= image_tag "label_bio.png", class: "label-bio-img"%>
+                      <% end %>
+
+                      <% if add.match("fair")%>
+                        <%= image_tag "fairtrade.png", class: "label-fair-img"%>
+                      <% end %>
+                    <% end %></p>
+                  <% end %>
+                </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+                <div class="col-1"> <p> a </p> </div>
+              </div>
+
+            </div>
+          </div>
         </div>
-      </div>
-
-
-      <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
-        <div class="card-body p-3 m-0">
-
-          <div class="row">
-            <div class="col-4"> <p> Type </p> </div>
-            <div class="col-4"> <p> <%= product.pnns_group_2 %></p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4"> <p> Nutri-score</p> </div>
-            <div class="col-4"> <p>
-              <% if product.nutrition_grades_tags == "unknown" || nil %>
-              <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
-              <% else %>
-              <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
-              <% end %>
-            </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4"> <p> Additives </p> </div>
-            <div class="col-4"> <p>
-              <%= JSON.parse(product.additives_tags).count %> </p>
-            </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4"> <p> Packaging </p> </div>
-            <div class="col-4"> <p>
-              <% if  product.packaging_tags != nil %>
-              <% JSON.parse(product.packaging_tags).each do |add| %>
-              <%= add.gsub('-', " ") %>
-              <% end %>
-              <% end %> </p>
-            </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4"> <p> Origin </p> </div>
-            <div class="col-4"> <p> <%= product.countries_tags %></p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-          </div>
-
-          <div class="row">
-            <div class="col-4"> <p> Labels </p> </div>
-            <div class="col-4"> <p>
-              <% if  product.labels_tags != nil %>
-              <% JSON.parse(product.labels_tags).each do |add| %>
-              <% if add.match("agriculture")%>
-              <%= image_tag "label_bio.png", class: "label-bio-img"%>
-              <% end %>
-              <% if add.match("fair")%>
-              <%= image_tag "fairtrade.png", class: "label-fair-img"%>
-              <% end %>
-              <% end %></p>
-              <% end %>
-            </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-            <div class="col-1"> <p> a </p> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <%end%>
+      <%end%>
     <% end %>
   </div>
 
