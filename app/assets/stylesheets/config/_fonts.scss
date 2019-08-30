@@ -4,8 +4,8 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400,500,600|Montserrat:200,300,400,500,600&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Fira Sans", "sans-serif";
-$headers-font: "Fira Sans", "sans-serif";
+$body-font: "Montserrat", "sans-serif";
+$headers-font: "Montserrat", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
@@ -21,16 +21,16 @@ $headers-font: "Fira Sans", "sans-serif";
 
 
 h1 {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 22px;
 }
 
 h2 {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h3 {
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 p {

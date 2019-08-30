@@ -1,5 +1,5 @@
 .navbar-lewagon {
-  justify-content: space-between;
+  justify-content: space-evently;
   background: white;
   padding: 0px 15px;
   background: linear-gradient(180deg, #1FD2C4 0%, #40D3F2 100%);
@@ -11,6 +11,7 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 60px;
+  padding: 0px;
 }
 
 .navbar-light .navbar-toggler {
@@ -18,4 +19,14 @@
   height: 46px;
 }
 
+.navbar h3 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.navbar-toggler-position {
+  padding: 0;
+  width: 17%;
+}
 
