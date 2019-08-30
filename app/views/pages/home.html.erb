@@ -16,7 +16,11 @@
     </div>
     <div class="row">
       <div class="col-12">
+        <% if user_signed_in? %>
+        <%= link_to "Get Started", lastbasket_path, class: "btn-mid-size", id: 'btn-homepage' %>
+        <% else %>
         <%= link_to "Get Started", new_user_session_path, class: "btn-mid-size", id: 'btn-homepage' %>
+        <% end %>
       </div>
     </div>
   </div>
