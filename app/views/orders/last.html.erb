@@ -7,6 +7,7 @@
 
 <div class="accordion" id="accordionExample">
 <% @order.products.each do |product| %>
+<% if product.image_front_url != nil  %>
   <div class="card">
     <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="false" aria-controls="collapse<%= product.id %>">
     <div class="card-header m-0 p-0" id="heading<%= product.id %>">
@@ -17,47 +18,7 @@
       </div>
 
       <div class="col-6">
-        <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px") %>
-        <!-- <div class="jauges">
-        <div class="jauge">
-
-          <div class="demi-jauge">
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="demi-jauge">
-            <div class="progress" id="prog1">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="jauge">
-          <div class="demi-jauge">
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="demi-jauge">
-            <div class="progress" id="prog2">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="jauge">
-          <div class="demi-jauge">
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="demi-jauge">
-            <div class="progress" id="prog3">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-        </div> -->
+        <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {boderWidth: 7}) %>
       </div>
 
       </div>
@@ -78,7 +39,9 @@
         <div class="row">
             <div class="col-4"> <p> Nutri-score</p> </div>
             <div class="col-4"> <p>
-              <% if product.nutrition_grades_tags != "unknown" %>
+              <% if product.nutrition_grades_tags == "unknown" || nil %>
+              <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
+              <% else %>
               <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
               <% end %>
             </div>
@@ -99,8 +62,11 @@
 
         <div class="row">
           <div class="col-4"> <p> Packaging </p> </div>
-          <div class="col-4"> <p> <% JSON.parse(product.packaging_tags).each do |add| %>
+          <div class="col-4"> <p>
+            <% if  product.packaging_tags != nil %>
+            <% JSON.parse(product.packaging_tags).each do |add| %>
             <%= add.gsub('-', " ") %>
+            <% end %>
             <% end %> </p>
             </div>
           <div class="col-1"> <p> a </p> </div>
@@ -119,14 +85,16 @@
         <div class="row">
           <div class="col-4"> <p> Labels </p> </div>
           <div class="col-4"> <p>
-            <% JSON.parse(product.labels_tags).each do |add| %>
-              <% if add.match("agriculture")%>
-                <%= image_tag "label_bio.png", class: "label-bio-img"%>
-              <% end %>
-              <% if add.match("fair")%>
-                <%= image_tag "fairtrade.png", class: "label-fair-img"%>
-              <% end %>
-            <% end %></p>
+            <% if  product.labels_tags != nil %>
+              <% JSON.parse(product.labels_tags).each do |add| %>
+                <% if add.match("agriculture")%>
+                  <%= image_tag "label_bio.png", class: "label-bio-img"%>
+                <% end %>
+                <% if add.match("fair")%>
+                  <%= image_tag "fairtrade.png", class: "label-fair-img"%>
+                <% end %>
+              <% end %></p>
+            <% end %>
           </div>
           <div class="col-1"> <p> a </p> </div>
           <div class="col-1"> <p> a </p> </div>
@@ -135,6 +103,7 @@
       </div>
     </div>
   </div>
+  <%end%>
   <% end %>
 </div>
 <div class="footer-position">
