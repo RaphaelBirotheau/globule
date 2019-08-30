@@ -72,9 +72,15 @@
 
         <div class="row">
           <div class="col-4"> <p> Packaging </p> </div>
-          <div class="col-4"> <p> <% JSON.parse(product.packaging_tags).each do |add| %>
-            <%= add.gsub('-', " ") %>
-            <% end %> </p>
+          <div class="col-4"> <p>
+
+            <% JSON.parse(product.packaging_tags).each do |add| %>
+              <% if add != nil  %>
+              <%= add.gsub('-', " ") %>
+              <% else %>
+              <% end %>
+            <% end %>
+              </p>
             </div>
           <div class="col-1"> <p> a </p> </div>
           <div class="col-1"> <p> a </p> </div>
@@ -110,8 +116,9 @@
   </div>
   <% end %>
 </div>
+
 <div class="footer-position">
-  <input type="checkbox" id="switch" />
-  <label for="switch"></label>
+  <input class="inputfooter" type="checkbox" id="switch" />
+  <label class="labelfooter" for="switch"></label>
   <%= link_to "", recommandations_path, class: "d-none hidden-link" %>
 </div>
