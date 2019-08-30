@@ -30,9 +30,6 @@
 
 
   <%= link_to "Create order", new_order_path %>
-  <h1>MY LAST BASKET</h1>
-
-
 
   <div class="accordion" id="accordionExample">
     <% @order.products.each do |product| %>
@@ -60,7 +57,12 @@
 
               <div class="row">
                 <div class="col-4"> <p> Type </p> </div>
-                <div class="col-4"> <p> <%= product.pnns_group_2 %></p> </div>
+                <div class="col-4"> <p>
+                  <% if product.pnns_group_2 != 'unknwon' %>
+                  <%= product.pnns_group_2 %>
+                    <% end %>
+                  </p>
+                 </div>
                 <div class="col-1"> <p> a </p> </div>
                 <div class="col-1"> <p> a </p> </div>
                 <div class="col-1"> <p> a </p> </div>
@@ -137,6 +139,12 @@
         </div>
       <%end%>
     <% end %>
+  </div>
+  <div class="blank">
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
 
   <div class="footer-position">

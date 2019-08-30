@@ -25,11 +25,7 @@
 
 <div class="container-global" style="height: 73vh;">
 
-
   <%= link_to "Create order", new_order_path %>
-  <h1>RECOMMENDED BASKET</h1>
-
-
 
   <div class="accordion" id="accordionExample">
     <% @order.products.each do |product| %>
@@ -135,9 +131,16 @@
       <%end%>
     <% end %>
   </div>
+  <div class="blank">
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+
 
   <div class="footer-position">
-    <input class="inputfooter" type="checkbox" id="switch" />
+    <input class="inputfooter" type="checkbox" id="switch" checked="true" />
     <label class="labelfooter" for="switch"></label>
     <%= link_to "", lastbasket_path, class: "d-none hidden-link" %>
   </div>
