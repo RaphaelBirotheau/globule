@@ -21,19 +21,29 @@ $headers-font: "Montserrat", "sans-serif";
 
 
 h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 22px;
+  color: #fff;
+  font-size: 18px !important;
+  margin: auto !important;
+  text-transform: uppercase;
 }
 
 h2 {
-  font-family: 'Montserrat', sans-serif;
+    font-size: 16px !important;
+  // margin: auto !important;
+    text-transform: uppercase;
 }
 
 h3 {
-  font-family: 'Montserrat', sans-serif;
+    font-size: 10px !important;
+    margin: auto !important;
+    text-transform: uppercase;
+    // display: flex;
+    // text-align: auto;
 }
 
 p {
-  font-family: 'Montserrat', sans-serif;
 
+  font-size: 10px !important;
+  margin: auto !important;
+  // text-transform: uppercase;
 }
