@@ -33,8 +33,8 @@
   <%= link_to "Create order", new_order_path %>
 
   <div class="accordion" id="accordionExample">
-    <% @order.products.each do |product| %>
-    <% if product.image_front_url != nil  %>
+   <% @order.products.map { |product| Product.recommendation(product.code) }.uniq.each  do |product| %>
+   <% if product.image_front_url != nil  %>
     <div class="card">
       <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
         <div class="card-header m-0 p-0" id="heading<%= product.id %>">
