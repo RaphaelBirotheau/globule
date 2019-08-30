@@ -8,6 +8,6 @@
 
 User.destroy_all
 
-carrefour_user = User.new(email: "carrefour@gmail.com", password: "carrefour")
+carrefour_user = User.create(email: "carrefour@gmail.com", password: "carrefour")
 
-biocoop_user = User.new(email: "biocoop@gmail.com", password: "biocoop")
+biocoop_user = User.create(email: "biocoop@gmail.com", password: "biocoop")

@@ -22,12 +22,14 @@ after_action :create_user_profile, only: [:create]
     @order = Order.new(user: current_user, purchase_date: Time.now)
     @shopping_list = order_params[:shopping_list].gsub(" ", "").split(',')
     @shopping_list.each do |item|
-      if Product.where(code: item).any?
-        product = Product.where(code: item).first
-      else
-        product = Product.create!(code: item)
+      unless product = Product.find_by(code: item)
+        product = Product.create(code: item)
       end
-      OrderItem.create(order: @order, product: product)
+      if product.code.nil?
+        product.destroy
+      else
+        OrderItem.create(order: @order, product: product)
+      end
     end
     @order.save
     @order.product_facts
