@@ -22,13 +22,13 @@ align-items: center;
 
 
 
-input[type=checkbox]{
+.inputfooter[type=checkbox]{
   height: 0;
   width: 0;
   visibility: hidden;
 }
 
-label {
+.labelfooter {
   cursor: pointer;
   text-indent: -9999px;
   width: 120px;
@@ -40,7 +40,7 @@ label {
   margin: auto;
 }
 
-label:after {
+.labelfooter:after {
   content: '';
   position: absolute;
   top: 5px;
@@ -59,13 +59,13 @@ label:after {
 
 }
 
-input:checked + label {
+.inputfooter:checked + .labelfooter {
   // background: #bada55;
   background-color: linear-gradient(to right,#3fd3f1, #20d2c5);
 
 }
 
-input:checked + label:after {
+.inputfooter:checked + .labelfooter:after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
   background: url(magic-solid.svg);
@@ -76,7 +76,7 @@ input:checked + label:after {
 
 }
 
-label:active:after {
+.labelfooter:active:after {
   width: 130px;
 }
 
