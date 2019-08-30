@@ -1,7 +1,15 @@
 <div class="container-global" style="height: 73vh;">
 
 
-  <%= link_to "Create order", new_order_path %>
+  <%= link_to "const button = document.querySelector('input[type=checkbox');
+  const hiddenLink = document.querySelector('.hidden-link');
+
+  button.addEventListener('change', () => {
+    hiddenLink.click();
+  })
+  console.log('ta mère');
+}
+Create order", new_order_path %>
   <h1>RECOMMENDED BASKET</h1>
 
 
@@ -18,7 +26,7 @@
       </div>
 
       <div class="col-6">
-        <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {boderWidth: 7}) %>
+        <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {boderWidth: 10}) %>
       </div>
 
       </div>
