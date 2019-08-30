@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_120927) do
+ActiveRecord::Schema.define(version: 2019_08_29_141824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,10 @@ ActiveRecord::Schema.define(version: 2019_08_28_120927) do
     t.string "pnns_group_2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "health_score"
+    t.integer "environment_score"
+    t.integer "social_score"
+    t.integer "total_score"
   end
 
   create_table "profiles", force: :cascade do |t|
