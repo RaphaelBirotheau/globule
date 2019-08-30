@@ -1,0 +1,63 @@
+<% @order.products.each do |product| %>
+<div class="card-bottom">
+  <div class="row">
+    <div class="col-4">Type</div>
+    <div class="col-5"><%= product.pnns_group_2 %></div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Nutri-score</div>
+    <div class="col-5">
+      <% if product.nutrition_grades_tags != "unknown" %>
+      <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %>
+      <% end %>
+      </div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Additives</div>
+    <div class="col-5"><%= JSON.parse(product.additives_tags).count %>
+    </div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Packaging</div>
+    <div class="col-5"><% JSON.parse(product.packaging_tags).each do |add| %>
+      <%= add.gsub('-', " ") %>
+      <% end %>
+      </div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Origin</div>
+    <div class="col-5"><%= product.countries_tags %></div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Labels</div>
+    <div class="col-5">
+      <% JSON.parse(product.labels_tags).each do |add| %>
+        <% if add.match("agriculture")%>
+          <%= image_tag "label_bio.png", class: "label-bio-img"%>
+        <% end %>
+        <% if add.match("fair")%>
+          <%= image_tag "fairtrade.png", class: "label-fair-img"%>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+    <div class="col-1">a</div>
+  </div>
+</div>
+<% end %>

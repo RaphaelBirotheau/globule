@@ -15,6 +15,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'nokogiri'
+gem 'chartkick'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

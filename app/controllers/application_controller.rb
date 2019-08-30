@@ -4,16 +4,15 @@ class ApplicationController < ActionController::Base
 
   def global_facts
     global_nutrition_score_array = []
-    gloabl_packaging_array = []
+    global_packaging_array = []
     global_product_category_array = []
     global_product_sub_category_array = []
     global_country_origin_repartion = []
     global_additives_array = []
 
-
     current_user.orders.each do |order|
       global_nutrition_score_array << order.nutrition_score_repartition
-      gloabl_packaging_array << order.packaging_repartition
+      global_packaging_array << order.packaging_repartition
       global_product_category_array << order.product_category_repartition
       global_product_sub_category_array << order.product_sub_category_repartition
       global_country_origin_repartion << order.country_origin_repartion
@@ -21,7 +20,7 @@ class ApplicationController < ActionController::Base
     end
 
     current_user.user_profile.nutrition_score_repartition = global_nutrition_score_array
-    current_user.user_profile.packaging_repartition = gloabl_packaging_array
+    current_user.user_profile.packaging_repartition = global_packaging_array
     current_user.user_profile.product_category_repartition = global_product_category_array
     current_user.user_profile.product_sub_category_repartition = global_product_sub_category_array
     current_user.user_profile.country_origin_repartion = global_country_origin_repartion

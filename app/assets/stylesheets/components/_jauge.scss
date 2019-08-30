@@ -1,0 +1,23 @@
+.jauges {
+  display: flex;
+}
+
+.jauge {
+  flex-basis: 33%;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+}
+
+.demi-jauge {
+  // height: 100%;
+  // width: 50%;
+  background-color: blue;
+  // display: flex;
+  // align-items: flex-end;
+    transform: rotate(270deg);
+    // transform-origin: left;
+  .progress {
+    width: 100%;
+}
+}

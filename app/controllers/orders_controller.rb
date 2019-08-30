@@ -1,12 +1,14 @@
 class OrdersController < ApplicationController
 after_action :global_facts, only: [:create]
 after_action :create_user_profile, only: [:create]
+
   def last
+    @order = Order.last
   end
 
   def recommended
+    @order = Order.last
   end
-
 
   def create_user_profile
     UserProfile.create!(user: current_user) if !current_user.user_profile
@@ -15,7 +17,6 @@ after_action :create_user_profile, only: [:create]
    def new
     @order = Order.new
   end
-
 
   def create
     @order = Order.new(user: current_user, purchase_date: Time.now)
