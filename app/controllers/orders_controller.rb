@@ -7,7 +7,7 @@ after_action :create_user_profile, only: [:create]
   end
 
   def recommended
-    @order = Order.last
+    # @order = Order.last
   end
 
   def create_user_profile
@@ -22,18 +22,16 @@ after_action :create_user_profile, only: [:create]
     @order = Order.new(user: current_user, purchase_date: Time.now)
     @shopping_list = order_params[:shopping_list].gsub(" ", "").split(',')
     @shopping_list.each do |item|
-      unless product = Product.find_by(code: item)
-        product = Product.create(code: item)
-      end
-      if product.code.nil?
-        product.destroy
+      if Product.where(code: item).any?
+        product = Product.where(code: item).first
       else
-        OrderItem.create(order: @order, product: product)
+        product = Product.create!(code: item)
       end
+      OrderItem.create(order: @order, product: product)
     end
     @order.save
     @order.product_facts
-    redirect_to root_path
+    redirect_to lastbasket_path
   end
 
 private
