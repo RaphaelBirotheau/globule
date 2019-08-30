@@ -45,7 +45,7 @@
           </div>
 
           <div class="col-5 chart-align">
-            <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
+            <%= column_chart({"santé"=>[product.generic_name_fr.length], "social"=>(product.generic_name_fr.length - 20), "env"=>(product.generic_name_fr.length / 4)}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
           </div>
 
         </div>
