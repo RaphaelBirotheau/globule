@@ -38,11 +38,9 @@
     <% if recommended_product.image_front_url != nil  %>
     <div class="card" style="border: none;">
       <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
-
         <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
 
           <div class="col-7">
-
             <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
             <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs mb-3" >
           </div>
@@ -62,14 +60,14 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
-              <% if recommended_product.pnns_group_2 != 'unknwon' %>
+              <% if recommended_product.pnns_group_2 != 'unknown' %>
               <%= recommended_product.pnns_group_2 %>
               <% end %>
             </p>
           </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_health(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_env(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" color="#ffff"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
@@ -80,18 +78,18 @@
             <%= image_tag "#{recommended_product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
             <% end %>
           </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
           <div class="ml-1 col-8 pr-0"> <h3> Additives </h3> <p>
             <%= JSON.parse(recommended_product.additives_tags).count %> </p>
           </div>
-          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_additives(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
@@ -102,17 +100,17 @@
             <% end %>
             <% end %> </p>
           </div>
-          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </div>
         </div>
 
 
         <div class="row align-items-center mb-3">
-          <div class="ml-1 col-8 pr-0"> <h3> Origin </h3>  <p> <%= recommended_product.countries_tags %></p> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-8"> <h3> Origin </h3>  <p> <%= recommended_product.countries_tags %></p> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
@@ -129,9 +127,9 @@
             <% end %></p>
             <% end %>
           </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_labels(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_labels(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_labels(recommended_product.code)%>"> <i class="fas fa-circle"></i> </div>
         </div>
       </div>
     </div>
