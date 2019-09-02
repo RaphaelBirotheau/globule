@@ -1,5 +1,5 @@
 .nutriscore-img {
-  width: 20px;
+  width: 100px;
   height: 40px;
 }
 
@@ -21,6 +21,7 @@
 
 .card-header {
   display: flex;
+  flex-direction: column;
 }
 
 .card-body p {

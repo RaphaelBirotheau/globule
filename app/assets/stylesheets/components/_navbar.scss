@@ -7,6 +7,7 @@
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
+  padding-left: 0;
 }
 
 .navbar-lewagon .navbar-brand img {
@@ -25,12 +26,12 @@
 
 
 .navbar-brand {
-  margin-left: 10px;
+  margin-right: 0;
 }
 
 .navbar-toggler-position {
-  padding: 0;
-  width: 17%;
-  margin-left: 14px;
+  // padding: 0;
+  // width: 17%;
+  padding-right: 10px;
 }
 

@@ -1,23 +1,23 @@
 <div class="row navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "logowhite.png" %>
-    <% end %>
+  <%= link_to dashboard_path, class: "navbar-brand" do %>
+  <%= image_tag "logowhite.png" %>
+  <% end %>
 
-  <h1 class="">Magic Basket</h1>
+  <h1>My Magic Basket</h1>
 
   <div class="navbar-toggler-position">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="fas fa-user-alt"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-user-alt"></span>
+    </button>
   </div>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <%= link_to "Profile", profile_path(:id), class: "dropdown-item" %>
-          <%= link_to "Log in", new_user_session_path, class: "dropdown-item" unless user_signed_in? %>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" if user_signed_in? %>
-        </li>
+      <li class="nav-item dropdown text-right">
+        <%= link_to "Profile", profile_path(:id), class: "dropdown-item text-secondary pl-0" %>
+        <%= link_to "Log in", new_user_session_path, class: "dropdown-item text-secondary pl-0" unless user_signed_in? %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-secondary" if user_signed_in? %>
+      </li>
     </ul>
   </div>
 </div>
@@ -33,21 +33,24 @@
   <%= link_to "Create order", new_order_path %>
 
   <div class="accordion" id="accordionExample">
-  <% order = current_user.orders.last  %>
-   <% order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
-   <% if recommended_product.image_front_url != nil  %>
-    <div class="card">
-      <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
+    <% order = current_user.orders.last  %>
+    <% order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
+    <% if recommended_product.image_front_url != nil  %>
+    <div class="card" style="border: none;">
+      <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
+
         <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
 
           <div class="col-7">
-            <h2 style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
-            <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs">
-            <p style="text-align: left; font-size: 12px;"> Produit précédent </p>
+
+            <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
+            <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs mb-3" >
           </div>
 
-          <div class="col-5 chart-align">
-            <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
+          <div class="col-5 chart-align pt-2">
+            <%#= column_chart({"santé"=> product.health_score, "social"=> product.social_score, "env"=> product.environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
+
+
           </div>
 
         </div>
@@ -55,65 +58,65 @@
 
 
       <div id="collapse<%= recommended_product.id %>" class="collapse" aria-labelledby="heading<%= recommended_product.id %>" data-parent="#accordionExample">
-        <div class="card-body pl-4 pr-4 m-0">
+        <div class="card-body p-0 ml-4 mr-4 mt-1 md-0 rounded-lg" style="border: solid 1px #EFEFEF;">
 
           <div class="row align-items-center mb-3">
-            <div class="col-8"> <h3> Type </h3>  <p>
+            <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
               <% if recommended_product.pnns_group_2 != 'unknwon' %>
               <%= recommended_product.pnns_group_2 %>
               <% end %>
             </p>
           </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Nutri-score</h3> <p>
+          <div class="col-8 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
             <% if recommended_product.nutrition_grades_tags == "unknown" || nil %>
             <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
             <% else %>
             <%= image_tag "#{recommended_product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
             <% end %>
           </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Additives </h3> <p>
+          <div class="ml-1 col-8 pr-0"> <h3> Additives </h3> <p>
             <%= JSON.parse(recommended_product.additives_tags).count %> </p>
           </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Packaging </h3> <p>
+          <div class="ml-1 col-8 pr-0"> <h3> Packaging </h3> <p>
             <% if  recommended_product.packaging_tags != nil %>
             <% JSON.parse(recommended_product.packaging_tags).each do |add| %>
             <%= add.gsub('-', " ") %>
             <% end %>
             <% end %> </p>
           </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Origin </h3> <p> <%= recommended_product.countries_tags %></p> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="ml-1 col-8 pr-0"> <h3> Origin </h3>  <p> <%= recommended_product.countries_tags %></p> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Labels </h3>  <p>
+          <div class="ml-1 col-8 pr-0"> <h3> Labels </h3>  <p>
             <% if  recommended_product.labels_tags != nil %>
             <% JSON.parse(recommended_product.labels_tags).each do |add| %>
             <% if add.match("agriculture")%>
@@ -126,9 +129,9 @@
             <% end %></p>
             <% end %>
           </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
         </div>
       </div>
     </div>
@@ -136,6 +139,7 @@
   <%end%>
   <%end %>
 </div>
+
 <div class="blank">
   <br>
   <br>
@@ -144,7 +148,7 @@
 </div>
 
 <div class="footer-position">
-  <input class="inputfooter" type="checkbox" id="switch" checked="true" />
-  <label class="labelfooter" for="switch"></label>
-  <%= link_to "", lastbasket_path, class: "d-none hidden-link" %>
+  <input class="inputfooter" type="checkbox" id="switch" />
+  <label class="labelfooter" for="switch"> </label>
+  <%= link_to "Go to My Magic Basket", lastbasket_path, class: "d-none hidden-link" %>
 </div>

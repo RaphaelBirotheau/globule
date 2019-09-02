@@ -1,9 +1,68 @@
-
 <div class="row navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
+  <%= link_to dashboard_path, class: "navbar-brand" do %>
   <%= image_tag "logowhite.png" %>
   <% end %>
 
+  <h1>My Profile</h1>
+
+  <div class="navbar-toggler-position">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-user-alt"></span>
+    </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown text-right">
+        <%= link_to "Profile", profile_path(:id), class: "dropdown-item text-secondary pl-0" %>
+        <%= link_to "Log in", new_user_session_path, class: "dropdown-item text-secondary pl-0" unless user_signed_in? %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-secondary" if user_signed_in? %>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<h2>C'est ici qu'on va display le profile du user </h2>
+
+<div class="container">
+
+  <div class="row align-items-center m-3">
+    <div class="card col-12">
+
+      <div class="row">
+        <div class="col-12">
+          <h2 class="mt-2">My informations</h2>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class="col-4">
+          <h3 class= "mb-2"> Username : </h3>
+          <h3 class= "mb-2"> First-Name : </h3>
+          <h3 class= "mb-2"> Last-Name : </h3>
+          <h3 class= "mb-2"> Username : </h3>
+          <h3 class= "mb-2"> Username : </h3>
+          <h3 class= "mb-2"> Username : </h3>
+        </div>
+        <div class="col-8">
+          <p> Username : </p>
+          <p> First-Name : </p>
+          <p> Last-Name : </p>
+          <p> Username : </p>
+          <p> Username : </p>
+          <p> Username : </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="row align-items-center m-3">
+      <div class="card col-12">
+        <div class= "col-12 mt-2">
+          <h2>My baskets</h2>
+        </div>
+        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3">Block level button</button>
+      </div>
+    </div>
+
+</div>
