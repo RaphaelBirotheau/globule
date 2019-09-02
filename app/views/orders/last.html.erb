@@ -3,7 +3,7 @@
     <%= image_tag "logowhite.png" %>
     <% end %>
 
-  <h3 class="">My Last Basket</h3>
+  <h2 class="">My Last Basket</h2>
 
   <div class="navbar-toggler-position">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,18 +36,21 @@
       <% if product.image_front_url != nil  %>
         <div class="card">
           <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
-            <div class="card-header m-0 p-0" id="heading<%= product.id %>">
-
-              <div class="col-6">
-                <p><%= product.generic_name_fr %></p>
-                <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs">
-                <p> Produit précédent </p>
+            <div class="card-header m-0 p-0 container" id="heading<%= product.id %>">
+              <div class="row">
+                <div class='col-12'>
+                  <h3><%= truncate(product.generic_name_fr, :length => 40)...%></h3>
+                </div>
               </div>
-
-              <div class="col-6">
-                <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {boderWidth: 33}) %>
+              <div class="row">
+                <div class="col-6">
+                  <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs">
+                  <p> Produit précédent </p>
+                </div>
+                <div class="col-6">
+                  <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {borderWidth: 33}) %>
+                </div>
               </div>
-
             </div>
           </button>
 
