@@ -24,7 +24,7 @@ class Product < ApplicationRecord
       self.nova_group = product["product"]["nova_group"]
       self.allergens_tags = product["product"]["allergens_tags"]
       self.generic_name_fr = product["product"]["product_name"]
-      self.categories_hierarchy = product["product"]["categories_hierarchy"]
+      self.categories_hierarchy = product["product"]["categories_hierarchy"].select { |category| category.start_with?('en:') }[-1]
 
       self.additives_tags = product["product"]["additives_tags"]
       self.brands = product["product"]["brands"]
@@ -46,7 +46,7 @@ class Product < ApplicationRecord
     #   self.destroy
     end
     # self.remote_image_front_url_url = product["product"]
-    # .select { |category| category.start_with?('en:') }[-2]
+    #
   end
 
   def create_pnns
@@ -129,8 +129,8 @@ class Product < ApplicationRecord
     Product.select do |p|
       p != product &&
         p.pnns_group_2 == product.pnns_group_2 &&
-        p.total_score > product.total_score
-    end
+        p.health_score >= product.health_score
+    end.sort_by(&:total_score).first
   end
 
   # def set_scores

@@ -33,15 +33,16 @@
   <%= link_to "Create order", new_order_path %>
 
   <div class="accordion" id="accordionExample">
-   <% @order.products.map { |product| Product.recommendation(product.code) }.uniq.each  do |product| %>
-   <% if product.image_front_url != nil  %>
+  <% order = current_user.orders.last  %>
+   <% order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
+   <% if recommended_product.image_front_url != nil  %>
     <div class="card">
-      <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
-        <div class="card-header m-0 p-0" id="heading<%= product.id %>">
+      <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
+        <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
 
           <div class="col-7">
-            <h2 style="text-align: left; font-size: 16px;"><%= product.generic_name_fr %></h2>
-            <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs">
+            <h2 style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
+            <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="recommended_products-imgs">
             <p style="text-align: left; font-size: 12px;"> Produit précédent </p>
           </div>
 
@@ -53,13 +54,13 @@
       </button>
 
 
-      <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
+      <div id="collapse<%= recommended_product.id %>" class="collapse" aria-labelledby="heading<%= recommended_product.id %>" data-parent="#accordionExample">
         <div class="card-body pl-4 pr-4 m-0">
 
           <div class="row align-items-center mb-3">
             <div class="col-8"> <h3> Type </h3>  <p>
-              <% if product.pnns_group_2 != 'unknwon' %>
-              <%= product.pnns_group_2 %>
+              <% if recommended_product.pnns_group_2 != 'unknwon' %>
+              <%= recommended_product.pnns_group_2 %>
               <% end %>
             </p>
           </div>
@@ -70,10 +71,10 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-8"> <h3> Nutri-score</h3> <p>
-            <% if product.nutrition_grades_tags == "unknown" || nil %>
+            <% if recommended_product.nutrition_grades_tags == "unknown" || nil %>
             <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
             <% else %>
-            <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
+            <%= image_tag "#{recommended_product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
             <% end %>
           </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
@@ -83,7 +84,7 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-8"> <h3> Additives </h3> <p>
-            <%= JSON.parse(product.additives_tags).count %> </p>
+            <%= JSON.parse(recommended_product.additives_tags).count %> </p>
           </div>
           <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
@@ -92,8 +93,8 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-8"> <h3> Packaging </h3> <p>
-            <% if  product.packaging_tags != nil %>
-            <% JSON.parse(product.packaging_tags).each do |add| %>
+            <% if  recommended_product.packaging_tags != nil %>
+            <% JSON.parse(recommended_product.packaging_tags).each do |add| %>
             <%= add.gsub('-', " ") %>
             <% end %>
             <% end %> </p>
@@ -105,7 +106,7 @@
 
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Origin </h3> <p> <%= product.countries_tags %></p> </div>
+          <div class="col-8"> <h3> Origin </h3> <p> <%= recommended_product.countries_tags %></p> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
@@ -113,8 +114,8 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-8"> <h3> Labels </h3>  <p>
-            <% if  product.labels_tags != nil %>
-            <% JSON.parse(product.labels_tags).each do |add| %>
+            <% if  recommended_product.labels_tags != nil %>
+            <% JSON.parse(recommended_product.labels_tags).each do |add| %>
             <% if add.match("agriculture")%>
             <%= image_tag "label_bio.png", class: "label-bio-img"%>
             <% end %>
