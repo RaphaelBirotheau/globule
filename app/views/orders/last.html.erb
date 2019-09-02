@@ -1,23 +1,23 @@
 <div class="row navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "logowhite.png" %>
-    <% end %>
+  <%= image_tag "logowhite.png" %>
+  <% end %>
 
-  <h2 class="">My Last Basket</h2>
+  <h1>Last Basket</h1>
 
   <div class="navbar-toggler-position">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="fas fa-user-alt"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-user-alt"></span>
+    </button>
   </div>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <%= link_to "Profile", profile_path(:id), class: "dropdown-item" %>
-          <%= link_to "Log in", new_user_session_path, class: "dropdown-item" unless user_signed_in? %>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" if user_signed_in? %>
-        </li>
+      <li class="nav-item dropdown text-right">
+        <%= link_to "Profile", profile_path(:id), class: "dropdown-item text-secondary" %>
+        <%= link_to "Log in", new_user_session_path, class: "dropdown-item text-secondary" unless user_signed_in? %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-secondary" if user_signed_in? %>
+      </li>
     </ul>
   </div>
 </div>
@@ -53,105 +53,111 @@
               </div>
             </div>
           </button>
-
-
-          <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
-            <div class="card-body p-3 m-0">
-
-              <div class="row">
-                <div class="col-4"> <p> Type </p> </div>
-                <div class="col-4"> <p>
-                  <% if product.pnns_group_2 != 'unknwon' %>
-                  <%= product.pnns_group_2 %>
-                    <% end %>
-                  </p>
-                 </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-              </div>
-
-              <div class="row">
-                <div class="col-4"> <p> Nutri-score</p> </div>
-                <div class="col-4"> <p>
-                  <% if product.nutrition_grades_tags == "unknown" || nil %>
-                  <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
-                  <% else %>
-                  <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
-                  <% end %>
-                </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-              </div>
-
-              <div class="row">
-                <div class="col-4"> <p> Additives </p> </div>
-                <div class="col-4"> <p>
-                  <%= JSON.parse(product.additives_tags).count %> </p>
-                </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-              </div>
-
-              <div class="row">
-                <div class="col-4"> <p> Packaging </p> </div>
-                <div class="col-4"> <p>
-                  <% if  product.packaging_tags != nil %>
-                  <% JSON.parse(product.packaging_tags).each do |add| %>
-                  <%= add.gsub('-', " ") %>
-                  <% end %>
-                  <% end %> </p>
-                </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-              </div>
-
-              <div class="row">
-                <div class="col-4"> <p> Origin </p> </div>
-                <div class="col-4"> <p> <%= product.countries_tags %></p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-              </div>
-
-              <div class="row">
-                <div class="col-4"> <p> Labels </p> </div>
-                <div class="col-4"> <p>
-                  <% if  product.labels_tags != nil %>
-                    <% JSON.parse(product.labels_tags).each do |add| %>
-                      <% if add.match("agriculture")%>
-                        <%= image_tag "label_bio.png", class: "label-bio-img"%>
-                      <% end %>
-
-                      <% if add.match("fair")%>
-                        <%= image_tag "fairtrade.png", class: "label-fair-img"%>
-                      <% end %>
-                    <% end %></p>
-                  <% end %>
-                </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-                <div class="col-1"> <p> a </p> </div>
-              </div>
-
-            </div>
           </div>
-        </div>
-      <%end%>
-    <% end %>
-  </div>
-  <div class="blank">
-    <br>
-    <br>
-    <br>
-    <br>
-  </div>
+          <div class="col-5 chart-align pt-2">
+            <%#= column_chart({"santé"=> product.health_score, "social"=> product.social_score, "env"=> product.environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
 
-  <div class="footer-position">
-    <input class="inputfooter" type="checkbox" id="switch" />
-    <label class="labelfooter" for="switch"></label>
-    <%= link_to "", recommandations_path, class: "d-none hidden-link" %>
+          </div>
+
+        </div>
+      </button>
+
+
+      <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
+        <div class="card-body p-0 ml-4 mr-4 mt-1 md-0 rounded-lg" style="border: solid 1px #EFEFEF;">
+
+          <div class="row align-items-center mb-3">
+            <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
+              <% if product.pnns_group_2 != 'unknwon' %>
+              <%= product.pnns_group_2 %>
+              <% end %>
+            </p>
+          </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-8 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
+            <% if product.nutrition_grades_tags == "unknown" || nil %>
+            <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
+            <% else %>
+            <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
+            <% end %>
+          </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="ml-1 col-8 pr-0"> <h3> Additives </h3> <p>
+            <%= JSON.parse(product.additives_tags).count %> </p>
+          </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="ml-1 col-8 pr-0"> <h3> Packaging </h3> <p>
+            <% if  product.packaging_tags != nil %>
+            <% JSON.parse(product.packaging_tags).each do |add| %>
+            <%= add.gsub('-', " ") %>
+            <% end %>
+            <% end %> </p>
+          </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
+        </div>
+
+
+        <div class="row align-items-center mb-3">
+          <div class="ml-1 col-8 pr-0"> <h3> Origin </h3>  <p> <%= product.countries_tags %></p> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="ml-1 col-8 pr-0"> <h3> Labels </h3>  <p>
+            <% if  product.labels_tags != nil %>
+            <% JSON.parse(product.labels_tags).each do |add| %>
+            <% if add.match("agriculture")%>
+            <%= image_tag "label_bio.png", class: "label-bio-img"%>
+            <% end %>
+
+            <% if add.match("fair")%>
+            <%= image_tag "fairtrade.png", class: "label-fair-img"%>
+            <% end %>
+            <% end %></p>
+            <% end %>
+          </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <%end%>
+  <%end %>
+</div>
+
+<!-- </div> -->
+
+
+<div class="blank">
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+
+<div class="footer-position">
+  <input class="inputfooter" type="checkbox" id="switch" />
+  <label class="labelfooter" for="switch"></label>
+  <%= link_to "", recommandations_path, class: "d-none hidden-link" %>
+</div>

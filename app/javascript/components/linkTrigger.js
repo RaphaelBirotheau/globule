@@ -5,7 +5,7 @@ const linkTrigger = () => {
   button.addEventListener('change', () => {
     hiddenLink.click();
   })
-  console.log('ta mère');
+  // console.log('ta mère');
 }
 
 export default linkTrigger;
