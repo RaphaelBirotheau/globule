@@ -39,9 +39,10 @@
           <h3 class= "mb-2"> Username : </h3>
           <h3 class= "mb-2"> First-Name : </h3>
           <h3 class= "mb-2"> Last-Name : </h3>
-          <h3 class= "mb-2"> Username : </h3>
-          <h3 class= "mb-2"> Username : </h3>
-          <h3 class= "mb-2"> Username : </h3>
+          <h3 class= "mb-2"> Family Size : </h3>
+          <h3 class= "mb-2"> Children : </h3>
+          <h3 class= "mb-2"> City : </h3>
+          <h3 class= "mb-2"> Loyaulty programs : </h3>
         </div>
         <div class="col-8">
           <p> Username : </p>
@@ -58,10 +59,14 @@
 
     <div class="row align-items-center m-3">
       <div class="card col-12">
-        <div class= "col-12 mt-2">
-          <h2>My baskets</h2>
+        <div class= "col-12">
+          <h2 class= "mt-2">My baskets</h2>
         </div>
-        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3">Block level button</button>
+        <% current_user.orders.each do |order| %>
+        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3" >
+        <%= link_to "#{order.purchase_date}", order_path(:id) %>
+        </button>
+        <%end%>
       </div>
     </div>
 
