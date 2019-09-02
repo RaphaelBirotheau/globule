@@ -53,7 +53,7 @@
         <div class="card-body p-0 ml-4 mr-4 mt-1 md-0 rounded-lg" style="border: solid 1px #EFEFEF;">
 
         <div class="row align-items-center mb-3">
-          <div class="col-8 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
+          <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
             <% if product.nutrition_grades_tags == "unknown" || nil %>
             <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
             <% else %>
@@ -79,7 +79,7 @@
 
 
         <div class="row align-items-center mb-3">
-          <div class="ml-1 col-8 pr-0"> <h3> Additives </h3> <p>
+          <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
             <%= JSON.parse(product.additives_tags).count %> </p>
           </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(product.code)%>"> <i class="fas fa-circle"></i> </div>
@@ -88,7 +88,7 @@
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="ml-1 col-8 pr-0"> <h3> Packaging </h3> <p>
+          <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Packaging </h3> <p>
             <% if  product.packaging_tags != nil %>
             <% JSON.parse(product.packaging_tags).each do |add| %>
             <%= add.gsub('-', " ") %>
@@ -102,14 +102,14 @@
 
 
         <div class="row align-items-center mb-3">
-          <div class="col-8"> <h3> Origin </h3>  <p> <%= product.countries_tags %></p> </div>
+          <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= product.countries_tags %></p> </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-circle"></i> </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-circle"></i> </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-circle"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="ml-1 col-8 pr-0"> <h3> Labels </h3>  <p>
+          <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Labels </h3>  <p>
             <% if  product.labels_tags != nil %>
             <% JSON.parse(product.labels_tags).each do |add| %>
             <% if add.match("agriculture")%>
