@@ -18,6 +18,11 @@ after_action :create_user_profile, only: [:create]
     @order = Order.new
   end
 
+
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def create
     @order = Order.new(user: current_user, purchase_date: Time.now)
     @shopping_list = order_params[:shopping_list].gsub(" ", "").split(',')
