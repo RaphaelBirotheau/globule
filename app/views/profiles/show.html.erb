@@ -64,7 +64,7 @@
         </div>
         <% current_user.orders.each do |order| %>
         <button type="button" class="btn btn-secondary btn-lg btn-block mb-3" >
-        <%= link_to "#{order.purchase_date}", order_path(:id) %>
+        <%= link_to "#{order.purchase_date}", order_path(order) %>
         </button>
         <%end%>
       </div>
