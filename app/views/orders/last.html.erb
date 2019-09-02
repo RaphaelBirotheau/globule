@@ -30,21 +30,30 @@
   <%= link_to "Create order", new_order_path %>
 
   <div class="accordion" id="accordionExample">
-    <% order = current_user.orders.last  %>
-    <% order.products.each do |product| %>
-    <% if product.image_front_url != nil  %>
-    <div class="card" style="border: none;">
-      <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
-        <div class="card-header m-0 p-0" id="heading<%= product.id %>">
-
-          <div class="col-7">
-            <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= product.generic_name_fr %></h2>
-            <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3" >
+    <% @order.products.each do |product| %>
+      <% if product.image_front_url != nil  %>
+        <div class="card">
+          <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
+            <div class="card-header m-0 p-0 container" id="heading<%= product.id %>">
+              <div class="row">
+                <div class='col-12'>
+                  <h3><%= truncate(product.generic_name_fr, :length => 40)...%></h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs">
+                  <p> Produit précédent </p>
+                </div>
+                <div class="col-6">
+                  <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "140px", height: "250px", dataset: {borderWidth: 33}) %>
+                </div>
+              </div>
+            </div>
+          </button>
           </div>
-
           <div class="col-5 chart-align pt-2">
             <%#= column_chart({"santé"=> product.health_score, "social"=> product.social_score, "env"=> product.environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
-
 
           </div>
 
