@@ -37,12 +37,12 @@
    <% order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
    <% if recommended_product.image_front_url != nil  %>
     <div class="card">
-      <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
+      <button class="btn btn-link pt-3 pl-3 pr-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
         <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
 
           <div class="col-7">
             <h2 style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
-            <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="recommended_products-imgs">
+            <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs">
             <p style="text-align: left; font-size: 12px;"> Produit précédent </p>
           </div>
 
@@ -57,7 +57,7 @@
       <div id="collapse<%= recommended_product.id %>" class="collapse" aria-labelledby="heading<%= recommended_product.id %>" data-parent="#accordionExample">
         <div class="card-body pl-4 pr-4 m-0">
 
-          <div class="row align-items-center mb-3">
+          <div class="row align-items-center mb-4">
             <div class="col-8"> <h3> Type </h3>  <p>
               <% if recommended_product.pnns_group_2 != 'unknwon' %>
               <%= recommended_product.pnns_group_2 %>
@@ -66,10 +66,10 @@
           </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-4">
           <div class="col-8"> <h3> Nutri-score</h3> <p>
             <% if recommended_product.nutrition_grades_tags == "unknown" || nil %>
             <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
@@ -79,19 +79,19 @@
           </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-4">
           <div class="col-8"> <h3> Additives </h3> <p>
             <%= JSON.parse(recommended_product.additives_tags).count %> </p>
           </div>
           <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-4">
           <div class="col-8"> <h3> Packaging </h3> <p>
             <% if  recommended_product.packaging_tags != nil %>
             <% JSON.parse(recommended_product.packaging_tags).each do |add| %>
@@ -101,18 +101,18 @@
           </div>
           <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1" style="color: #fff"> <i class="fas fa-circle"></i> </div>
         </div>
 
 
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-4">
           <div class="col-8"> <h3> Origin </h3> <p> <%= recommended_product.countries_tags %></p> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: green"> <i class="fas fa-circle"></i> </div>
           <div class="col-1" style="color: red"> <i class="fas fa-circle"></i> </div>
         </div>
 
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center">
           <div class="col-8"> <h3> Labels </h3>  <p>
             <% if  recommended_product.labels_tags != nil %>
             <% JSON.parse(recommended_product.labels_tags).each do |add| %>
