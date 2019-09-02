@@ -1,9 +1,9 @@
 <div class="row navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
+  <%= link_to dashboard_path, class: "navbar-brand" do %>
   <%= image_tag "logowhite.png" %>
   <% end %>
 
-  <h1>Last Basket</h1>
+  <h1>My Last Basket</h1>
 
   <div class="navbar-toggler-position">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,15 +14,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown text-right">
-        <%= link_to "Profile", profile_path(:id), class: "dropdown-item text-secondary" %>
-        <%= link_to "Log in", new_user_session_path, class: "dropdown-item text-secondary" unless user_signed_in? %>
+        <%= link_to "Profile", profile_path(:id), class: "dropdown-item text-secondary pl-0" %>
+        <%= link_to "Log in", new_user_session_path, class: "dropdown-item text-secondary pl-0" unless user_signed_in? %>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-secondary" if user_signed_in? %>
       </li>
     </ul>
   </div>
 </div>
-
-
 
 
 
@@ -149,6 +147,7 @@
 
 <div class="footer-position">
   <input class="inputfooter" type="checkbox" id="switch" />
-  <label class="labelfooter" for="switch"></label>
-  <%= link_to "", recommandations_path, class: "d-none hidden-link" %>
+  <label class="labelfooter" for="switch"> </label>
+  <%= link_to "Go to My Magic Basket", recommandations_path, class: "d-none hidden-link" %>
 </div>
+

@@ -17,7 +17,7 @@
     <div class="row pt-10">
       <div class="col-12 pt-10">
         <% if user_signed_in? %>
-        <%= link_to "Get Started", lastbasket_path, class: "btn-mid-size pt-10", id: 'btn-homepage' %>
+        <%= link_to "Get Started", dashboard_path, class: "btn-mid-size pt-10", id: 'btn-homepage' %>
         <% else %>
         <%= link_to "Get Started", new_user_session_path, class: "btn-mid-size", id: 'btn-homepage' %>
         <% end %>
