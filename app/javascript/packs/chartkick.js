@@ -1,2 +1,2 @@
-import "chartkick";
-import "chart.js";
+// import "chartkick";
+// import "chart.js";
