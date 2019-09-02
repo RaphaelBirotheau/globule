@@ -32,7 +32,8 @@
   <%= link_to "Create order", new_order_path %>
 
   <div class="accordion" id="accordionExample">
-    <% @order.products.each do |product| %>
+    <% order = current_user.orders.last  %>
+    <% order.products.each do |product| %>
     <% if product.image_front_url != nil  %>
     <div class="card">
       <button class="btn btn-link p-3 m-0" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
@@ -45,7 +46,7 @@
           </div>
 
           <div class="col-5 chart-align">
-            <%= column_chart({"santé"=>[-3], "social"=>5, "env"=>2}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
+            <%= column_chart({"santé"=> product.health_score, "social"=> product.social_score, "env"=> product.environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
           </div>
 
         </div>
