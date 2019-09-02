@@ -52,18 +52,6 @@
       <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
         <div class="card-body p-0 ml-4 mr-4 mt-1 md-0 rounded-lg" style="border: solid 1px #EFEFEF;">
 
-          <div class="row align-items-center mb-3">
-            <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
-              <% if product.pnns_group_2 != 'unknwon' %>
-              <%= product.pnns_group_2 %>
-              <% end %>
-            </p>
-          </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_health(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_env(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </div>
-        </div>
-
         <div class="row align-items-center mb-3">
           <div class="col-8 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
             <% if product.nutrition_grades_tags == "unknown" || nil %>
@@ -73,9 +61,22 @@
             <% end %>
           </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
         </div>
+
+          <div class="row align-items-center mb-3">
+            <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
+              <% if product.pnns_group_2 != 'unknwon' %>
+              <%= product.pnns_group_2 %>
+              <% end %>
+            </p>
+          </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_health(product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_env(product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
+        </div>
+
 
         <div class="row align-items-center mb-3">
           <div class="ml-1 col-8 pr-0"> <h3> Additives </h3> <p>
@@ -83,7 +84,7 @@
           </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(product.code)%>"> <i class="fas fa-circle"></i> </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_additives(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
@@ -96,7 +97,7 @@
           </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-circle"></i> </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
         </div>
 
 

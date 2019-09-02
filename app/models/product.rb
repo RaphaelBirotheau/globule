@@ -294,4 +294,25 @@ class Product < ApplicationRecord
       return "#EF3C22"
     end
   end
+
+  def self.color_labels_soc(code)
+        product = Product.find_by(code: code)
+    label_score = 0
+    JSON.parse(product.labels_tags).each do |add|
+      if add.match("agriculture")
+        label_score += 1
+      elsif add.match("fair")
+        label_score += 1
+      else
+        label_score = label_score
+      end
+    end
+    if label_score > 3
+      return "#008042"
+    elsif label_score > 1
+      return "#FFC82B"
+    else
+      return "#EF3C22"
+    end
+  end
 end
