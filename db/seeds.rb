@@ -8,9 +8,9 @@
 
 User.destroy_all
 
-carrefour_user = User.create(email: "carrefour@gmail.com", password: "carrefour")
+carrefour_user = User.create!(email: "carrefour@gmail.com", password: "carrefour")
 
-biocoop_user = User.create(email: "biocoop@gmail.com", password: "biocoop")
+biocoop_user = User.create!(email: "biocoop@gmail.com", password: "biocoop")
 PnnsSecondGroup.create(name: 'Appetizers', health_score: -4, environmental_score: -4)
 PnnsSecondGroup.create(name: 'Fruit juices', health_score: -3, environmental_score: -4)
 PnnsSecondGroup.create(name: 'Biscuits and cakes', health_score: -5, environmental_score: 0)
@@ -54,3 +54,5 @@ PnnsSecondGroup.create(name: 'pastries', health_score: -2, environmental_score: 
 PnnsSecondGroup.create(name: 'Plant-based milk substitutes', health_score: 2, environmental_score: -3)
 PnnsSecondGroup.create(name: 'One-dish meals', health_score: -4, environmental_score: -4)
 PnnsSecondGroup.create(name: 'Cereals', health_score: 4, environmental_score: -2)
+
+puts "Seed done"
