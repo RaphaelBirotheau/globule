@@ -15,8 +15,6 @@ class Product < ApplicationRecord
 
   after_create :create_pnns, if: :code_not_nil?
   after_create :total_score_compute
-
-  after_create :create_pnns
   @dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
   @eu_countries = ["Albania", "Andorra", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria" ,"Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City", "Albanie", "Andorre", "Autriche", "Azerbaidjan", "Bielorussie", "Belgique", "Boznie", "Bulgarie", "Croatie", "Chypre", "Tcheque", "Tchequie", "Danemark", "Estonie", "Finland", "Allemagne", "Deutschland", "Grêce", "Grece", "Irlande", "Italie", "Estonie", "Lettonie", "Lituanie", "Macedoine", "Malte", "Moldavie", "Pays-bas", "Norvège", "Suède", "Pologne", "Roumanie", "Serbie", "Slovaquie","Slovénie", "Espagne", "Suisse", "Turquie", "Royaume", "Angleterre", "England", "Scotland", "Ecosse", "union-europeenne", "european union", "european-union", "union europeenne"]
   @france = ["France", "French", "france", "french", "fr-", "-fr", "fr:"]
@@ -53,7 +51,7 @@ class Product < ApplicationRecord
         self.image_front_url = product["product"]["image_front_url"]
       end
 
-   
+
     #   self.save
     else
       self.code = nil
@@ -216,15 +214,15 @@ class Product < ApplicationRecord
   end
 
   def self.recommendation(code)
-    product = Product.find_by(code: code)
+    old_product = Product.find_by(code: code)
 
-    product_categories = JSON.parse(product.categories_hierarchy).reverse
+    product_categories = JSON.parse(old_product.categories_hierarchy).reverse
 
     product_categories.each do |product_cat|
       product = Product.
-        where.not(id: product.id).
+        where.not(id: old_product.id).
         where('categories_hierarchy like ?', "%#{product_cat}%").
-        where('total_score >= ?', product.total_score).
+        where('total_score >= ?', old_product.total_score).
         order(total_score: :desc).
         first
       # return the product if found otherwise stay in the each loop
@@ -265,13 +263,13 @@ class Product < ApplicationRecord
 
   def self.color_env(code)
     product = Product.find_by(code: code)
-    if product.environmental_score < -3
+    if product.compute_environmental_score < -3
       return "#EF3C22"
-    elsif product.environmental_score < -1
+    elsif product.compute_environmental_score < -1
       return "#F67F23"
-    elsif product.environmental_score < 2
+    elsif product.compute_environmental_score < 2
       return "#FFC82B"
-    elsif product.environmental_score < 4
+    elsif product.compute_environmental_score < 4
       return "#83B937"
     else
       return "#008042"
