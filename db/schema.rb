@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_141604) do
+ActiveRecord::Schema.define(version: 2019_09_03_115856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,10 @@ ActiveRecord::Schema.define(version: 2019_09_02_141604) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "total_score"
+    t.integer "additives_score"
+    t.integer "origin_score"
+    t.integer "label_score"
+    t.integer "packaging_score"
   end
 
   create_table "profiles", force: :cascade do |t|
