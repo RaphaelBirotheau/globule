@@ -13,6 +13,7 @@ class Order < ApplicationRecord
       product_sub_category_array = []
       country_origin_repartion = []
       additives_array = []
+      nova_array = []
 
     self.products.each do | product |
       current_product = Product.where(code: product[:code])
@@ -22,6 +23,7 @@ class Order < ApplicationRecord
       product_sub_category_array << current_product.first.pnns_group_2
       country_origin_repartion << current_product.first.countries_tags
       additives_array << current_product.first.additives_tags
+      nova_array << current_product.first.nova_group
     end
 
     self.nutrition_score_repartition = nutrition_score_array
@@ -30,6 +32,7 @@ class Order < ApplicationRecord
     self.product_sub_category_repartition = product_sub_category_array
     self.country_origin_repartion = country_origin_repartion
     self.additives_repartition = additives_array
+    self.nova_repartition = nova_array
     self.save
   end
 end

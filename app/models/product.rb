@@ -12,9 +12,14 @@ class Product < ApplicationRecord
   validates :code, presence: true
 
   before_create :call_open_food_fact
+
   after_create :create_pnns, if: :code_not_nil?
   after_create :total_score_compute
-  # after_create :scoring
+
+  after_create :create_pnns
+  @dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
+  @eu_countries = ["Albania", "Andorra", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria" ,"Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City", "Albanie", "Andorre", "Autriche", "Azerbaidjan", "Bielorussie", "Belgique", "Boznie", "Bulgarie", "Croatie", "Chypre", "Tcheque", "Tchequie", "Danemark", "Estonie", "Finland", "Allemagne", "Deutschland", "Grêce", "Grece", "Irlande", "Italie", "Estonie", "Lettonie", "Lituanie", "Macedoine", "Malte", "Moldavie", "Pays-bas", "Norvège", "Suède", "Pologne", "Roumanie", "Serbie", "Slovaquie","Slovénie", "Espagne", "Suisse", "Turquie", "Royaume", "Angleterre", "England", "Scotland", "Ecosse", "union-europeenne", "european union", "european-union", "union europeenne"]
+  @france = ["France", "French", "france", "french", "fr-", "-fr", "fr:"]
 
   def call_open_food_fact
 
@@ -22,6 +27,7 @@ class Product < ApplicationRecord
     url = "https://fr.openfoodfacts.org/api/v0/produit/#{barcode}.json"
     product_serialized = open(url).read
     product = JSON.parse(product_serialized)
+
     if (product["status_verbose"] != "product not found")
       if  (PnnsSecondGroup.distinct.pluck(:name).exclude?(product["product"]["pnns_groups_2"]))
         self.code = nil
@@ -46,6 +52,8 @@ class Product < ApplicationRecord
         self.pnns_group_2 = product["product"]["pnns_groups_2"]
         self.image_front_url = product["product"]["image_front_url"]
       end
+
+   
     #   self.save
     else
       self.code = nil
@@ -209,6 +217,7 @@ class Product < ApplicationRecord
 
   def self.recommendation(code)
     product = Product.find_by(code: code)
+
     product_categories = JSON.parse(product.categories_hierarchy).reverse
 
     product_categories.each do |product_cat|
@@ -218,9 +227,178 @@ class Product < ApplicationRecord
         where('total_score >= ?', product.total_score).
         order(total_score: :desc).
         first
-
       # return the product if found otherwise stay in the each loop
       return product if product
+    end
+  end
+
+
+  def self.color_health(code)
+    product = Product.find_by(code: code)
+    if product.health_score < -3
+      return "#EF3C22"
+    elsif product.health_score < -1
+      return "#F67F23"
+    elsif product.health_score < 2
+      return "#FFC82B"
+    elsif product.health_score < 4
+      return "#83B937"
+    else
+      return "#008042"
+    end
+  end
+
+  def self.color_social(code)
+    product = Product.find_by(code: code)
+    if product.social_score < -3
+      return "#EF3C22"
+    elsif product.social_score < -1
+      return "#F67F23"
+    elsif product.social_score < 2
+      return "#FFC82B"
+    elsif product.social_score < 4
+      return "#83B937"
+    else
+      return "#008042"
+    end
+  end
+
+  def self.color_env(code)
+    product = Product.find_by(code: code)
+    if product.environmental_score < -3
+      return "#EF3C22"
+    elsif product.environmental_score < -1
+      return "#F67F23"
+    elsif product.environmental_score < 2
+      return "#FFC82B"
+    elsif product.environmental_score < 4
+      return "#83B937"
+    else
+      return "#008042"
+    end
+  end
+
+
+  def self.color_nutriscore(code)
+    product = Product.find_by(code: code)
+    if product.nutrition_grades_tags == "e"
+      return "#EF3C22"
+    elsif product.nutrition_grades_tags == "d"
+      return "#F67F23"
+    elsif product.nutrition_grades_tags == "c"
+      return "#FFC82B"
+    elsif product.nutrition_grades_tags == "b"
+      return "#83B937"
+    else
+      return "#008042"
+    end
+  end
+
+  def self.color_additives(code)
+    product = Product.find_by(code: code)
+    if JSON.parse(product.additives_tags).count == 0
+      return "#008042"
+    elsif JSON.parse(product.additives_tags).count == 1
+      return "#83B937"
+    elsif JSON.parse(product.additives_tags).count == 2
+      return "#FFC82B"
+    elsif JSON.parse(product.additives_tags).count == 3
+      return "#F67F23"
+    else
+      return "#EF3C22"
+    end
+  end
+
+  def self.color_additives_health(code)
+    product = Product.find_by(code: code)
+    verif = false
+    JSON.parse(product.additives_tags).each do |add|
+      if @dangerous_additives.include?(add)
+        verif = true
+      end
+    end
+    if verif == true
+      return "#EF3C22"
+    elsif JSON.parse(product.additives_tags).count == 0
+      return "#008042"
+    elsif JSON.parse(product.additives_tags).count == 1
+      return "#83B937"
+    elsif JSON.parse(product.additives_tags).count == 2
+      return "#FFC82B"
+    elsif JSON.parse(product.additives_tags).count == 3
+      return "#F67F23"
+    else
+      return "#EF3C22"
+    end
+  end
+
+  def self.color_country(code)
+    product = Product.find_by(code: code)
+    result = @eu_countries - product.countries_tags.gsub('-', ' ').split(' ')
+    if @france.include?(product.countries_tags.gsub(",", " "))
+      return "#008042"
+    elsif result.length != @eu_countries.length
+      return "#FFC82B"
+    else
+      return "#F67F23"
+    end
+  end
+
+  def self.color_pack(code)
+    product = Product.find_by(code: code)
+    x = false
+    JSON.parse(product.packaging_tags).each do |pack|
+      if pack.include?("plasti")
+        x = true
+      end
+    end
+    if x = true
+      return "#EF3C22"
+    else "#FFC82B"
+      return
+    end
+  end
+
+
+  def self.color_labels(code)
+    product = Product.find_by(code: code)
+    label_score = 0
+    JSON.parse(product.labels_tags).each do |add|
+      if add.match("agriculture")
+        label_score += 1
+      elsif add.match("fair")
+        label_score += 1
+      else
+        label_score = label_score
+      end
+    end
+    if label_score > 2
+      return "#008042"
+    elsif label_score > 0
+      return "#FFC82B"
+    else
+      return "#EF3C22"
+    end
+  end
+
+  def self.color_labels_soc(code)
+        product = Product.find_by(code: code)
+    label_score = 0
+    JSON.parse(product.labels_tags).each do |add|
+      if add.match("agriculture")
+        label_score += 1
+      elsif add.match("fair")
+        label_score += 1
+      else
+        label_score = label_score
+      end
+    end
+    if label_score > 3
+      return "#008042"
+    elsif label_score > 1
+      return "#FFC82B"
+    else
+      return "#EF3C22"
     end
   end
 end
