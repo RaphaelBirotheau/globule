@@ -21,7 +21,6 @@
 
 .card-header {
   display: flex;
-  flex-direction: column;
 }
 
 .card-body p {
@@ -33,3 +32,7 @@
     max-height: 150px;
 }
 
+.topcard {
+  // margin: 0px !important;
+  // padding: 0px !important;
+}
