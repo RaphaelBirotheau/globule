@@ -15,8 +15,6 @@ class Product < ApplicationRecord
 
   after_create :create_pnns, if: :code_not_nil?
   after_create :total_score_compute
-
-  after_create :create_pnns
   @dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
   @eu_countries = ["Albania", "Andorra", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria" ,"Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City", "Albanie", "Andorre", "Autriche", "Azerbaidjan", "Bielorussie", "Belgique", "Boznie", "Bulgarie", "Croatie", "Chypre", "Tcheque", "Tchequie", "Danemark", "Estonie", "Finland", "Allemagne", "Deutschland", "Grêce", "Grece", "Irlande", "Italie", "Estonie", "Lettonie", "Lituanie", "Macedoine", "Malte", "Moldavie", "Pays-bas", "Norvège", "Suède", "Pologne", "Roumanie", "Serbie", "Slovaquie","Slovénie", "Espagne", "Suisse", "Turquie", "Royaume", "Angleterre", "England", "Scotland", "Ecosse", "union-europeenne", "european union", "european-union", "union europeenne"]
   @france = ["France", "French", "france", "french", "fr-", "-fr", "fr:"]
