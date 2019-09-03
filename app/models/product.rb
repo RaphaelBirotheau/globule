@@ -2,6 +2,8 @@ require 'json'
 require 'open-uri'
 
 class Product < ApplicationRecord
+  EU_COUNTRIES = ["albania", "andorra", "austria", "belarus", "belgium", "bosnia and herzegovina", "bulgaria", "croatia", "cyprus", "czech republic", "denmark", "estonia", "finland", "germany", "greece", "hungary", "iceland", "ireland", "italy", "kosovo", "latvia", "liechtenstein", "lithuania", "luxembourg", "macedonia", "malta", "moldova", "monaco", "montenegro", "netherlands", "norway", "poland", "portugal", "romania", "san marino", "serbia", "slovakia", "slovenia", "spain", "sweden", "switzerland", "turkey", "ukraine", "united kingdom", "vatican city", "albanie", "andorre", "autriche", "azerbaidjan", "bielorussie", "belgique", "boznie", "bulgarie", "croatie", "chypre", "tcheque", "tchequie", "danemark", "estonie", "finland", "allemagne", "deutschland", "grêce", "grece", "irlande", "italie", "estonie", "lettonie", "lituanie", "macedoine", "malte", "moldavie", "pays-bas", "norvège", "suède", "pologne", "roumanie", "serbie", "slovaquie","slovénie", "espagne", "suisse", "turquie", "royaume", "angleterre", "england", "scotland", "ecosse", "union-europeenne", "european union", "european-union", "union europeenne", "europe"]
+
   has_many :order_items, dependent: :destroy
   has_many :orders, through: :order_items
   has_one :pnns_product
@@ -74,9 +76,9 @@ class Product < ApplicationRecord
   end
 
   def compute_environmental_score
-    if has_labels_bio?(JSON.parse(self.labels_tags)) && is_french?(self.countries_tags) && has_plastic?(self.packaging_tags)
+    if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score(JSON.parse(self.countries_tags)) && has_plastic?(self.packaging_tags)
       self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 50
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && is_french?(self.countries_tags)
+    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score(JSON.parse(self.countries_tags))
       self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 40
     elsif has_labels_bio?(JSON.parse(self.labels_tags))
       self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 20
@@ -90,12 +92,10 @@ class Product < ApplicationRecord
       50
     elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
       75
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags)) && is_french?(self.countries_tags)
+    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags)) && origin_score(JSON.parse(self.countries_tags))
       100
-    elsif is_french?(self.countries_tags)
-      25
     else
-    0
+      origin_score(JSON.parse(self.countries_tags))
     end
   end
 
@@ -117,6 +117,22 @@ class Product < ApplicationRecord
     else
       tags.downcase.include?("france")
     end
+  end
+
+  def origin_score(tags)
+    score = 0
+
+    tags.each do |tag|
+      if tag.downcase.include?('france')
+        score += 25
+      elsif EU_COUNTRIES.include?(tag.downcase)
+        score += 15
+      else # rest of the world
+        score = 0
+      end
+    end
+
+    return score
   end
 
    def has_plastic?(tags)
@@ -193,13 +209,18 @@ class Product < ApplicationRecord
 
   def self.recommendation(code)
     product = Product.find_by(code: code)
-    product_cat = JSON.parse(product.categories_hierarchy).reverse.first
+    product_categories = JSON.parse(product.categories_hierarchy).reverse
 
-    Product.
-      where.not(id: product.id).
-      where('categories_hierarchy like ?', "%#{product_cat}%").
-      where('total_score >= ?', product.total_score).
-      order(total_score: :desc).
-      first
+    product_categories.each do |product_cat|
+      product = Product.
+        where.not(id: product.id).
+        where('categories_hierarchy like ?', "%#{product_cat}%").
+        where('total_score >= ?', product.total_score).
+        order(total_score: :desc).
+        first
+
+      # return the product if found otherwise stay in the each loop
+      return product if product
+    end
   end
 end
