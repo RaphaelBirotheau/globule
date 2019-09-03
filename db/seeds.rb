@@ -12,6 +12,7 @@ carrefour_user = User.create!(email: "carrefour@gmail.com", password: "carrefour
 
 
 biocoop_user = User.create(email: "biocoop@gmail.com", password: "biocoop")
+
 PnnsSecondGroup.create(name: 'Eggs', health_score: 4, environmental_score: 30)
 PnnsSecondGroup.create(name: 'fruits', health_score: 5, environmental_score: 30)
 PnnsSecondGroup.create(name: 'Waters and flavored waters', health_score: 5, environmental_score: 30)
@@ -55,5 +56,4 @@ PnnsSecondGroup.create(name: 'Sweets', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Fats', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Meat', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Processed meat', health_score: -5, environmental_score: 0)
-
 puts "Seed done"
