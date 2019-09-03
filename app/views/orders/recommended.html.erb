@@ -46,8 +46,7 @@
           </div>
 
           <div class="col-5 chart-align pt-2">
-            <%#= column_chart({"santé"=> product.health_score, "social"=> product.social_score, "env"=> product.environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
-
+            <%= column_chart({"santé"=> recommended_product.health_score, "social"=> recommended_product.social_score, "env"=> recommended_product.compute_environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
 
           </div>
 
