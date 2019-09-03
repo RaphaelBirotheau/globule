@@ -81,7 +81,9 @@
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
               <%= JSON.parse(product.additives_tags).count %> </p>
-            </div>
+                <% if JSON.parse(product.additives_tags) != nil %>
+                <p> <%= Product.retrieve_additives(product.code) %> </p>
+              <% end %>            </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives(product.code)%>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </i> </div>
@@ -89,11 +91,8 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Packaging </h3> <p>
-              <% if  product.packaging_tags != nil %>
-              <% JSON.parse(product.packaging_tags).each do |add| %>
-              <%= add.gsub('-', " ") %>
-              <% end %>
-              <% end %> </p>
+              <%= Product.retrieve_packs(product.code) %>
+            </p>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-leaf"></i> </div>
