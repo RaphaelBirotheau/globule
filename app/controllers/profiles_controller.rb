@@ -7,6 +7,8 @@ class ProfilesController < ApplicationController
     nutrition_score
     nova_score
     additives_score
+
+
   end
 
   private
@@ -24,8 +26,11 @@ class ProfilesController < ApplicationController
   end
 
   def additives_score
-    scores = current_user.orders.pluck(:additives_repartition).map { |score| JSON.parse(score) }.flatten
-    scores = scores.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total }
-    @additives_score = Hash[scores.to_a.sort_by { |key, val| key }]
   end
+
+  def method_name
+
+  end
+
 end
+
