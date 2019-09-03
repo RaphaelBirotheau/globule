@@ -6,8 +6,8 @@ after_action :create_user_profile, only: [:create]
     @order = Order.last
   end
 
-  def recommended
-    @order = Order.last
+  def recommendations
+    @order = Order.find(params[:id])
   end
 
   def create_user_profile

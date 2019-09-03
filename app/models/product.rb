@@ -117,6 +117,7 @@ class Product < ApplicationRecord
   end
 
   def compute_label_score
+
     if has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
       15
     elsif has_labels_fairtrade?(JSON.parse(self.labels_tags))
@@ -131,26 +132,28 @@ class Product < ApplicationRecord
 
   def is_french?(tags)
     countries = ["france", "europe"]
-    if tags.start_with?('[')
-      JSON.parse(tags).any? { |label| label.downcase.include?("france") }
-    else
-      tags.downcase.include?("france")
+    if !tags.nil?
+      if tags.start_with?('[')
+        JSON.parse(tags).any? { |label| label.downcase.include?("france") }
+      else
+        tags.downcase.include?("france")
+      end
     end
   end
 
   def compute_origin_score(tags)
     score = 0
-
-    tags.each do |tag|
-      if tag.downcase.include?('france')
-        score += 25
-      elsif EU_COUNTRIES.include?(tag.downcase)
-        score += 15
-      else # rest of the world
-        score = 0
+    if !tags.nil?
+      tags.each do |tag|
+        if tag.downcase.include?('france')
+          score += 25
+        elsif EU_COUNTRIES.include?(tag.downcase)
+          score += 15
+        else # rest of the world
+          score = 1
+        end
       end
     end
-
     return score
   end
 

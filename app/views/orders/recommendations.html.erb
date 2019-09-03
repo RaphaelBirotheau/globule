@@ -55,9 +55,9 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
-              <%= JSON.parse(product.additives_tags).count %> </p>
-                <% if JSON.parse(product.additives_tags) != nil %>
-                <p> <%= Product.retrieve_additives(product.code) %> </p>
+              <%= JSON.parse(recommended_product.additives_tags).count %> </p>
+                <% if JSON.parse(recommended_product.additives_tags) != nil %>
+                <p> <%= Product.retrieve_additives(recommended_product.code) %> </p>
               <% end %>            </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
@@ -66,7 +66,7 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Packaging </h3> <p>
-              <%= Product.retrieve_packs(product.code) %>
+              <%= Product.retrieve_packs(recommended_product.code) %>
             </p>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
