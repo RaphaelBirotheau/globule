@@ -57,8 +57,6 @@ PnnsSecondGroup.create(name: 'Fats', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Meat', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Processed meat', health_score: -5, environmental_score: 0)
 
-
-
 Product.create(code: '3422210438065')
 Product.create(code: '3266980138721')
 Product.create(code: '3038350335005')
@@ -498,7 +496,6 @@ Product.create(code: '3175681108974')
 Product.create(code: '3263859858513')
 Product.create(code: '3263859474126')
 Product.create(code: '3263859848613')
-puts "1/5"
 Product.create(code: '3263859885410')
 Product.create(code: '3187670011424')
 Product.create(code: '3276170019143')
@@ -998,7 +995,6 @@ Product.create(code: '3263859445010')
 Product.create(code: '3263859474416')
 Product.create(code: '3263859600617')
 Product.create(code: '3263859680312')
-puts "2/5"
 Product.create(code: '3263859800116')
 Product.create(code: '3263859873516')
 Product.create(code: '3263851444592')
@@ -1498,7 +1494,6 @@ Product.create(code: '3760019713533')
 Product.create(code: '3760019710075')
 Product.create(code: '3435660690334')
 Product.create(code: '3180054010143')
-puts "3/5"
 Product.create(code: '8410060401501')
 Product.create(code: '3154230074922')
 Product.create(code: '8711528699011')
@@ -1998,7 +1993,6 @@ Product.create(code: '3263850667411')
 Product.create(code: '3263859183011')
 Product.create(code: '3263856484517')
 Product.create(code: '3263856489413')
-puts "4/5"
 Product.create(code: '3336374700053')
 Product.create(code: '3111950232704')
 Product.create(code: '3069530110006')
@@ -2533,6 +2527,5 @@ Product.create(code: '3701028200034')
 Product.create(code: '3292070003563')
 Product.create(code: '3427290002731')
 Product.create(code: '3263856851326')
-
 
 puts "Seed done"

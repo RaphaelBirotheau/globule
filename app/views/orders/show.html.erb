@@ -1,30 +1,6 @@
-<div class="row navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to dashboard_path, class: "navbar-brand" do %>
-  <%= image_tag "logowhite.png" %>
-  <% end %>
 
-  <h1>My basket</h1>
+<div class="container-global">
 
-  <div class="navbar-toggler-position">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="fas fa-user-alt"></span>
-    </button>
-  </div>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown text-right">
-        <%= link_to "Profile", profile_path(:id), class: "dropdown-item text-secondary pl-0" %>
-        <%= link_to "Log in", new_user_session_path, class: "dropdown-item text-secondary pl-0" unless user_signed_in? %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-secondary" if user_signed_in? %>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="container-global" style="height: 73vh;">
-
-  <%= link_to "Create order", new_order_path %>
 
   <div class="accordion" id="accordionExample">
     <% order = @order  %>
@@ -133,7 +109,6 @@
     <% end %>
 </div>
 
-<!-- </div> -->
 
 
 <div class="blank">
@@ -143,9 +118,4 @@
   <br>
 </div>
 
-<div class="footer-position">
-  <input class="inputfooter" type="checkbox" id="switch" />
-  <label class="labelfooter" for="switch"> </label>
-  <%= link_to "Go to My Magic Basket", recommandations_path, class: "d-none hidden-link" %>
-</div>
 
