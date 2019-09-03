@@ -146,11 +146,11 @@ class Product < ApplicationRecord
     if !tags.nil?
       tags.each do |tag|
         if tag.downcase.include?('france')
-          score += 25
+          score += 25 #France
         elsif EU_COUNTRIES.include?(tag.downcase)
-          score += 15
+          score += 15 #European Union
         else # rest of the world
-          score = 1
+          score = 1 #
         end
       end
     end
@@ -201,15 +201,15 @@ class Product < ApplicationRecord
   def compute_additive_score(tags)
   dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
      if tags.count == 0
-        15
+        15 #no additives, it's good
       elsif tags.any? { |tag| dangerous_additives.include?(tag.downcase) }
-        0
+        0 #has at least one dangerous additive
       elsif tags.count <= 4
-        10
+        10  #has four or less additives
       elsif tags.count <= 8
-        5
+        5 #has 8 or less additives
       else
-        0
+        1 #has more than 8 additives or company doesn't provide data
     end
   end
 
@@ -223,15 +223,15 @@ class Product < ApplicationRecord
     elsif tags.kind_of?(Array)
       # product_pack =  JSON.parse(tags)
       if tags.any? { |pack| carton.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("carton") }
-        20
+        20 #Cardboard only
       elsif tags.any? { |pack| verre.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("verre") }
-        15
+        15  #Glass only
       elsif tags.any? { |label| label.downcase.include?("plasti") }
-        1
+        1 #Contains plastic
       elsif tags.any? { |pack| verre.exclude?("plasti") } && tags.any? { |label| label.downcase.include?("allu") }
-        10
+        10  #Contains aluminium
       else
-        2
+        2   #Contains plastic and others
       end
     else
       if tags.downcase.include?("carton")
