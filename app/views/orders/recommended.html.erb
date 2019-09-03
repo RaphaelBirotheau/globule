@@ -23,10 +23,6 @@
 </div>
 
 
-
-
-
-
 <div class="container container-global" style="height: 73vh;">
 
 
@@ -42,7 +38,7 @@
           <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
 
             <div class="col-7">
-              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
+              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= truncate(recommended_product.generic_name_fr, :length => 25)%></h2>
               <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs mb-3" >
             </div>
 
@@ -86,10 +82,8 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
-              <%= JSON.parse(product.additives_tags).count %> </p>
-                <% if JSON.parse(product.additives_tags) != nil %>
-                <p> <%= Product.retrieve_additives(product.code) %> </p>
-              <% end %>            </div>
+              <%= JSON.parse(recommended_product.additives_tags).count %> </p>
+            </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style= "color:#ffff"> <i class="fas fa-users"></i> </i> </div>
@@ -97,8 +91,11 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Packaging </h3> <p>
-              <%= Product.retrieve_packs(product.code) %>
-            </p>
+              <% if  recommended_product.packaging_tags != nil %>
+              <% JSON.parse(recommended_product.packaging_tags).each do |add| %>
+              <%= add.gsub('-', " ") %>
+              <% end %>
+              <% end %> </p>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
