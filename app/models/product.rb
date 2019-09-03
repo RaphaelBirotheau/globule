@@ -214,15 +214,15 @@ class Product < ApplicationRecord
   end
 
   def self.recommendation(code)
-    product = Product.find_by(code: code)
+    old_product = Product.find_by(code: code)
 
-    product_categories = JSON.parse(product.categories_hierarchy).reverse
+    product_categories = JSON.parse(old_product.categories_hierarchy).reverse
 
     product_categories.each do |product_cat|
       product = Product.
-        where.not(id: product.id).
+        where.not(id: old_product.id).
         where('categories_hierarchy like ?', "%#{product_cat}%").
-        where('total_score >= ?', product.total_score).
+        where('total_score >= ?', old_product.total_score).
         order(total_score: :desc).
         first
       # return the product if found otherwise stay in the each loop

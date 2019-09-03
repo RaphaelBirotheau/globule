@@ -56,10 +56,5 @@ PnnsSecondGroup.create(name: 'Sweets', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Fats', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Meat', health_score: -5, environmental_score: 0)
 PnnsSecondGroup.create(name: 'Processed meat', health_score: -5, environmental_score: 0)
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 7f8421dcff85c33e19f8e00300c5b931fc6e2f5e
 
 puts "Seed done"
