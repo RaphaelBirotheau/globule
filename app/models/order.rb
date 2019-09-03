@@ -1,8 +1,8 @@
 class Order < ApplicationRecord
   attr_accessor :shopping_list
 
-  belongs_to :user, dependent: :destroy
-  has_many :order_items
+  belongs_to :user
+  has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
 
 
@@ -18,7 +18,7 @@ class Order < ApplicationRecord
     self.products.each do | product |
       current_product = Product.where(code: product[:code])
       nutrition_score_array << current_product.first.nutrition_grades_tags
-      packaging_array << current_product.first.packaging_tags
+      packaging_array << current_product.first.packaging_score
       product_category_array << current_product.first.pnns_group_1
       product_sub_category_array << current_product.first.pnns_group_2
       country_origin_repartion << current_product.first.countries_tags

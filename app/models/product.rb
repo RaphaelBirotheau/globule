@@ -14,10 +14,11 @@ class Product < ApplicationRecord
   before_create :call_open_food_fact
 
   after_create :create_pnns, if: :code_not_nil?
-  after_create :total_score_compute
+  after_create :compute_total_score
   @dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
   @eu_countries = ["Albania", "Andorra", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria" ,"Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City", "Albanie", "Andorre", "Autriche", "Azerbaidjan", "Bielorussie", "Belgique", "Boznie", "Bulgarie", "Croatie", "Chypre", "Tcheque", "Tchequie", "Danemark", "Estonie", "Finland", "Allemagne", "Deutschland", "Grêce", "Grece", "Irlande", "Italie", "Estonie", "Lettonie", "Lituanie", "Macedoine", "Malte", "Moldavie", "Pays-bas", "Norvège", "Suède", "Pologne", "Roumanie", "Serbie", "Slovaquie","Slovénie", "Espagne", "Suisse", "Turquie", "Royaume", "Angleterre", "England", "Scotland", "Ecosse", "union-europeenne", "european union", "european-union", "union europeenne"]
   @france = ["France", "French", "france", "french", "fr-", "-fr", "fr:"]
+  @packagings = ["Carton", "plastique", "verre", "carton", "alu", "plastic", "Verre", "Aluminium", "aluminium"]
 
   def call_open_food_fact
 
@@ -75,16 +76,16 @@ class Product < ApplicationRecord
     if self.pnns_group_2 == "unknown"
       nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group)
     elsif has_labels_bio?(JSON.parse(self.labels_tags))
-      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + additive_score(JSON.parse(self.additives_tags)) + 10
+      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + additives_score + 10
     else
-      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + additive_score(JSON.parse(self.additives_tags))
+      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + additives_score
     end
   end
 
   def compute_environmental_score
-    if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score(JSON.parse(self.countries_tags)) && has_plastic?(self.packaging_tags)
+    if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score && has_plastic?(self.packaging_tags)
       self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 50
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score(JSON.parse(self.countries_tags))
+    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score
       self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 40
     elsif has_labels_bio?(JSON.parse(self.labels_tags))
       self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 20
@@ -98,10 +99,10 @@ class Product < ApplicationRecord
       50
     elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
       75
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags)) && origin_score(JSON.parse(self.countries_tags))
+    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags)) && origin_score
       100
     else
-      origin_score(JSON.parse(self.countries_tags))
+      origin_score
     end
   end
 
@@ -110,9 +111,21 @@ class Product < ApplicationRecord
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
   end
 
-    def has_labels_fairtrade?(tags)
+  def has_labels_fairtrade?(tags)
     labels = ["fairtrade", "equitable"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
+  end
+
+  def compute_label_score
+    if has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
+      15
+    elsif has_labels_fairtrade?(JSON.parse(self.labels_tags))
+      5
+    elsif has_labels_bio?(JSON.parse(self.labels_tags))
+      10
+    else
+      0
+    end
   end
 
 
@@ -125,7 +138,7 @@ class Product < ApplicationRecord
     end
   end
 
-  def origin_score(tags)
+  def compute_origin_score(tags)
     score = 0
 
     tags.each do |tag|
@@ -182,35 +195,65 @@ class Product < ApplicationRecord
     end
   end
 
-  def additive_score(tags)
+  def compute_additive_score(tags)
   dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
      if tags.count == 0
-      15
-    elsif tags.include?(dangerous_additives)
+        15
+      elsif tags.any? { |tag| dangerous_additives.include?(tag.downcase) }
+        0
+      elsif tags.count <= 4
+        10
+      elsif tags.count <= 8
+        5
+      else
+        0
+    end
+  end
+
+  def compute_packaging_score(tags)
+    carton = ["plasti", "allu", "verre", "glass"]
+    verre = ["plasti", "allu", "carton"]
+    if tags.nil?
       0
-    elsif tags.count <= 4
-      10
-    elsif tags.count <= 8
-      5
+    elsif tags.count == 0
+      0
+    elsif tags.kind_of?(Array)
+      # product_pack =  JSON.parse(tags)
+      if tags.any? { |pack| carton.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("carton") }
+        20
+      elsif tags.any? { |pack| verre.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("verre") }
+        15
+      elsif tags.any? { |label| label.downcase.include?("plasti") }
+        1
+      elsif tags.any? { |pack| verre.exclude?("plasti") } && tags.any? { |label| label.downcase.include?("allu") }
+        10
+      else
+        2
+      end
     else
-      0
+      if tags.downcase.include?("carton")
+          20
+        elsif tags.downcase.include?("verre")
+          15
+        elsif tags.downcase.include?("plasti")
+          1
+        elsif tags.downcase.include?("allu")
+          10
+        else
+          2
+      end
     end
   end
 
 
-  def total_score_compute
-    self.total_score = health_score + compute_environmental_score
+  def compute_total_score
+    # order matters here!
+    self.additives_score = compute_additive_score(JSON.parse(self.additives_tags))
+    self.origin_score = compute_origin_score(JSON.parse(self.countries_tags))
+    self.label_score = compute_label_score
+    self.packaging_score = compute_packaging_score(JSON.parse(self.packaging_tags))
+    self.total_score = health_score + compute_environmental_score + social_score
     self.save
-  end
-
-  def score_cap(score)
-    if score > 5
-      5
-    elsif score < -5
-      -5
-    else
-      score
-    end
   end
 
   def self.recommendation(code)
@@ -233,13 +276,13 @@ class Product < ApplicationRecord
 
   def self.color_health(code)
     product = Product.find_by(code: code)
-    if product.health_score < -3
+    if product.health_score < 20
       return "#EF3C22"
-    elsif product.health_score < -1
+    elsif product.health_score < 40
       return "#F67F23"
-    elsif product.health_score < 2
+    elsif product.health_score < 60
       return "#FFC82B"
-    elsif product.health_score < 4
+    elsif product.health_score < 80
       return "#83B937"
     else
       return "#008042"
@@ -248,13 +291,13 @@ class Product < ApplicationRecord
 
   def self.color_social(code)
     product = Product.find_by(code: code)
-    if product.social_score < -3
+    if product.social_score < 20
       return "#EF3C22"
-    elsif product.social_score < -1
+    elsif product.social_score < 40
       return "#F67F23"
-    elsif product.social_score < 2
+    elsif product.social_score < 60
       return "#FFC82B"
-    elsif product.social_score < 4
+    elsif product.social_score < 80
       return "#83B937"
     else
       return "#008042"
@@ -263,13 +306,13 @@ class Product < ApplicationRecord
 
   def self.color_env(code)
     product = Product.find_by(code: code)
-    if product.compute_environmental_score < -3
+    if product.compute_environmental_score < 20
       return "#EF3C22"
-    elsif product.compute_environmental_score < -1
+    elsif product.compute_environmental_score < 40
       return "#F67F23"
-    elsif product.compute_environmental_score < 2
+    elsif product.compute_environmental_score < 60
       return "#FFC82B"
-    elsif product.compute_environmental_score < 4
+    elsif product.compute_environmental_score < 80
       return "#83B937"
     else
       return "#008042"
@@ -333,7 +376,7 @@ class Product < ApplicationRecord
   def self.color_country(code)
     product = Product.find_by(code: code)
     result = @eu_countries - product.countries_tags.gsub('-', ' ').split(' ')
-    if @france.include?(product.countries_tags.gsub(",", " "))
+    if @france.include?(JSON.parse(product.countries_tags).join(","))
       return "#008042"
     elsif result.length != @eu_countries.length
       return "#FFC82B"
@@ -350,7 +393,7 @@ class Product < ApplicationRecord
         x = true
       end
     end
-    if x = true
+    if x == true
       return "#EF3C22"
     else "#FFC82B"
       return
@@ -380,7 +423,7 @@ class Product < ApplicationRecord
   end
 
   def self.color_labels_soc(code)
-        product = Product.find_by(code: code)
+    product = Product.find_by(code: code)
     label_score = 0
     JSON.parse(product.labels_tags).each do |add|
       if add.match("agriculture")
@@ -397,6 +440,32 @@ class Product < ApplicationRecord
       return "#FFC82B"
     else
       return "#EF3C22"
+    end
+  end
+
+  def self.retrieve_packs(code)
+    product = Product.find_by(code: code)
+    x = []
+    if JSON.parse(product.packaging_tags) != nil
+      JSON.parse(product.packaging_tags).each do |pack|
+        if @packagings.include?(pack)
+          x << pack.capitalize
+        end
+      end
+    end
+      return x.join(", ")
+  end
+
+  def self.retrieve_additives(code)
+    product = Product.find_by(code: code)
+      x = []
+    if product.additives_tags != nil
+      JSON.parse(product.additives_tags).each do |pack|
+        if @dangerous_additives.include?(pack)
+          x << pack.gsub("en:", "").capitalize
+        end
+      end
+      return x.join(", ")
     end
   end
 end
