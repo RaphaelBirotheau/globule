@@ -28,9 +28,15 @@ class ProfilesController < ApplicationController
   def additives_score
   end
 
-  def method_name
+  def labels
 
   end
+
+  def packaging
+
+  end
+
+  def origin
 
 end
 
