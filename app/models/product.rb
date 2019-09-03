@@ -203,16 +203,6 @@ class Product < ApplicationRecord
     self.save
   end
 
-  def score_cap(score)
-    if score > 5
-      5
-    elsif score < -5
-      -5
-    else
-      score
-    end
-  end
-
   def self.recommendation(code)
     old_product = Product.find_by(code: code)
 
