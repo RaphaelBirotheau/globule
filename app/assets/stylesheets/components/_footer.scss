@@ -21,75 +21,56 @@
 // }
 
 
-
-.inputfooter[type=checkbox]{
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-.labelfooter {
-  cursor: pointer;
-  text-indent: -9999px;
-  width: 150px;
+.footer {
+  background: #F4F4F4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  width: 100%;
   height: 70px;
-  background: linear-gradient(to left,#3fd3f1, #20d2c5);
-  display: block;
-  border-radius: 100px;
+  padding: 0px 50px;
+  color: linear-gradient(to left,#3fd3f1, #20d2c5);
+  flex: 1;
+  padding: 5px;
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+
+.footer-links a {
+  color: linear-gradient(to left,#3fd3f1, #20d2c5);
+  opacity: 1;
+  text-decoration: none;
+  font-size: 40px;
+  padding: 0px 20px;
+  margin-right: 18px;
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.footer-toggle {
+  display: flex;
+  align-items: center;
   position: relative;
-  margin: auto;
+  bottom: 20px;
+  border: solid 2px lightgray;
+  border-radius: 50%;
+  font-size: 70px;
+  padding: 15px;
+  margin: 15px;
+  background-color: lightgray;
 }
 
-// .labelfooter:after {
-//   content: '';
-//   position: absolute;
-//   top: 5px;
-//   left: 5px;
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 90px;
-//   transition: 0s;
-//   z-index: 0;
-//   background: url(shopping-basket-solid.svg);
-//   background-color: #3ed3ef;
-//   background-repeat: no-repeat;
-//   background-size: 80%;
-//   background-position: center;
-//   border: 1px solid #fff;
 
-// }
 
-// .inputfooter:checked + .labelfooter {
-//   // background: #bada55;
-//   background-color: linear-gradient(to right,#3fd3f1, #20d2c5);
 
-// }
 
-// .inputfooter:checked + .labelfooter:after {
-//   left: calc(100% - 5px);
-//   transform: translateX(-100%);
-//   background: url(magic-solid.svg);
-//     background-color: #3ed3ef;
-//   background-repeat: no-repeat;
-//   background-size: 80%;
-//   background-position: center;
 
-// }
 
-// .labelfooter:active:after {
-//   width: 130px;
-// }
 
-// centering
-// body {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 100vh;
-// }
 
-.footer-position {
-  position: sticky;
-  bottom: 35px;
-  text-align: center;
-}
