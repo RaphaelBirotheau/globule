@@ -122,5 +122,7 @@
 <div class="footer-position">
   <input class="inputfooter" type="checkbox" id="switch" />
   <label class="labelfooter" for="switch"> </label>
-  <%= link_to "Go to My Magic Basket", recommendations_order_path(order), class: "d-none hidden-link" %>
+  <% if current_user.orders.count > 0  %>
+    <%= link_to "Go to My Magic Basket", recommendations_order_path(order), class: "d-none hidden-link" %>
+  <% end %>
 </div>
