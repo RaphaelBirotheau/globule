@@ -53,7 +53,7 @@ class Product < ApplicationRecord
         self.image_front_url = product["product"]["image_front_url"]
       end
 
-   
+
     #   self.save
     else
       self.code = nil
@@ -265,13 +265,13 @@ class Product < ApplicationRecord
 
   def self.color_env(code)
     product = Product.find_by(code: code)
-    if product.environmental_score < -3
+    if product.compute_environmental_score < -3
       return "#EF3C22"
-    elsif product.environmental_score < -1
+    elsif product.compute_environmental_score < -1
       return "#F67F23"
-    elsif product.environmental_score < 2
+    elsif product.compute_environmental_score < 2
       return "#FFC82B"
-    elsif product.environmental_score < 4
+    elsif product.compute_environmental_score < 4
       return "#83B937"
     else
       return "#008042"
