@@ -39,12 +39,7 @@
               <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= product.generic_name_fr %></h2>
               <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3" >
             </div>
-            <div class="col-5 chart-align">
-              <%= column_chart({"santé"=> product.health_score, "social"=> product.social_score, "env"=> product.compute_environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
 
-
-
-            </div>
 
           </div>
         </button>
@@ -68,7 +63,7 @@
 
             <div class="row align-items-center mb-3">
               <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
-                <% if product.pnns_group_2 != 'unknwon' %>
+                <% if product.pnns_group_2 != 'unknown' %>
                 <%= product.pnns_group_2 %>
                 <% end %>
               </p>
@@ -82,6 +77,9 @@
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
               <%= JSON.parse(product.additives_tags).count %> </p>
+              <% if JSON.parse(product.additives_tags) != nil %>
+                <p> <%= Product.retrieve_additives(product.code) %> </p>
+              <% end %>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives(product.code)%>"> <i class="fas fa-leaf"></i> </div>
@@ -90,11 +88,8 @@
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Packaging </h3> <p>
-              <% if  product.packaging_tags != nil %>
-              <% JSON.parse(product.packaging_tags).each do |add| %>
-              <%= add.gsub('-', " ") %>
-              <% end %>
-              <% end %> </p>
+              <%= Product.retrieve_packs(product.code) %>
+            </p>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-leaf"></i> </div>
@@ -103,7 +98,7 @@
 
 
           <div class="row align-items-center mb-3">
-            <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= product.countries_tags %></p> </div>
+            <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= JSON.parse(product.countries_tags).join(",") %></p> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-users"></i> </div>
