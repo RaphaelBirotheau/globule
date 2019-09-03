@@ -63,9 +63,9 @@
               <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
               <% end %>
             </div>
-            <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(product.code)%>"> <i class="fas fa-circle"></i> </div>
-            <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
-            <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(product.code)%>"> <i class="fas fa-heart"></i> </div>
+            <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
+            <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
           </div>
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
@@ -74,9 +74,9 @@
               <% end %>
             </p>
           </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_health(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_env(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_health(product.code)%>"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_env(product.code)%>"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
         </div>
 
 
@@ -84,9 +84,9 @@
           <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
             <%= JSON.parse(product.additives_tags).count %> </p>
           </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_additives(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(product.code)%>"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_additives(product.code)%>"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
@@ -97,17 +97,17 @@
             <% end %>
             <% end %> </p>
           </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
         </div>
 
 
         <div class="row align-items-center mb-3">
           <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= product.countries_tags %></p> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_country(product.code) %>"> <i class="fas fa-users"></i> </div>
         </div>
 
         <div class="row align-items-center mb-3">
@@ -124,9 +124,9 @@
             <% end %></p>
             <% end %>
           </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-circle"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-circle"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-users"></i> </div>
         </div>
       </div>
     </div>
