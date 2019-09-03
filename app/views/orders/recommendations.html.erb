@@ -1,5 +1,6 @@
 <div class="container container-global" style="height: 73vh;">
 
+
   <div class="accordion" id="accordionExample">
     <% order = current_user.orders.last  %>
     <% if order != nil %>
@@ -77,8 +78,7 @@
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= JSON.parse(recommended_product.countries_tags).join(",") %></p> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-heart"></i> </div>
-            <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-leaf"></i>
-            </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-users"></i> </div>
           </div>
 
@@ -114,3 +114,4 @@
   <br>
   <br>
 </div>
+

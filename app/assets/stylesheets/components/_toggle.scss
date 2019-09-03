@@ -1,0 +1,73 @@
+
+.switcherposition {
+  position: sticky;
+  bottom: 35px;
+  text-align: center;
+}
+
+
+.inputswitcher[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.labelswitcher {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 150px;
+  height: 70px;
+  background: linear-gradient(to left,#3fd3f1, #20d2c5);
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  margin: auto;
+}
+
+.labelswitcher:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 90px;
+  transition: 0s;
+  z-index: 0;
+  background: url(shopping-basket-solid.svg);
+  background-color: #3ed3ef;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+  border: 1px solid #fff;
+
+}
+
+.inputswitcher:checked + .labelswitcher {
+  // background: #bada55;
+  background-color: linear-gradient(to right,#3fd3f1, #20d2c5);
+
+}
+
+.inputswitcher:checked + .labelswitcher:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+  background: url(magic-solid.svg);
+  background-color: #3ed3ef;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+
+}
+
+.labelswitcher:active:after {
+  width: 130px;
+}
+
+// centering
+// body {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100vh;
+// }
