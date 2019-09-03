@@ -22,10 +22,10 @@ class Order < ApplicationRecord
       packaging_array << current_product.first.packaging_score
       product_category_array << current_product.first.pnns_group_1
       product_sub_category_array << current_product.first.pnns_group_2
-      country_origin_repartion << current_product.first.countries_tags
-      additives_array << current_product.first.additives_tags
+      country_origin_repartion << current_product.first.origin_score
+      additives_array << current_product.first.additives_score
       nova_array << current_product.first.nova_group
-      label_array << current_product.first.labels_tags
+      label_array << current_product.first.label_score
     end
 
     self.nutrition_score_repartition = nutrition_score_array
