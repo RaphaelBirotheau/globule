@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
-  def profile
-    render layout: "landing"
+
+
+  def show
   end
 
   def dashboard
@@ -10,6 +11,8 @@ class ProfilesController < ApplicationController
     labels_score
     packaging_score
     origin_score
+
+    render layout: 'orders'
   end
 
   private
