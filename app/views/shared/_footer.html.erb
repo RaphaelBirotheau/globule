@@ -1,15 +1,19 @@
+
 <div class="footer">
   <div class="footer-links">
     <%= link_to lastbasket_path, class: "navbar-brand" do %>
       <i class="fas fa-history"></i>
     <% end %>
 
-      <%= link_to recommandations_path, class: "navbar-brand" do %>
-    <i class="fas fa-magic footer-toggle"></i>
+    <% if @order && @order.persisted?  %>
+      <%= link_to recommendations_order_path(@order), class: "navbar-brand" do %>
+      <i class="fas fa-magic footer-toggle"></i>
+      <% end %>
     <% end %>
 
     <%= link_to lastbasket_path, class: "navbar-brand" do %>
       <i class="fas fa-shopping-basket"></i></a>
+
 
     <% end %>
 
