@@ -1,7 +1,7 @@
 class UserProfilesController < ApplicationController
 
 def login
-render layout: "landing"
+  render layout: "landing"
 end
 
 end

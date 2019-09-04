@@ -1,11 +1,14 @@
 class ProfilesController < ApplicationController
-  def profile
+
+
+  def show
     render layout: "landing"
   end
 
   def dashboard
     nutrition_score
     nova_score
+    render layout: "landing"
     additives_score
     labels_score
     packaging_score
