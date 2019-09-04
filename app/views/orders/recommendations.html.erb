@@ -1,6 +1,5 @@
 <div class="container container-global" style="height: 73vh;">
 
-
   <div class="accordion" id="accordionExample">
     <% order = current_user.orders.last  %>
     <% if order != nil %>
@@ -11,7 +10,7 @@
           <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
 
             <div class="col-7">
-              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
+              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= truncate(recommended_product.generic_name_fr, :length => 25)%></h2>
               <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs mb-3" >
             </div>
 
@@ -78,7 +77,8 @@
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= JSON.parse(recommended_product.countries_tags).join(",") %></p> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-heart"></i> </div>
-            <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-leaf"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-leaf"></i>
+            </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-users"></i> </div>
           </div>
 
@@ -113,10 +113,4 @@
   <br>
   <br>
   <br>
-</div>
-
-<div class="footer-position">
-  <input class="inputfooter" type="checkbox" id="switch" />
-  <label class="labelfooter" for="switch"> </label>
-  <%= link_to "Go to My Magic Basket", lastbasket_path, class: "d-none hidden-link" %>
 </div>

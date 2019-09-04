@@ -12,12 +12,12 @@
         <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
           <div class="card-header m-0 p-0" id="heading<%= product.id %>" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);">
 
-            <div class="col-7">
-              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= product.generic_name_fr %></h2>
+            <div class="col-5 topcard">
+              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= truncate(product.generic_name_fr, :length => 25)%></h2>
               <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3" >
             </div>
-
-
+            <div class="col-7 chart-align pt-2 topcard">
+              <canvas id="polar-chart" width="1200" height="675"></canvas>
           </div>
         </button>
 
@@ -118,22 +118,3 @@
   <% end %>
 </div>
 
-<!-- </div> -->
-
-<!--
-<div class="blank">
-  <br>
-  <br>
-  <br>
-  <br>
-</div> -->
-
-
-
-<div class="footer-position">
-  <input class="inputfooter" type="checkbox" id="switch" />
-  <label class="labelfooter" for="switch"> </label>
-  <% if current_user.orders.count > 0  %>
-    <%= link_to "Go to My Magic Basket", recommendations_order_path(order), class: "d-none hidden-link" %>
-  <% end %>
-</div>
