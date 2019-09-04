@@ -95,9 +95,9 @@
               <% end %></p>
               <% end %>
             </div>
-            <div class="col-1 pl-1" style="color: <%= Product.color_labels(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
-            <div class="col-1 pl-1" style="color: <%= Product.color_labels(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
-            <div class="col-1 pl-1" style="color: <%= Product.color_labels(recommended_product.code)%>"> <i class="fas fa-users"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_labels_health(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_labels_env(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_labels_soc(recommended_product.code)%>"> <i class="fas fa-users"></i> </div>
           </div>
         </div>
       </div>
