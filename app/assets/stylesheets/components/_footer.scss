@@ -22,7 +22,8 @@
 
 
 .footer {
-  background: #F4F4F4;
+  background: white;
+  // border-top: 2px solid lightgray;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +33,7 @@
   width: 100%;
   height: 70px;
   padding: 0px 50px;
-  color: linear-gradient(to left,#3fd3f1, #20d2c5);
+  color: #21D1B0;
   flex: 1;
   padding: 5px;
 }
@@ -42,7 +43,7 @@
 }
 
 .footer-links a {
-  color: linear-gradient(to left,#3fd3f1, #20d2c5);
+  color: #25dab8bf;
   opacity: 1;
   text-decoration: none;
   font-size: 40px;
@@ -58,12 +59,17 @@
   align-items: center;
   position: relative;
   bottom: 20px;
-  border: solid 2px lightgray;
+  border: solid 2px white;
   border-radius: 50%;
-  font-size: 70px;
-  padding: 15px;
+  font-size: 55px;
+  padding: 18px;
   margin: 15px;
-  background-color: lightgray;
+  background-color: #27debd;
+  color: white;
+}
+
+.footer-toggle a:hover {
+
 }
 
 

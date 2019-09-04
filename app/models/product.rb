@@ -107,12 +107,13 @@ class Product < ApplicationRecord
   end
 
   def has_labels_bio?(tags)
-    labels = ["bio", "organic"]
+    labels = ["bio", "organic", "ecocert"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
+
   end
 
   def has_labels_fairtrade?(tags)
-    labels = ["fairtrade", "equitable"]
+    labels = ["fairtrade", "equitable", "fair-trade"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
   end
 
@@ -251,12 +252,16 @@ class Product < ApplicationRecord
 
   def compute_total_score
     # order matters here!
-    self.additives_score = compute_additive_score(JSON.parse(self.additives_tags))
-    self.origin_score = compute_origin_score(JSON.parse(self.countries_tags))
-    self.label_score = compute_label_score
-    self.packaging_score = compute_packaging_score(JSON.parse(self.packaging_tags))
-    self.total_score = health_score + compute_environmental_score + social_score
-    self.save
+    begin
+      self.additives_score = compute_additive_score(JSON.parse(self.additives_tags))
+      self.origin_score = compute_origin_score(JSON.parse(self.countries_tags))
+      self.label_score = compute_label_score
+      self.packaging_score = compute_packaging_score(JSON.parse(self.packaging_tags))
+      self.total_score = health_score + compute_environmental_score + social_score
+      self.save
+    rescue
+      puts code
+    end
   end
 
   def self.recommendation(code)

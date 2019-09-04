@@ -1,1 +1,15 @@
+<div class="container-global">
 <h1>All my orders</h1>
+    <div class="row align-items-center m-3">
+      <div class="card col-12">
+        <div class= "col-12">
+          <h2 class= "mt-2">My baskets</h2>
+        </div>
+        <% current_user.orders.each do |order| %>
+        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3" >
+        <%= link_to "#{order.purchase_date}", order_path(order) %>
+        </button>
+        <%end%>
+      </div>
+    </div>
+</div>
