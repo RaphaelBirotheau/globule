@@ -1,9 +1,8 @@
 <div class="container container-global" style="height: 73vh;">
 
   <div class="accordion" id="accordionExample">
-    <% order = current_user.orders.last  %>
-    <% if order != nil %>
-      <% order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
+    <% if @order %>
+      <% @order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
       <% if recommended_product %>
       <div class="card" style="border: none;">
         <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
