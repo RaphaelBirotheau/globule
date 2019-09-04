@@ -216,28 +216,28 @@ class Product < ApplicationRecord
       0
     elsif tags.kind_of?(Array)
       # product_pack =  JSON.parse(tags)
-      if tags.any? { |pack| carton.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("carton") }
-        20 #Cardboard only
+      if tags.any? { |label| label.downcase.include?("plasti") }
+        1 #Cardboard only
       elsif tags.any? { |pack| verre.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("verre") }
         15  #Glass only
-      elsif tags.any? { |label| label.downcase.include?("plasti") }
-        1 #Contains plastic
+      elsif tags.any? { |pack| carton.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("carton") }
+        20 #Contains plastic
       elsif tags.any? { |pack| verre.exclude?("plasti") } && tags.any? { |label| label.downcase.include?("allu") }
         10  #Contains aluminium
       else
         2   #Contains plastic and others
       end
     else
-      if tags.downcase.include?("carton")
-          20
-        elsif tags.downcase.include?("verre")
-          15
-        elsif tags.downcase.include?("plasti")
-          1
-        elsif tags.downcase.include?("allu")
-          10
-        else
-          2
+      if tags.downcase.include?("plasti")
+        1
+      elsif tags.downcase.include?("carton")
+        20
+      elsif tags.downcase.include?("verre")
+        15
+      elsif tags.downcase.include?("allu")
+        10
+      else
+        2
       end
     end
   end
@@ -389,7 +389,19 @@ class Product < ApplicationRecord
     end
   end
 
-  def self.color_pack(code)
+  def self.color_pack_health(code)
+    product = Product.find_by(code: code)
+    score = product.packaging_score
+    if score == 1
+      return "#EF3C22"
+    elsif score == 2
+      return "grey"
+    else
+      return "#008042"
+    end
+  end
+
+   def self.color_pack(code)
     product = Product.find_by(code: code)
     score = product.additives_score
     if score == 20
