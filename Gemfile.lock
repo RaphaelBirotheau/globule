@@ -51,10 +51,6 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
-    chart-js-rails (0.1.6)
-      railties (> 3.1)
-    chartjs-ror (3.6.4)
-      rails (>= 3.1)
     chartkick (3.2.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
@@ -198,8 +194,6 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootsnap
-  chart-js-rails
-  chartjs-ror
   chartkick
   devise
   dotenv-rails
