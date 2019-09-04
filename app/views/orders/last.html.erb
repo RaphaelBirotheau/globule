@@ -32,27 +32,27 @@
     <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample" style="border: none;">
       <div class="card-body pt-3 ml-2 mr-2 rounded-lg" style="border: none; background-color: #ffff;">
 
-        <div class="row">
-          <div class="col-6">
-            <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3 pl-2" >
-          </div>
-          <div class="col-6">
-            <canvas class="polar-chart" width="1200" height="1200" data-values="[ <%= product.health_score %>, <%= product.compute_environmental_score %>, <%= product.social_score %> ]">
-            </canvas>
-          </div>
-        </div>
-        <div class="row align-items-center mb-3">
-          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
-            <% if product.nutrition_grades_tags == "unknown" || nil %>
-            <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
-            <% else %>
-            <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
-            <% end %>
-          </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(product.code)%>"> <i class="fas fa-heart"></i> </div>
-          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
-          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
-        </div>
+            <div class="row">
+              <div class="col-6">
+                <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3 pl-2" >
+              </div>
+              <div class="col-6">
+              <canvas class="polar-chart" width="170" height="170" data-values="[ <%= product.health_score %>, <%= product.compute_environmental_score %>, <%= product.social_score %> ]">
+              </canvas>
+            </div>
+            <p> <strong><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i>  <i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i>  <i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i>  </strong></p>
+            </div>
+          <div class="row align-items-center mb-3">
+            <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
+              <% if product.nutrition_grades_tags == "unknown" || nil %>
+              <%= image_tag "not-applicable-nutriscore.png", class: "nutriscore-img" %>
+              <% else %>
+              <%= image_tag "#{product.nutrition_grades_tags}-nutriscore.png", class: "nutriscore-img" %> </p>
+              <% end %>
+            </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_nutriscore(product.code)%>"> <i class="fas fa-heart"></i> </div>
+            <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
+            <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
 
         <div class="row align-items-center mb-3">
           <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Type </h3>  <p>
@@ -112,11 +112,11 @@
           <% end  %>
         <% end %>
         </p>
-      </div>
-      <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-heart"></i> </div>
-      <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-leaf"></i> </div>
-      <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-users"></i> </div>
-    </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_labels_health(product.code)%>"> <i class="fas fa-heart"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_labels_env(product.code)%>"> <i class="fas fa-leaf"></i> </div>
+            <div class="col-1 pl-1" style="color: <%= Product.color_labels_soc(product.code)%>"> <i class="fas fa-users"></i> </div>
+          </div>
+        </div>
   </div>
 </div>
 </div>
