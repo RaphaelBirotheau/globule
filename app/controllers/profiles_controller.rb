@@ -52,10 +52,10 @@ class ProfilesController < ApplicationController
 
   def additives_score
     legend = {
-      0 => { string: 'Contains dangerous additives', color: '#FF3C02' },
+      0 => { string: 'Contains dangerous additives', color: '#E3170A' },
       1 => { string: 'Contains more than 8 additives', color: '#FF8F02' },
       5 => { string: 'Contains ≤8 additives', color: '#FAD000' },
-      10 => { string: 'Contains ≤4 additives', color: '#8DC51E' },
+      10 => { string: 'Contains ≤4 additives', color: '#6FD082' },
       15 => { string: 'No additives', color: '#017F3D' }
 
     }
@@ -70,10 +70,10 @@ class ProfilesController < ApplicationController
 
  def labels_score
     legend = {
-      0 => { string: 'No labels', color: '#FF3C02' },
+      0 => { string: 'No labels', color: '#E3170A' },
       5 => { string: 'Fairtrade label', color: '#FAD000' },
-      10 => { string: 'Bio label', color: '#8DC51E' },
-      15 => { string: 'Bio & Faitrade labels', color: '#017F3D' }
+      10 => { string: 'Bio label', color: '#6FD082' },
+      15 => { string: 'Bio & Faitrade labels', color: '#007539' }
     }
     scores = current_user.orders.pluck(:label_repartition).map { |score| JSON.parse(score) }.flatten
     scores = scores.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total }
@@ -87,10 +87,11 @@ class ProfilesController < ApplicationController
 
  def packaging_score
     legend = {
-      1 => { string: 'Contains plastic', color: '#FF3C02' },
+      0 => { string: 'Unknown', color: '#a9a9a9' },
+      1 => { string: 'Contains plastic', color: '#E3170A' },
       2 => { string: 'Contains plastic and others', color: '#FF8F02' },
       10 => { string: 'Aluminium only', color: '#FAD000' },
-      15 => { string: 'Glass only', color: '#8DC51E' },
+      15 => { string: 'Glass only', color: '#4D88CC' },
       20 => { string: 'Cardboard only', color: '#017F3D' }
     }
     scores = current_user.orders.pluck(:packaging_repartition).map { |score| JSON.parse(score) }.flatten
@@ -105,12 +106,12 @@ class ProfilesController < ApplicationController
 
  def origin_score
     legend = {
-      0 => { string: 'No information', color: '#FF3C02' },
-      1 => { string: 'Rest of the World', color: '#FF8F02' },
+      0 => { string: 'Unknown', color: '#FF3C02' },
+      1 => { string: 'Rest of the World', color: '#E3170A' },
       15 => { string: 'European Union', color: '#FAD000' },
       20 => { string: 'Origin France & border countries', color: '#8DC51E' },
-      25 => { string: 'Origin France', color: '#017F3D' },
-      26 => { string: 'Origin France', color: '#017F3D' }
+      25 => { string: 'Origin France', color: '#007539' },
+      26 => { string: 'Origin France', color: '#007539' }
     }
     scores = current_user.orders.pluck(:country_origin_repartion).map { |score| JSON.parse(score) }.flatten
     scores = scores.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total }
