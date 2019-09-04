@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_115856) do
+ActiveRecord::Schema.define(version: 2019_09_04_110444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,9 @@ ActiveRecord::Schema.define(version: 2019_09_03_115856) do
     t.integer "origin_score"
     t.integer "label_score"
     t.integer "packaging_score"
+    t.integer "environmental_score"
+    t.integer "health_score"
+    t.integer "social_score"
   end
 
   create_table "profiles", force: :cascade do |t|
