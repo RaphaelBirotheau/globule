@@ -21,10 +21,13 @@ $headers-font: "Montserrat", "sans-serif";
 
 
 h1 {
-  color: #fff;
-  font-size: 18px !important;
+  color: white;
+  font-size: 38px !important;
   margin: auto !important;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  font-weight: 150 !important;
 }
 
 .homepageh1 {
@@ -34,9 +37,9 @@ h1 {
 }
 
 h2 {
-    font-size: 20px !important;
+    font-size: 16px !important;
   // margin: auto !important;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     font-weight: 150 !important;
     color: #808080c2;
 }
