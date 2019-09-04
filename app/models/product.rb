@@ -73,37 +73,34 @@ class Product < ApplicationRecord
   end
 
   def health_score
-    if self.pnns_group_2 == "unknown"
-      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group)
-    elsif has_labels_bio?(JSON.parse(self.labels_tags))
-      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + additives_score + 10
-    else
-      nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + additives_score
-    end
+    nutri_score(self.nutrition_grades_tags) + nova_score(self.nova_group) + self.additives_score +  self.label_score
   end
 
   def compute_environmental_score
-    if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score && has_plastic?(self.packaging_tags)
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 50
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 40
-    elsif has_labels_bio?(JSON.parse(self.labels_tags))
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 20
-    else
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2)
-    end
+    self.pnns_product.pnns_second_group.environmental_score + compute_label_score + self.origin_score + self.packaging_score + (nova_score(self.nova_group))
+
+    # if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score && has_plastic?(self.packaging_tags)
+    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 50
+    # elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score
+    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 40
+    # elsif has_labels_bio?(JSON.parse(self.labels_tags))
+    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 20
+    # else
+    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2)
+    # end
   end
 
   def social_score
-    if has_labels_bio?(JSON.parse(self.labels_tags))
-      50
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
-      75
-    elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags)) && origin_score
-      100
-    else
-      origin_score
-    end
+    (compute_label_score * 4.6) + (self.origin_score * 1.2)
+    # if has_labels_bio?(JSON.parse(self.labels_tags))
+    #   50
+    # elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
+    #   75
+    # elsif has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags)) && origin_score
+    #   100
+    # else
+    #   origin_score
+    # end
   end
 
   def has_labels_bio?(tags)
@@ -171,7 +168,7 @@ class Product < ApplicationRecord
     if nutri.nil?
       0
     elsif nutri == "a"
-      50
+      60
     elsif nutri == "b"
       45
     elsif nutri == "c"

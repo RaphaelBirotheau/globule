@@ -1,5 +1,7 @@
 
 
+
+
 <div class="container global p-0 m-0 ">
 
 <div class="p-3">
@@ -7,6 +9,12 @@
 </div>
 
   <% order = current_user.orders.last  %>
+  <% order_total_score = 0 %>
+  <% order.products.each do |product| %>
+  <% order_total_score += product.total_score %>
+  <% end %>
+  <% compute_total_score = order_total_score / order.products.count %>
+  <h3><% basket_score = compute_total_score / 3%><%= basket_score %> /100</h3>
   <% if order != nil %>
   <% order.products.each do |product| %>
   <% if product.image_front_url != nil  %>
@@ -17,11 +25,9 @@
         <div class="card m-0 p-0" id="heading<%= product.id %>" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white; box-sizing: content-box;">
 
           <div class="row">
-<!--             <div class="col-1">
-              <h2 class="pt-2 p-2" style="text-align: left;"> <i class="fas fa-check"></i></h2>
-            </div> -->
             <div class="col-12">
-              <h2 class="px-2 py-3 m-0" style="text-align: left;"><%= product.generic_name_fr %></h2>
+              <h2 class="px-2 py-3 m-0" style="text-align: left;"><%= product.generic_name_fr %> <% product_score = product.total_score / 3 %><%= product_score %></h2>
+
             </div>
           </div>
         </div>
