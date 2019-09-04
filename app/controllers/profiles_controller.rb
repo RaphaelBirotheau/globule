@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
     labels_score
     packaging_score
     origin_score
+
     render layout: 'orders'
   end
 
@@ -56,6 +57,7 @@ class ProfilesController < ApplicationController
       5 => { string: 'Contains ≤8 additives', color: '#FAD000' },
       10 => { string: 'Contains ≤4 additives', color: '#8DC51E' },
       15 => { string: 'No additives', color: '#017F3D' }
+
     }
     scores = current_user.orders.pluck(:additives_repartition).map { |score| JSON.parse(score) }.flatten
     scores = scores.inject(Hash.new(0)) { |total, e| total[e] += 1 ;total }
