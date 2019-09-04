@@ -365,11 +365,9 @@ class Product < ApplicationRecord
       return "#EF3C22"
     elsif JSON.parse(product.additives_tags).count == 0
       return "#008042"
-    elsif JSON.parse(product.additives_tags).count == 1
-      return "#83B937"
-    elsif JSON.parse(product.additives_tags).count == 2
+    elsif JSON.parse(product.additives_tags).count <= 4
       return "#FFC82B"
-    elsif JSON.parse(product.additives_tags).count == 3
+    elsif JSON.parse(product.additives_tags).count <= 8
       return "#F67F23"
     else
       return "#EF3C22"
@@ -390,16 +388,17 @@ class Product < ApplicationRecord
 
   def self.color_pack(code)
     product = Product.find_by(code: code)
-    x = false
-    JSON.parse(product.packaging_tags).each do |pack|
-      if pack.include?("plasti")
-        x = true
-      end
-    end
-    if x == true
+    score = product.additives_score
+    if score == 20
+      return "#008042"
+    elsif score == 15
+      return "#83B937"
+    elsif score == 10
+      return "#F67F23"
+    elsif score == 1
       return "#EF3C22"
-    else "#FFC82B"
-      return
+    else
+      return "grey"
     end
   end
 
