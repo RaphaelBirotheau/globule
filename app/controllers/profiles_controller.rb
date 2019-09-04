@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
 
   def additives_score
     legend = {
-      0 => { string: 'sans additif', color: '#00AB01'},
+      0 => { string: 'sans additif', color: 'rgba(0, 171, 1, 0.8)'},
       1 => { string: 'sans additif1', color: '#00AB01'},
       5 => { string: 'sans additif 5', color: '#FFCC00'},
       10 => { string: 'sans additif 10', color: '#FF6600'},
