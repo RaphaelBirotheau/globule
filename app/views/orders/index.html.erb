@@ -1,44 +1,19 @@
-<!-- <div class="container-global">
-<h1>All my orders</h1>
-    <div class="row align-items-center m-3">
-      <div class="card col-12">
-        <div class= "col-12">
-          <h2 class= "mt-2">My baskets</h2>
-        </div>
-        <%# current_user.orders.each do |order| %>
-        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3" >
-        <%#= link_to "#{order.purchase_date}", order_path(order) %>
-        </button>
-        <%#end%>
-      </div>
-    </div>
-</div> -->
-
-
-
-<div class="container global p-0 ">
-  <h3>All my previous orders</h3>
+    <h3>All my previous orders</h3>
     <% if @orders != nil %>
-      <% current_user.orders.each do |order| %>
-            <div class="card mt-3 mb-3" style="border: none;">
-              <div class="btn btn-link p-0 m-0 rounded-lg" >
-                <div class="card-header m-0 p-0" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white;">
-                  <div class="row">
-                    <div class="col-2 m-0 p-0">
-                      <h2 class="" style="text-align: left;"> <i class="fas fa-check"></i></h2>
-                    </div>
-                    <div class="col-7 m-0 p-0">
-                      <h2 class="" style="text-align: left;"><%= l(order.purchase_date, format: ' %A %e %B')%></h2>
-                      <h2 class="" style="text-align: left;"><%= order.order_items.count%> products</h2>
-                    </div>
-                      <button type="button" class="btn btn-secondary btn-sm btn-block col-3 m-0 p-0" >
-                        <%= link_to "View basket", order_path(order) %>
-                      </button>
-                  </div>
-                 </div>
-                </div>
-            </div>
-      <% end %>
-    <% end %>
+    <% current_user.orders.each do |order| %>
+    <div class="container justify-content-center">
+      <div class="row">
+        <button type="button" class="btn btn-white btn-lg rounded-lg col-10" style="border: none; text-align: left; background-color: white">
+          <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
+          <div class="row">
+            <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
+          </div>
+        </div>
+      </div>
+    </button>
+
+  </div>
 </div>
+<% end %>
+<% end %>
 
