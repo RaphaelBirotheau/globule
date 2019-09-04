@@ -107,12 +107,13 @@ class Product < ApplicationRecord
   end
 
   def has_labels_bio?(tags)
-    labels = ["bio", "organic"]
+    labels = ["bio", "organic", "ecocert"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
+
   end
 
   def has_labels_fairtrade?(tags)
-    labels = ["fairtrade", "equitable"]
+    labels = ["fairtrade", "equitable", "fair-trade"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
   end
 

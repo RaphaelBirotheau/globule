@@ -84,15 +84,26 @@
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Labels </h3>  <p>
               <% if  product.labels_tags != nil %>
-              <% JSON.parse(product.labels_tags).each do |add| %>
-              <% if add.match("agriculture")%>
-              <%= image_tag "label_bio.png", class: "label-bio-img"%>
-              <% end %>
+                <% if product.label_score == 15  %>
+                  <div>
+                    <%= image_tag "label_bio.png", class: "label-bio-img"%>
+                    <%= image_tag "fairtrade.png", class: "label-fair-img"%>
+                  </div>
+                <% elsif product.label_score == 10  %>
+                  <%= image_tag "label_bio.png", class: "label-bio-img"%>
+                <% elsif product.label_score == 5  %>
+                  <%= image_tag "fairtrade.png", class: "label-fair-img"%>
+                <% end  %>
 
-              <% if add.match("fair")%>
-              <%= image_tag "fairtrade.png", class: "label-fair-img"%>
-              <% end %>
-              <% end %></p>
+              <%# JSON.parse(product.labels_tags).each do |add| %>
+              <%# if add.match("agriculture")%>
+              <%#= image_tag "label_bio.png", class: "label-bio-img"%>
+              <%# end %>
+
+              <%# if add.match("fair")%>
+              <%#= image_tag "fairtrade.png", class: "label-fair-img"%>
+              <%# end %>
+              <%# end %></p>
               <% end %>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_labels(product.code)%>"> <i class="fas fa-heart"></i> </div>
