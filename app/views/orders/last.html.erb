@@ -1,29 +1,36 @@
 
 
-<div class="container global">
+<div class="container global p-0 ">
 
 
-  <div class="accordion" id="accordionExample">
+  <div class="accordion mb-3" id="accordionExample">
     <% order = current_user.orders.last  %>
     <% if order != nil %>
       <% order.products.each do |product| %>
       <% if product.image_front_url != nil  %>
       <div class="card" style="border: none;">
-        <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
-          <div class="card-header m-0 p-0" id="heading<%= product.id %>" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);">
-
-            <div class="col-7">
-              <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= product.generic_name_fr %></h2>
-              <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3" >
+        <button class="btn btn-link p-0 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>">
+          <div class="card-header m-0 p-0" id="heading<%= product.id %>" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white;">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="pt-2 pl-2" style="text-align: left; font-size: 16px;"><%= product.generic_name_fr %></h2>
+              </div>
             </div>
 
-
+            <div class="row">
+              <div class="col-6">
+                <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3 pl-2" >
+              </div>
+            </div>
           </div>
-        </button>
 
 
-        <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample">
-          <div class="card-body p-0 ml-4 mr-4 mt-1 md-0 rounded-lg" style="border: solid 1px #EFEFEF;">
+          </button>
+      </div>
+
+
+        <div id="collapse<%= product.id %>" class="collapse" aria-labelledby="heading<%= product.id %>" data-parent="#accordionExample" style="border: none;">
+          <div class="card-body p-0 m-0 rounded-lg" style="border: none; background-color: #ffff;">
 
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Nutri-score</h3> <p>

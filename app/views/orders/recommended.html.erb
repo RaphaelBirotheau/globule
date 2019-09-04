@@ -1,32 +1,32 @@
 <div class="container container-global" style="height: 73vh;">
-
-
+​
+​
   <div class="accordion" id="accordionExample">
     <% order = current_user.orders.last  %>
     <% if order != nil %>
       <% order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
-      <% if recommended_product  %>
+      <% if recommended_product %>
       <div class="card" style="border: none;">
         <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
           <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
-
+​
             <div class="col-7">
               <h2 class="pt-2" style="text-align: left; font-size: 16px;"><%= recommended_product.generic_name_fr %></h2>
               <img src="<%= recommended_product.image_front_url %>" alt="<%= recommended_product.generic_name_fr %>" class="products-imgs mb-3" >
             </div>
-
+​
             <div class="col-5 chart-align pt-2">
               <%= column_chart({"santé"=> recommended_product.health_score, "social"=> recommended_product.social_score, "env"=> recommended_product.compute_environmental_score}, colors: ["#17d120"], width: "85px", height: "175px", dataset: {boderWidth: 33}) %>
-
+​
             </div>
-
+​
           </div>
         </button>
-
-
+​
+​
         <div id="collapse<%= recommended_product.id %>" class="collapse" aria-labelledby="heading<%= recommended_product.id %>" data-parent="#accordionExample">
           <div class="card-body p-0 ml-4 mr-4 mt-1 md-0 rounded-lg" style="border: solid 1px #EFEFEF;">
-
+​
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
               <% if recommended_product.nutrition_grades_tags == "unknown" || nil %>
@@ -39,7 +39,7 @@
             <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style= "color:#ffff"> <i class="fas fa-users"></i> </div>
           </div>
-
+​
             <div class="row align-items-center mb-3">
               <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Type </h3>  <p>
                 <% if recommended_product.pnns_group_2 != 'unknown' %>
@@ -51,37 +51,37 @@
             <div class="col-1 pl-1" style="color: <%= Product.color_env(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style= "color:#ffff"> <i class="fas fa-users"></i> </div>
           </div>
-
-
+​
+​
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Additives </h3> <p>
-              <%= JSON.parse(product.additives_tags).count %> </p>
-                <% if JSON.parse(product.additives_tags) != nil %>
-                <p> <%= Product.retrieve_additives(product.code) %> </p>
+              <%= JSON.parse(recommended_product.additives_tags).count %> </p>
+                <% if JSON.parse(recommended_product.additives_tags) != nil %>
+                <p> <%= Product.retrieve_additives(recommended_product.code) %> </p>
               <% end %>            </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives_health(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_additives(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style= "color:#ffff"> <i class="fas fa-users"></i> </i> </div>
           </div>
-
+​
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Packaging </h3> <p>
-              <%= Product.retrieve_packs(product.code) %>
+              <%= Product.retrieve_packs(recommended_product.code) %>
             </p>
             </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style= "color:#ffff"> <i class="fas fa-users"></i> </div>
           </div>
-
-
+​
+​
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Origin </h3>  <p> <%= JSON.parse(recommended_product.countries_tags).join(",") %></p> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-heart"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-leaf"></i> </div>
             <div class="col-1 pl-1" style="color: <%= Product.color_country(recommended_product.code) %>"> <i class="fas fa-users"></i> </div>
           </div>
-
+​
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-2 mb-2 ml-1 pr-0"> <h3> Labels </h3>  <p>
               <% if  recommended_product.labels_tags != nil %>
@@ -89,7 +89,7 @@
               <% if add.match("agriculture")%>
               <%= image_tag "label_bio.png", class: "label-bio-img"%>
               <% end %>
-
+​
               <% if add.match("fair")%>
               <%= image_tag "fairtrade.png", class: "label-fair-img"%>
               <% end %>
@@ -107,16 +107,12 @@
     <% end %>
   <% end %>
 </div>
-
+​
 <div class="blank">
   <br>
   <br>
   <br>
   <br>
 </div>
+​
 
-<div class="footer-position">
-  <input class="inputfooter" type="checkbox" id="switch" />
-  <label class="labelfooter" for="switch"> </label>
-  <%= link_to "Go to My Magic Basket", lastbasket_path, class: "d-none hidden-link" %>
-</div>

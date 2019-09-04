@@ -2,6 +2,10 @@ class OrdersController < ApplicationController
 after_action :global_facts, only: [:create]
 after_action :create_user_profile, only: [:create]
 
+  def layout
+    # render layout: "landing"
+  end
+
   def last
     @order = Order.last
   end

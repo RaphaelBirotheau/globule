@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
 
+  def productlayout
+    render layout: "landing"
+  end
 
   private
 
