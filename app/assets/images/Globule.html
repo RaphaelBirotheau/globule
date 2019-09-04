@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://localhost:3000/lastbasket -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="./Globule_files/css" rel="stylesheet">
+    <title>Globule</title>
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="+pe7TYGVj7wW7wDFW0tU0L2qUsFhxvoqwm8lhx0gEhYJr+yv/2A7Qr/37+Qu/vJGEVpNE5qsxqpmfqFQBYM96g==">
+    <meta name="action-cable-url" content="/cable">
+    <link rel="stylesheet" media="all" href="./Globule_files/application-4f353e37cd2e199e12b99f9983a7fa931b1a24c7bfef6fc59e5c8fdcdc2544c4.css">
+     <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+  <style type="text/css">/* Chart.js */
+/*
+ * DOM element rendering detection
+ * https://davidwalsh.name/detect-node-insertion
+ */
+@keyframes chartjs-render-animation {
+	from { opacity: 0.99; }
+	to { opacity: 1; }
+}
+
+.chartjs-render-monitor {
+	animation: chartjs-render-animation 0.001s;
+}
+
+/*
+ * DOM element resizing detection
+ * https://github.com/marcj/css-element-queries
+ */
+.chartjs-size-monitor,
+.chartjs-size-monitor-expand,
+.chartjs-size-monitor-shrink {
+	position: absolute;
+	direction: ltr;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	pointer-events: none;
+	visibility: hidden;
+	z-index: -1;
+}
+
+.chartjs-size-monitor-expand > div {
+	position: absolute;
+	width: 1000000px;
+	height: 1000000px;
+	left: 0;
+	top: 0;
+}
+
+.chartjs-size-monitor-shrink > div {
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	left: 0;
+	top: 0;
+}
+</style></head>
+  <body class="bodybackground" cz-shortcut-listen="true">
+    <div class="row navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <a class="navbar-brand" href="http://localhost:3000/dashboard">
+  <i class="fas fa-tachometer-alt tachometer"></i>
+</a>
+  <h1>GLOBULE</h1>
+
+  <div class="navbar-toggler-position">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="fas fa-user-alt"></span>
+    </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown text-right">
+        <a class="dropdown-item text-secondary pl-0" href="http://localhost:3000/profiles/id">Profile</a>
+        
+        <a class="dropdown-item text-secondary" rel="nofollow" data-method="delete" href="http://localhost:3000/users/sign_out">Log out</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+    
+    <div>
+    
+
+<div class="container global p-2 ">
+  <h3>Mon dernier panier</h3>
+
+
+  <div class="accordion" id="accordionExample">
+    <div class="card" style="border: none;">
+      <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse581" aria-expanded="true" aria-controls="collapse581">
+        <div class="card m-0 p-0" id="heading581" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white; box-sizing: content-box;">
+
+          <div class="row py-1">
+<!--             <div class="col-1">
+              <h2 class="pt-2 p-2" style="text-align: left;"> <i class="fas fa-check"></i></h2>
+            </div> -->
+            <div class="col-12">
+              <h2 class="px-2 py-3 m-0" style="text-align: left;">Chocolat noir 85%</h2>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+
+
+    <div id="collapse581" class="collapse" aria-labelledby="heading581" data-parent="#accordionExample" style="border: none;">
+      <div class="card-body p-1 ml-2 mr-2 rounded-lg" style="border: none; background-color: #ffff;">
+
+        <div class="row">
+          <div class="col-6">
+            <img src="./Globule_files/front_fr.21.400.jpg" alt="Chocolat noir 85%" class="products-imgs mb-3 pl-2">
+          </div>
+          <div class="col-6">
+            <canvas class="polar-chart chartjs-render-monitor" width="0" height="0" data-values="[ 43, 61.0, 50 ]" style="display: block; height: 0px; width: 0px;">
+            </canvas>
+          </div>
+        </div>
+        <div class="row align-items-center mb-3">
+          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
+            <img class="nutriscore-img" src="./Globule_files/d-nutriscore-fba70b7ac0610d6fb867b82be4ef9aac04b84fc9cf5ffebf3f83e4c9947fa641.png"> </p>
+          </div>
+          <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Type </h3>  <p>
+            Chocolate products
+          </p>
+        </div>
+        <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-heart"></i> </div>
+        <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-leaf"></i> </div>
+        <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+      </div>
+
+
+      <div class="row align-items-center mb-3">
+        <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Additives </h3> <p>
+          0 </p>
+          <p>  </p>
+        </div>
+        <div class="col-1 pl-1" style="color: #008042"> <i class="fas fa-heart"></i> </div>
+        <div class="col-1 pl-1" style="color: #008042"> <i class="fas fa-leaf"></i> </div>
+        <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i>  </div>
+      </div>
+
+      <div class="row align-items-center mb-3">
+        <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Packaging </h3> <p>
+          Carton
+        </p>
+      </div>
+      <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+    </div>
+
+
+    <div class="row align-items-center mb-3">
+      <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Origin </h3>  <p> republique-dominicaine,amerique-latine</p> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-users"></i> </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Labels </h3>  <p>
+            </p><div>
+              <img class="label-bio-img" src="./Globule_files/label_bio-c0edf619d74b1f1ba414452f40198ce9e252e5ece89d850671f141aad9b7f74e.png">
+              <img class="label-fair-img" src="./Globule_files/fairtrade-f59f1a3ea41e523ffe80b06715406313208bbd5162811d6222a0dc2c869feb2c.png">
+            </div>
+        <p></p>
+      </div>
+      <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-users"></i> </div>
+    </div>
+  </div>
+</div>
+</div>
+
+  <div class="accordion" id="accordionExample">
+    <div class="card" style="border: none;">
+      <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse582" aria-expanded="true" aria-controls="collapse582">
+        <div class="card m-0 p-0" id="heading582" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white; box-sizing: content-box;">
+
+          <div class="row my-1">
+<!--             <div class="col-1">
+              <h2 class="pt-2 p-2" style="text-align: left;"> <i class="fas fa-check"></i></h2>
+            </div> -->
+            <div class="col-12">
+              <h2 class="px-2 py-3 m-0" style="text-align: left;">Yaourt à la grecque au lait de brebis nature</h2>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+
+
+    <div id="collapse582" class="collapse" aria-labelledby="heading582" data-parent="#accordionExample" style="border: none;">
+      <div class="card-body p-1 ml-2 mr-2 rounded-lg" style="border: none; background-color: #ffff;">
+
+        <div class="row">
+          <div class="col-6">
+            <img src="./Globule_files/front_fr.17.400.jpg" alt="Yaourt à la grecque au lait de brebis nature" class="products-imgs mb-3 pl-2">
+          </div>
+          <div class="col-6">
+            <canvas class="polar-chart chartjs-render-monitor" width="0" height="0" data-values="[ 58, 65.0, 50 ]" style="display: block; height: 0px; width: 0px;">
+            </canvas>
+          </div>
+        </div>
+        <div class="row align-items-center mb-3">
+          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
+            <img class="nutriscore-img" src="./Globule_files/c-nutriscore-17248b2e0938383641a8357796cfb6088f9abec7eadea7ca33c3549f2017e61a.png"> </p>
+          </div>
+          <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Type </h3>  <p>
+            Milk and yogurt
+          </p>
+        </div>
+        <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-heart"></i> </div>
+        <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-leaf"></i> </div>
+        <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+      </div>
+
+
+      <div class="row align-items-center mb-3">
+        <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Additives </h3> <p>
+          0 </p>
+          <p>  </p>
+        </div>
+        <div class="col-1 pl-1" style="color: #008042"> <i class="fas fa-heart"></i> </div>
+        <div class="col-1 pl-1" style="color: #008042"> <i class="fas fa-leaf"></i> </div>
+        <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i>  </div>
+      </div>
+
+      <div class="row align-items-center mb-3">
+        <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Packaging </h3> <p>
+          Plastique, Carton
+        </p>
+      </div>
+      <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+    </div>
+
+
+    <div class="row align-items-center mb-3">
+      <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Origin </h3>  <p> </p> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-users"></i> </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Labels </h3>  <p>
+            <img class="label-bio-img" src="./Globule_files/label_bio-c0edf619d74b1f1ba414452f40198ce9e252e5ece89d850671f141aad9b7f74e.png">
+        </p>
+      </div>
+      <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-users"></i> </div>
+    </div>
+  </div>
+</div>
+</div>
+
+  <div class="accordion" id="accordionExample">
+    <div class="card" style="border: none;">
+      <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse583" aria-expanded="true" aria-controls="collapse583">
+        <div class="card m-0 p-0" id="heading583" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white; box-sizing: content-box;">
+
+          <div class="row my-1">
+<!--             <div class="col-1">
+              <h2 class="pt-2 p-2" style="text-align: left;"> <i class="fas fa-check"></i></h2>
+            </div> -->
+            <div class="col-12">
+              <h2 class="px-2 py-3 m-0" style="text-align: left;">Ratatouille</h2>
+            </div>
+          </div>
+        </div>
+      </button>
+    </div>
+
+
+    <div id="collapse583" class="collapse" aria-labelledby="heading583" data-parent="#accordionExample" style="border: none;">
+      <div class="card-body p-1 ml-2 mr-2 rounded-lg" style="border: none; background-color: #ffff;">
+
+        <div class="row">
+          <div class="col-6">
+            <img src="./Globule_files/front_fr.30.400.jpg" alt="Ratatouille" class="products-imgs mb-3 pl-2">
+          </div>
+          <div class="col-6">
+            <canvas class="polar-chart chartjs-render-monitor" width="0" height="0" data-values="[ 73, 49.0, 50 ]" style="display: block; height: 0px; width: 0px;">
+            </canvas>
+          </div>
+        </div>
+        <div class="row align-items-center mb-3">
+          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
+            <img class="nutriscore-img" src="./Globule_files/b-nutriscore-3541d766e78739c5dfebdd8d574dedf75a7b34795bc4623c21b3f6fc0709c13e.png"> </p>
+          </div>
+          <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-heart"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Type </h3>  <p>
+            One-dish meals
+          </p>
+        </div>
+        <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-heart"></i> </div>
+        <div class="col-1 pl-1" style="color: #FFC82B"> <i class="fas fa-leaf"></i> </div>
+        <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+      </div>
+
+
+      <div class="row align-items-center mb-3">
+        <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Additives </h3> <p>
+          0 </p>
+          <p>  </p>
+        </div>
+        <div class="col-1 pl-1" style="color: #008042"> <i class="fas fa-heart"></i> </div>
+        <div class="col-1 pl-1" style="color: #008042"> <i class="fas fa-leaf"></i> </div>
+        <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i>  </div>
+      </div>
+
+      <div class="row align-items-center mb-3">
+        <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Packaging </h3> <p>
+          Verre
+        </p>
+      </div>
+      <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #83B937"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
+    </div>
+
+
+    <div class="row align-items-center mb-3">
+      <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Origin </h3>  <p> france,languedoc-roussillon</p> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color: #F67F23"> <i class="fas fa-users"></i> </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Labels </h3>  <p>
+            <img class="label-bio-img" src="./Globule_files/label_bio-c0edf619d74b1f1ba414452f40198ce9e252e5ece89d850671f141aad9b7f74e.png">
+        </p>
+      </div>
+      <div class="col-1 pl-1" style="color: #EF3C22"> <i class="fas fa-heart"></i> </div>
+      <div class="col-1 pl-1" style="color: #EF3C22"> <i class="fas fa-leaf"></i> </div>
+      <div class="col-1 pl-1" style="color: #EF3C22"> <i class="fas fa-users"></i> </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+    </div>
+    
+<div class="footer">
+  <div class="footer-links">
+    <a class="navbar-brand" href="http://localhost:3000/orders">
+      <i class="fas fa-history"></i>
+</a>
+      <a class="navbar-brand" href="http://localhost:3000/orders/3/recommendations">
+      <i class="fas fa-magic footer-toggle"></i>
+</a>
+    <a class="navbar-brand" href="http://localhost:3000/lastbasket">
+      <i class="fas fa-shopping-basket"></i></a>
+
+
+
+  </div>
+</div>
+
+    <script src="./Globule_files/application-4b4ddfd553b88c7328407b27a8d6e7b9a84f5d19f4888a43bccefb1e5bb1d979.js"></script>
+    <script src="./Globule_files/application-0d5dacb7b682739ccc94.js"></script>
+  
+
+</body></html>
