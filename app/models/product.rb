@@ -413,44 +413,41 @@ class Product < ApplicationRecord
   end
 
 
-  def self.color_labels(code)
+  def self.color_labels_env(code)
     product = Product.find_by(code: code)
-    label_score = 0
-    JSON.parse(product.labels_tags).each do |add|
-      if add.match("agriculture")
-        label_score += 1
-      elsif add.match("fair")
-        label_score += 1
-      else
-        label_score = label_score
-      end
-    end
-    if label_score > 2
+    if product.compute_label_score == 15
       return "#008042"
-    elsif label_score > 0
-      return "#FFC82B"
-    else
+    elsif product.compute_label_score == 10
+      return "#83B937"
+    elsif product.compute_label_score == 5
+      return "#83B937"
+    elsif product.compute_label_score == 0
+      return "#EF3C22"
+    end
+  end
+
+  def self.color_labels_health(code)
+    product = Product.find_by(code: code)
+    if product.compute_label_score == 15
+      return "#008042"
+    elsif product.compute_label_score == 10
+      return "#83B937"
+    elsif product.compute_label_score == 5
+      return "#F67F23"
+    elsif product.compute_label_score == 0
       return "#EF3C22"
     end
   end
 
   def self.color_labels_soc(code)
     product = Product.find_by(code: code)
-    label_score = 0
-    JSON.parse(product.labels_tags).each do |add|
-      if add.match("agriculture")
-        label_score += 1
-      elsif add.match("fair")
-        label_score += 1
-      else
-        label_score = label_score
-      end
-    end
-    if label_score > 3
+    if product.compute_label_score == 15
       return "#008042"
-    elsif label_score > 1
-      return "#FFC82B"
-    else
+    elsif product.compute_label_score == 5
+      return "#83B937"
+    elsif product.compute_label_score == 10
+      return "#F67F23"
+    elsif product.compute_label_score == 0
       return "#EF3C22"
     end
   end
