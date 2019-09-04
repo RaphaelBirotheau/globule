@@ -84,13 +84,13 @@ class Product < ApplicationRecord
 
   def compute_environmental_score
     if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score && has_plastic?(self.packaging_tags)
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 50
+      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 50
     elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 40
+      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 40
     elsif has_labels_bio?(JSON.parse(self.labels_tags))
-      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group)*2) + 20
+      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 20
     else
-      2
+      self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2)
     end
   end
 
@@ -257,6 +257,9 @@ class Product < ApplicationRecord
       self.origin_score = compute_origin_score(JSON.parse(self.countries_tags))
       self.label_score = compute_label_score
       self.packaging_score = compute_packaging_score(JSON.parse(self.packaging_tags))
+      self.health_score = health_score
+      self.environmental_score =  compute_environmental_score
+      self.social_score = social_score
       self.total_score = health_score + compute_environmental_score + social_score
       self.save
     rescue
@@ -273,7 +276,9 @@ class Product < ApplicationRecord
       product = Product.
         where.not(id: old_product.id).
         where('categories_hierarchy like ?', "%#{product_cat}%").
-        where('total_score >= ?', old_product.total_score).
+        where('health_score >= ?', old_product.health_score).
+        where('social_score >= ?', old_product.social_score).
+        where('environmental_score >= ?', old_product.environmental_score).
         order(total_score: :desc).
         first
       # return the product if found otherwise stay in the each loop
@@ -408,44 +413,41 @@ class Product < ApplicationRecord
   end
 
 
-  def self.color_labels(code)
+  def self.color_labels_env(code)
     product = Product.find_by(code: code)
-    label_score = 0
-    JSON.parse(product.labels_tags).each do |add|
-      if add.match("agriculture")
-        label_score += 1
-      elsif add.match("fair")
-        label_score += 1
-      else
-        label_score = label_score
-      end
-    end
-    if label_score > 2
+    if product.compute_label_score == 15
       return "#008042"
-    elsif label_score > 0
-      return "#FFC82B"
-    else
+    elsif product.compute_label_score == 10
+      return "#83B937"
+    elsif product.compute_label_score == 5
+      return "#83B937"
+    elsif product.compute_label_score == 0
+      return "#EF3C22"
+    end
+  end
+
+  def self.color_labels_health(code)
+    product = Product.find_by(code: code)
+    if product.compute_label_score == 15
+      return "#008042"
+    elsif product.compute_label_score == 10
+      return "#83B937"
+    elsif product.compute_label_score == 5
+      return "#F67F23"
+    elsif product.compute_label_score == 0
       return "#EF3C22"
     end
   end
 
   def self.color_labels_soc(code)
     product = Product.find_by(code: code)
-    label_score = 0
-    JSON.parse(product.labels_tags).each do |add|
-      if add.match("agriculture")
-        label_score += 1
-      elsif add.match("fair")
-        label_score += 1
-      else
-        label_score = label_score
-      end
-    end
-    if label_score > 3
+    if product.compute_label_score == 15
       return "#008042"
-    elsif label_score > 1
-      return "#FFC82B"
-    else
+    elsif product.compute_label_score == 5
+      return "#83B937"
+    elsif product.compute_label_score == 10
+      return "#F67F23"
+    elsif product.compute_label_score == 0
       return "#EF3C22"
     end
   end

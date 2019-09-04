@@ -1,15 +1,19 @@
-<div class="container-global">
-<h1>All my orders</h1>
-    <div class="row align-items-center m-3">
-      <div class="card col-12">
-        <div class= "col-12">
-          <h2 class= "mt-2">My baskets</h2>
+    <h3>All my previous orders</h3>
+    <% if @orders != nil %>
+    <% current_user.orders.each do |order| %>
+    <div class="container justify-content-center">
+      <div class="row">
+        <button type="button" class="btn btn-white btn-lg rounded-lg col-10" style="border: none; text-align: left; background-color: white">
+          <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
+          <div class="row">
+            <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
+          </div>
         </div>
-        <% current_user.orders.each do |order| %>
-        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3" >
-        <%= link_to "#{order.purchase_date}", order_path(order) %>
-        </button>
-        <%end%>
       </div>
-    </div>
+    </button>
+
+  </div>
 </div>
+<% end %>
+<% end %>
+
