@@ -3,7 +3,7 @@
   <div class="accordion" id="accordionExample">
     <% if @order %>
       <% @order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
-      <% if recommended_product && recommended_product %>
+      <% if recommended_product && recommended_product.class != String %>
       <div class="card" style="border: none;">
         <button class="btn btn-link pb-0 pt-3 pl-3 pr-3 m-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>">
           <div class="card-header m-0 p-0" id="heading<%= recommended_product.id %>">
