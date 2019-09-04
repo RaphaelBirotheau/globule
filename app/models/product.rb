@@ -107,16 +107,18 @@ class Product < ApplicationRecord
   end
 
   def has_labels_bio?(tags)
-    labels = ["bio", "organic"]
+    labels = ["bio", "organic", "ecocert"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
+
   end
 
   def has_labels_fairtrade?(tags)
-    labels = ["fairtrade", "equitable"]
+    labels = ["fairtrade", "equitable", "fair-trade"]
     tags.any? { |tag| labels.include?(tag.gsub("en:","").downcase) }
   end
 
   def compute_label_score
+
     if has_labels_bio?(JSON.parse(self.labels_tags)) && has_labels_fairtrade?(JSON.parse(self.labels_tags))
       15
     elsif has_labels_fairtrade?(JSON.parse(self.labels_tags))
@@ -131,26 +133,28 @@ class Product < ApplicationRecord
 
   def is_french?(tags)
     countries = ["france", "europe"]
-    if tags.start_with?('[')
-      JSON.parse(tags).any? { |label| label.downcase.include?("france") }
-    else
-      tags.downcase.include?("france")
+    if !tags.nil?
+      if tags.start_with?('[')
+        JSON.parse(tags).any? { |label| label.downcase.include?("france") }
+      else
+        tags.downcase.include?("france")
+      end
     end
   end
 
   def compute_origin_score(tags)
     score = 0
-
-    tags.each do |tag|
-      if tag.downcase.include?('france')
-        score += 25
-      elsif EU_COUNTRIES.include?(tag.downcase)
-        score += 15
-      else # rest of the world
-        score = 0
+    if !tags.nil?
+      tags.each do |tag|
+        if tag.downcase.include?('france')
+          score += 25 #France
+        elsif EU_COUNTRIES.include?(tag.downcase)
+          score += 15 #European Union
+        else # rest of the world
+          score = 1 #
+        end
       end
     end
-
     return score
   end
 
@@ -198,15 +202,15 @@ class Product < ApplicationRecord
   def compute_additive_score(tags)
   dangerous_additives = ["en:e102", "en:e110", "en:e123", "en:e124", "en:e127", "en:e131", "en:e142", "en:e154", "en:e160", "en:e163", "en:e154", "en:e102", "en:e110", "en:e120", "en:e123", "en:e124", "en:e125", "en:e126", "en:e120", "en:e173", "en:e175"]
      if tags.count == 0
-        15
+        15 #no additives, it's good
       elsif tags.any? { |tag| dangerous_additives.include?(tag.downcase) }
-        0
+        0 #has at least one dangerous additive
       elsif tags.count <= 4
-        10
+        10  #has four or less additives
       elsif tags.count <= 8
-        5
+        5 #has 8 or less additives
       else
-        0
+        1 #has more than 8 additives or company doesn't provide data
     end
   end
 
@@ -220,15 +224,15 @@ class Product < ApplicationRecord
     elsif tags.kind_of?(Array)
       # product_pack =  JSON.parse(tags)
       if tags.any? { |pack| carton.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("carton") }
-        20
+        20 #Cardboard only
       elsif tags.any? { |pack| verre.exclude?(pack.downcase) } && tags.any? { |label| label.downcase.include?("verre") }
-        15
+        15  #Glass only
       elsif tags.any? { |label| label.downcase.include?("plasti") }
-        1
+        1 #Contains plastic
       elsif tags.any? { |pack| verre.exclude?("plasti") } && tags.any? { |label| label.downcase.include?("allu") }
-        10
+        10  #Contains aluminium
       else
-        2
+        2   #Contains plastic and others
       end
     else
       if tags.downcase.include?("carton")
@@ -366,11 +370,9 @@ class Product < ApplicationRecord
       return "#EF3C22"
     elsif JSON.parse(product.additives_tags).count == 0
       return "#008042"
-    elsif JSON.parse(product.additives_tags).count == 1
-      return "#83B937"
-    elsif JSON.parse(product.additives_tags).count == 2
+    elsif JSON.parse(product.additives_tags).count <= 4
       return "#FFC82B"
-    elsif JSON.parse(product.additives_tags).count == 3
+    elsif JSON.parse(product.additives_tags).count <= 8
       return "#F67F23"
     else
       return "#EF3C22"
@@ -391,16 +393,17 @@ class Product < ApplicationRecord
 
   def self.color_pack(code)
     product = Product.find_by(code: code)
-    x = false
-    JSON.parse(product.packaging_tags).each do |pack|
-      if pack.include?("plasti")
-        x = true
-      end
-    end
-    if x == true
+    score = product.additives_score
+    if score == 20
+      return "#008042"
+    elsif score == 15
+      return "#83B937"
+    elsif score == 10
+      return "#F67F23"
+    elsif score == 1
       return "#EF3C22"
-    else "#FFC82B"
-      return
+    else
+      return "grey"
     end
   end
 
