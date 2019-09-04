@@ -37,6 +37,8 @@
                 <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3 pl-2" >
               </div>
             </div>
+              <canvas class="polar-chart" width="1200" height="1200" data-values="[ <%= product.health_score %>, <%= product.compute_environmental_score %>, <%= product.social_score %> ]">
+              </canvas>
           <div class="row align-items-center mb-3">
             <div class="col-8 mt-1 mb-1 ml-1 pr-0"> <h3> Nutri-score</h3> <p>
               <% if product.nutrition_grades_tags == "unknown" || nil %>
