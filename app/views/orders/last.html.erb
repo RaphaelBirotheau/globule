@@ -5,9 +5,9 @@
 <div class="container global p-0 m-0 ">
 
 <div class="p-3">
-  <h4 class="text-center">🧺 My last basket 🛒</h4>
+  <h4 class="text-center">🛒 My last basket 🛒</h4>
 </div>
-
+<% if current_user.orders.count != 0  %>
   <% order = current_user.orders.last  %>
   <% order_total_score = 0 %>
   <% order.products.each do |product| %>
@@ -126,8 +126,13 @@
   </div>
 </div>
 </div>
-<% end%>
 <% end %>
+<% end %>
+<% end %>
+<% else  %>
+<div class="col-12 text-center mt-20">
+<h2 class=> No orders yet ! Get your ass to the closest shop!</h2>
+</div>
 <% end %>
 </div>
 
