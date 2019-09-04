@@ -18,6 +18,13 @@
       <div class='col-12 py-3 px-1'>
         <h3>NovaScore of your products</h3>
         <%= pie_chart(@novascores, width: "320px", height: "240px", colors: ['#00AB01', '#FFCC00', '#FF6600', '#F90200']) %>
+          <%#= pie_chart(
+          @novascores.values.map { |h| [h[:string], h[:total]] }.to_h,
+          colors: @novascores.values.map { |h| h[:color] },
+          width: "320px",
+          height: "240px"
+          )
+        %>
         <p>Four categories of foods are proposed in the NOVA food classification, which seeks to relate food processing as the primary driver of diet quality. Of these, the category “ultra-processed foods” has been widely studied in relation both to diet quality and to risk factors for noncommunicable disease.</p>
       </div>
     </div>
@@ -27,7 +34,13 @@
     <div class="card-dashboard m-0 p-0 " id="heading">
       <div class='col-12 py-3 px-1'>
         <h3>Additives contained in your products</h3>
-        <%= pie_chart(@additives_score.values.map { |h| [h[:string], h[:total]] }.to_h, width: "320px", height: "240px") %>
+        <%= pie_chart(
+          @additives_score.values.map { |h| [h[:string], h[:total]] }.to_h,
+          colors: @additives_score.values.map { |h| h[:color] },
+          width: "320px",
+          height: "240px"
+          )
+        %>
         <p>Food additives are substances that are added to foods to serve specific technical purposes, and are grouped depending on the function they perform when added to foods.Additives approved as safe for use in food are given an E-number (E for Europe), which is also a simple and convenient way to label permitted additives across the range of languages in the EU.</p>
       </div>
     </div>
@@ -36,7 +49,13 @@
     <div class="card-dashboard m-0 p-0 " id="heading">
       <div class='col-12 py-3 px-1'>
         <h3>Labels of your products</h3>
-        <%= pie_chart(@labels_score, width: "320px", height: "240px") %>
+           <%= pie_chart(
+          @labels_score.values.map { |h| [h[:string], h[:total]] }.to_h,
+          colors: @labels_score.values.map { |h| h[:color] },
+          width: "320px",
+          height: "240px"
+          )
+        %>
         <p>In order to help you choose your product, Labels displayed on the product beside the mandatory regulatory information (sales denomination, expiry date, etc.) an official sign of the quality of the product, and optional commercial information that informs you.</p>
       </div>
     </div>
@@ -45,7 +64,13 @@
     <div class="card-dashboard m-0 p-0 " id="heading">
       <div class='col-12 py-3 px-1'>
         <h3>Packaging of your products</h3>
-        <%= pie_chart(@packaging_score, width: "320px", height: "240px") %>
+            <%= pie_chart(
+          @packaging_score.values.map { |h| [h[:string], h[:total]] }.to_h,
+          colors: @packaging_score.values.map { |h| h[:color] },
+          width: "320px",
+          height: "240px"
+          )
+        %>
         <p>Packaging are taking an important regarding the impact of products on environment, social & health concerns.</p>
       </div>
     </div>
@@ -54,7 +79,15 @@
     <div class="card-dashboard m-0 p-0 " id="heading">
       <div class='col-12 py-3 px-1'>
         <h3>Origin of your products</h3>
-        <%= pie_chart(@origin_score, width: "320px", height: "240px") %>
+
+        <%= pie_chart(
+          @origin_score.values.map { |h| [h[:string], h[:total]] }.to_h,
+          colors: @origin_score.values.map { |h| h[:color] },
+          width: "320px",
+          height: "240px"
+          )
+        %>
+
         <p>Regarding the origin of your product, keep in mind that the furthest they come from, the worst it is for the environment.</p>
       </div>
     </div>

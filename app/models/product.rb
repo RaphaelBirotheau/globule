@@ -140,19 +140,15 @@ class Product < ApplicationRecord
   end
 
   def compute_origin_score(tags)
-    score = 0
     if !tags.nil?
-      tags.each do |tag|
-        if tag.downcase.include?('france')
-          score += 25 #France
-        elsif EU_COUNTRIES.include?(tag.downcase)
-          score += 15 #European Union
-        else # rest of the world
-          score = 1 #
-        end
+      if tags.any? { |tag| tag.downcase.include?("france") }
+        25 #France
+      elsif tags.any? { |tag| EU_COUNTRIES.include?(tag.downcase) }
+        15 #European Union
+      else # rest of the world
+        1 #
       end
     end
-    return score
   end
 
    def has_plastic?(tags)
