@@ -1,13 +1,13 @@
 <%= javascript_pack_tag 'chartkick' %>
 
-<div class="container">
+<div class="container global">
 
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
       <div class='col-12 py-3 px-1'>
         <h3>NutriScore of your products</h3>
 
-        <%= pie_chart(@nutriscores_rename, width: "320px", height: "240px",colors: ['#017F3D', '#8DC51E', '#FAD000', '#FF8F02', '#FF3C02']) %>
+        <%= pie_chart(@nutriscores_rename, width: "320px", height: "240px",colors: ['#017F3D', '#8DC51E', '#FAD000', '#FF8F02', '#ff6384']) %>
 
         <p>The NutriScore is a logo that shows the nutritional quality of food products with A to E grades. With the NutriScore, products can be easily and quickly compared.</p>
       </div>
@@ -17,7 +17,7 @@
     <div class="card-dashboard m-0 p-0 " id="heading">
       <div class='col-12 py-3 px-1'>
         <h3>NovaScore of your products</h3>
-        <%= pie_chart(@novascores, width: "320px", height: "240px", colors: ['#00AB01', '#FFCC00', '#FF6600', '#F90200']) %>
+        <%= pie_chart(@novascores, width: "320px", height: "240px", colors: ['#6FD082', '#FFCC00', '#FF6600', '#F90200']) %>
           <%#= pie_chart(
           @novascores.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @novascores.values.map { |h| h[:color] },
