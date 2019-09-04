@@ -7,6 +7,10 @@ after_action :create_user_profile, only: [:create]
     @order = Order.last
   end
 
+  def index
+    @orders = Order.where(user: current_user)
+  end
+
   def recommendations
     @order = Order.find(params[:id])
   end
