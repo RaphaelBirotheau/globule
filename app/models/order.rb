@@ -15,6 +15,7 @@ class Order < ApplicationRecord
     additives_array            = []
     nova_array                 = []
     label_array                = []
+    order_score                = []
 
     products.each do | product |
       nutrition_score_array      << (product.nutrition_grades_tags.presence || 'unknown')
@@ -25,6 +26,7 @@ class Order < ApplicationRecord
       additives_array            << (product.additives_score.presence || 'unknown')
       nova_array                 << (product.nova_group.presence || 'unknown')
       label_array                << (product.label_score.presence || 'unknown')
+      order_score                << (product.total_score.presence || 'unknown')
     end
 
     self.nutrition_score_repartition      = nutrition_score_array
@@ -35,6 +37,7 @@ class Order < ApplicationRecord
     self.additives_repartition            = additives_array
     self.nova_repartition                 = nova_array
     self.label_repartition                = label_array
+    self.total_score                      = (order_score.sum / order_score.count)
 
     self.save
   end

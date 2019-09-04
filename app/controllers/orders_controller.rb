@@ -19,10 +19,9 @@ after_action :create_user_profile, only: [:create]
     UserProfile.create!(user: current_user) if !current_user.user_profile
   end
 
-   def new
+  def new
     @order = Order.new
   end
-
 
   def show
     @order = Order.find(params[:id])
