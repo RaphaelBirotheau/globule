@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400,500,600|Montserrat:200,300,400,500,600&display=swap" rel="stylesheet">
     <title>Globule</title>
+    <%= favicon_link_tag 'favicon.ico'%>
+
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= favicon_link_tag 'favicon.ico'%>
-    <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+    <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <%#= javascript_pack_tag 'application' %>
 
   </head>
