@@ -20,3 +20,31 @@
 .product_icon {
   height: 20px;
 }
+
+.product-score {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 0px;
+    color: white;
+    margin: 0;
+}
+
+.poor-score {
+  background-color:#F90200;
+}
+
+.average-score {
+  background-color: #FF8F02
+}
+
+.good-score {
+  background-color: #8DC51E;
+}
+
+.excellent-score {
+  background-color: #017F3D;
+}

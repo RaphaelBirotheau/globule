@@ -25,7 +25,21 @@
                   </div>
 
                   <div class="col-3 py-3 binary" style="text-align: center;">
-                    <h3 class="p-0"> <% recommended_product_score = recommended_product.total_score / 3 %><%= recommended_product_score %> /100</h3>
+                    <% recommended_product_score = recommended_product.total_score / 3 %>
+                    <h3 class="product-score
+                      <% if recommended_product_score < 30 %>
+                        poor_score
+                      <% elsif recommended_product_score < 50 %>
+                        average-score
+                      <% elsif recommended_product_score < 80 %>
+                        good-score
+                      <% else %>
+                        excellent-score
+                      <% end %>
+                      "
+                    >
+                      <%= recommended_product_score %></h3>
+
                   </div>
 
                 </div>
@@ -99,7 +113,7 @@
                   <%= Product.retrieve_packs(recommended_product.code) %></p>
                 </div>
                 <div class="col-1 pl-1" style="color: <%= Product.color_pack_health(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
-                <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
+                <div class="col-1 pl-1" style="color: <%= Product.color_pack_env(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
                 <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
               </div>
 
