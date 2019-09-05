@@ -41,4 +41,11 @@ class Order < ApplicationRecord
 
     self.save
   end
+
+  def compute_reco_order_score
+    products = self.products.uniq.map { |product| Product.recommendation(product.code) }
+                  .flatten.select { |p| p p.class == Product }
+    products.pluck(:total_score).map { |s| s / 3}.reduce(:+) / products.count
+  end
+
 end
