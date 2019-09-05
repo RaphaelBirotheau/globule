@@ -14,6 +14,7 @@
     <% if recommended_product && recommended_product.class != String %>
 
 
+
     <div class="accordion" id="accordionExample">
         <div class="card" style="border: none;">
           <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>" style="border: none;">
@@ -40,6 +41,7 @@
             </div>
           </button>
         </div>
+
 
 
           <div id="collapse<%= recommended_product.id %>" class="collapse mb-2" aria-labelledby="heading<%= recommended_product.id %>" data-parent="#accordionExample" style="border: none;">
@@ -107,7 +109,7 @@
                   <%= Product.retrieve_packs(recommended_product.code) %></p>
                 </div>
                 <div class="col-1 pl-1" style="color: <%= Product.color_pack_health(recommended_product.code)%>"> <i class="fas fa-heart"></i> </div>
-                <div class="col-1 pl-1" style="color: <%= Product.color_pack(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
+                <div class="col-1 pl-1" style="color: <%= Product.color_pack_env(recommended_product.code)%>"> <i class="fas fa-leaf"></i> </div>
                 <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
               </div>
 

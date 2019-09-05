@@ -112,7 +112,7 @@
             <%= Product.retrieve_packs(product.code) %></p>
           </div>
           <div class="col-1 pl-1" style="color: <%= Product.color_pack_health(product.code)%>"> <i class="fas fa-heart"></i> </div>
-          <div class="col-1 pl-1" style="color: <%= Product.color_pack(product.code)%>"> <i class="fas fa-leaf"></i> </div>
+          <div class="col-1 pl-1" style="color: <%= Product.color_pack_env(product.code)%>"> <i class="fas fa-leaf"></i> </div>
           <div class="col-1 pl-1" style="color:#ffff"> <i class="fas fa-users"></i> </div>
         </div>
 

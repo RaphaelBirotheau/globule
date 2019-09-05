@@ -401,9 +401,9 @@ class Product < ApplicationRecord
     end
   end
 
-   def self.color_pack(code)
+   def self.color_pack_env(code)
     product = Product.find_by(code: code)
-    score = product.additives_score
+    score = product.packaging_score
     if score == 20
       return "#008042"
     elsif score == 15
