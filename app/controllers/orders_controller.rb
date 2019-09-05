@@ -19,6 +19,11 @@ after_action :create_user_profile, only: [:create]
     UserProfile.create!(user: current_user) if !current_user.user_profile
   end
 
+  def order_recommended_score
+    @order_score = []
+    @order_score << Product.total_score
+  end
+
   def new
     @order = Order.new
   end
