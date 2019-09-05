@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
 
   def show
+    render layout: 'orders'
   end
 
   def dashboard

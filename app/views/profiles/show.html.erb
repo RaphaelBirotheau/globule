@@ -1,23 +1,16 @@
 
 
-<div class="container-global">
+<div class="container">
 
-  <div class="row align-items-center m-3">
-    <div class="card col-12">
+  <div class="px-2 pt-3 pb-3">
+    <h4 class="text-center mb-0 pb-0"><i class="fas fa-user-circle"></i> My informations <i class="fas fa-user-circle"></i></h4>
+  </div>
 
-      <div class="row">
-        <div class="col-12">
-          <h2 class="mt-2">My informations</h2>
-        </div>
-      </div>
-
+    <div class="card p-2">
       <div class=row>
         <div class="col-12">
           <h3> Username : </h3>
-          <p class= "mb-1"> <%= current_user.username %> </p>
-          <button type="button" class="btn btn-secondary btn-sm btn-block mb-2 col-7 mx-auto" >
-          <%= link_to "EDIT MY PASSWORD", edit_user_password_path %>
-          </button>
+           <p class= "mb-1"> Thomas <%#= current_user.username %> </p>
         </div>
       </div>
 
@@ -47,25 +40,15 @@
       <div class=row>
         <div class="col-8">
           <h3> Loyalty programs : </h3>
-         <p class= "mb-2">Monoprix</p>
+         <p class= "mb-2">Biocoop, Franprix, Monoprix</p>
         </div>
       </div>
 
-    </div>
+
+      <button type="button" class="btn btn-light text-reset btn-sm btn-block mb-2 col-7 mx-auto" >
+      <%= link_to "EDIT MY PASSWORD", edit_user_password_path %>
+      </button>
+
   </div>
-
-
-    <div class="row align-items-center m-3">
-      <div class="card col-12">
-        <div class= "col-12">
-          <h2 class= "mt-2">My baskets</h2>
-        </div>
-        <% current_user.orders.each do |order| %>
-        <button type="button" class="btn btn-secondary btn-lg btn-block mb-3" >
-        <%= link_to "#{order.purchase_date}", order_path(order) %>
-        </button>
-        <%end%>
-      </div>
-    </div>
 
 </div>
