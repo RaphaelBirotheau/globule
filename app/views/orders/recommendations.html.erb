@@ -1,36 +1,43 @@
 <div class="container global p-0 m-0 ">
 
-  <div class="px-3 pt-3 pb-1">
-    <h4 class="text-center mb-0 pb-0"><i class="fas fa-hat-wizard"></i> My magic basket <i class="fas fa-hat-wizard"></i></h4>
+  <div class="px-3 py-2 mb-2 newheader ">
+    <h1 class="text-center mb-0 pb-0 ">My magic basket</h1>
+  </div>
+
     <h4 class="text-center mt-0 mb-2 px-3 basketscore"> MAGIC SCORE : <B style="font-size: 17px;"> 63 /100 </B> </h4>
   </div>
 
    <% if @order %>
       <% @order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
     <% if recommended_product && recommended_product.class != String %>
-        <div class="accordion" id="accordionExample">
-          <div class="card" style="border: none;">
-            <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>" style="border: none;">
-              <div class="card m-0 p-0" id="heading<%= recommended_product.id %>" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white; box-sizing: content-box;">
 
-                <div class="row">
 
-                  <div class="col-2 py-3" style="text-align: right;">
-                    <%= image_tag "#{recommended_product.pnns_second_group.group_icon}", class: "product_icon" %>
-                  </div>
+    <div class="accordion" id="accordionExample">
+        <div class="card" style="border: none;">
+          <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= recommended_product.id %>" aria-expanded="true" aria-controls="collapse<%= recommended_product.id %>" style="border: none;">
 
-                  <div class="col-7 p-0">
-                    <h2 class=" py-3 m-0" style="text-align: left;"><%= recommended_product.generic_name_fr %> </h2>
-                  </div>
+            <div class="cart-card" id="heading<%= recommended_product.id %>">
 
-                  <div class="col-3 py-3 binary" style="text-align: center;">
-                    <h3 class="p-0"> <% recommended_product_score = recommended_product.total_score / 3 %><%= recommended_product_score %> /100</h3>
-                  </div>
+              <%= image_tag "#{recommended_product.pnns_second_group.group_icon}", class: "product_icon" %>
+              <h2 class=" py-3 m-0" style="text-align: left;"><%= recommended_product.generic_name_fr %> </h2>
 
-                </div>
-              </div>
-            </button>
-          </div>
+            <% recommended_product_score = recommended_product.total_score / 3 %>
+              <h3 class="product-score
+                                    <% if recommended_product_score <= 30 %>
+                                      poor-score
+                                    <% elsif recommended_product_score <= 50 %>
+                                      average-score
+                                    <% elsif recommended_product_score <= 80 %>
+                                      good-score
+                                    <% else %>
+                                      excellent-score
+                                    <% end %>
+                                    "
+                                  >
+                                    <%= recommended_product_score %></h3>
+            </div>
+          </button>
+        </div>
 
 
           <div id="collapse<%= recommended_product.id %>" class="collapse mb-2" aria-labelledby="heading<%= recommended_product.id %>" data-parent="#accordionExample" style="border: none;">
