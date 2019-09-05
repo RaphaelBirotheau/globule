@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable"  content="yes">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400,500,600|Montserrat:200,300,400,500,600&display=swap" rel="stylesheet">
-    <title>Globule</title>
+    <title>Globule - Improve your impact</title>
     <%= favicon_link_tag 'favicon.ico'%>
     <%#dewqfe  %>
 
@@ -13,7 +15,9 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
     <%#= javascript_pack_tag 'application' %>
-
+  <link rel="manifest" href="<%= asset_path 'manifest.json.erb' %>">
+  <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png"/> -->
+  <link rel="apple-touch-icon" href="<%= image_path 'icons/apple-touch-icon.png' %>"/>
   </head>
   <body>
     <%= render 'shared/flashes' %>
