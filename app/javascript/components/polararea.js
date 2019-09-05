@@ -15,29 +15,42 @@ console.dir(dataset);
     datasets: [{
       data: dataset,
       fill: true,
-      lineTension: 0.15,
-      backgroundColor : ["rgba(255, 60, 2, 0.6)", "rgba(1, 127, 61, 0.6)","rgba(1, 196, 238, 0.6)"],
-      pointRadius: 0, // supprimer si on veut faire apparaitre les points
+      lineTension: 0,
+      backgroundColor : ["rgba(39, 222, 189, 0.6)"],
+      pointRadius: 2, // supprimer si on veut faire apparaitre les points
       borderWidth: 2,
-      borderJoinStyle: 'round',
+      borderJoinStyle: 'bevel',
       cubicInterpolationMode: 'monotone',
     }]
   };
 
   var options = {
+    // tooltips: {
+    //   enabled: true,
+    //   backgroundColor: red
+    // },
     scale: {
       ticks: {
-        max: 100
+        max: 100,
+        display: true,
       }
     },
     responsive: true,
     legend: {
-      display: false
+      display: false,
+    },
+    layout: {
+      padding: {
+        left: 10,
+        right: 0,
+        top: 0,
+        bottom: 0
+      }
     }
   };
 
   var myChart = new Chart(ctx, {
-    type: 'polarArea',
+    type: 'radar',
     data: data,
     options: options,
   });
