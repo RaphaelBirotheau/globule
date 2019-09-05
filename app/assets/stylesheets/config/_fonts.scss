@@ -62,10 +62,26 @@ h4 {
   font-size: 14px;
 }
 
+
+h5 {
+  color: #404040c2;
+  font-size: 18px !important;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  font-weight: 150 !important;
+}
+
 p {
   font-size: 12px !important;
   margin: auto !important;
+  font-weight: 150 !important;
   // text-transform: uppercase;
+}
+
+a {
+
+  color: #1fd3c4 !important;
 }
 
 .ph1 {

@@ -2,21 +2,36 @@
 
 <div class="container global">
 
+  <div class="px-2 pt-3 pb-4">
+    <h4 class="text-center mb-0 pb-0"><i class="fas fa-chart-pie"></i> My consumption habits <i class="fas fa-chart-pie"></i></h4>
+  </div>
+<!--
+Nutriscore -->
+
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 py-3 px-1'>
-        <h3>NutriScore of your products</h3>
+      <div class='col-12 pt-3 px-1'>
+        <h5>Nutri-Score total repartition</h5>
 
         <%= pie_chart(@nutriscores_rename, width: "320px", height: "240px",colors: ['#017F3D', '#8DC51E', '#FAD000', '#FF8F02', '#ff6384']) %>
 
-        <p>The NutriScore is a logo that shows the nutritional quality of food products with A to E grades. With the NutriScore, products can be easily and quickly compared.</p>
+        <div class="mt-3 text-center">
+          <h3>Nutri-score impacts mainly :</h3>
+          <p class="mb-2"><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
+          <h3>motto :</h3>
+          <p class="mb-2">The less of D & E you have, the better you are !</p>
+        </div>
       </div>
     </div>
   </div>
+
+
+<!-- Novascore-->
+
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 py-3 px-1'>
-        <h3>NovaScore of your products</h3>
+      <div class='col-12 pt-3 px-1'>
+        <h5>NovaScore total repartition</h5>
         <%= pie_chart(@novascores, width: "320px", height: "240px", colors: ['#6FD082', '#FFCC00', '#FF6600', '#F90200']) %>
           <%#= pie_chart(
           @novascores.values.map { |h| [h[:string], h[:total]] }.to_h,
@@ -25,15 +40,23 @@
           height: "240px"
           )
         %>
-        <p>Four categories of foods are proposed in the NOVA food classification, which seeks to relate food processing as the primary driver of diet quality. Of these, the category “ultra-processed foods” has been widely studied in relation both to diet quality and to risk factors for noncommunicable disease.</p>
+        <div class="mt-3 text-center">
+          <h3>Novascore impacts mainly :</h3>
+          <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
+          <p class="mb-2"><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
+          <h3>motto :</h3>
+          <p class="mb-2">The bigger the 1 & 2 slices are, the better you are !</p>
+        </div>
       </div>
     </div>
   </div>
 
+<!-- Additives -->
+
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 py-3 px-1'>
-        <h3>Additives contained in your products</h3>
+      <div class='col-12 pt-3 px-1'>
+        <h5>Additives repartition</h5>
         <%= pie_chart(
           @additives_score.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @additives_score.values.map { |h| h[:color] },
@@ -41,14 +64,23 @@
           height: "240px"
           )
         %>
-        <p>Food additives are substances that are added to foods to serve specific technical purposes, and are grouped depending on the function they perform when added to foods.Additives approved as safe for use in food are given an E-number (E for Europe), which is also a simple and convenient way to label permitted additives across the range of languages in the EU.</p>
+        <div class="mt-3 text-center">
+          <h3>Additives impact mainly :</h3>
+          <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
+          <p class="mb-2"><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
+          <h3>motto :</h3>
+          <p class="mb-2">The less additives you have, the better you are !</p>
+        </div>
       </div>
     </div>
   </div>
+
+<!-- Labels -->
+
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 py-3 px-1'>
-        <h3>Labels of your products</h3>
+      <div class='col-12 pt-3 px-1'>
+        <h5>Products labels repartition</h5>
            <%= pie_chart(
           @labels_score.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @labels_score.values.map { |h| h[:color] },
@@ -56,14 +88,24 @@
           height: "240px"
           )
         %>
-        <p>In order to help you choose your product, Labels displayed on the product beside the mandatory regulatory information (sales denomination, expiry date, etc.) an official sign of the quality of the product, and optional commercial information that informs you.</p>
+        <div class="mt-3 text-center">
+          <h3>labels impact mainly :</h3>
+          <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
+          <p class=""><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
+          <p class="mb-2"><i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i> </p>
+          <h3>motto :</h3>
+          <p class="mb-2">The more labels you have, the better you are !</p>
+        </div>
       </div>
     </div>
   </div>
+
+<!-- Packagings -->
+
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 py-3 px-1'>
-        <h3>Packaging of your products</h3>
+      <div class='col-12 pt-3 px-1'>
+        <h5>Products packaging types</h5>
             <%= pie_chart(
           @packaging_score.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @packaging_score.values.map { |h| h[:color] },
@@ -71,14 +113,24 @@
           height: "240px"
           )
         %>
-        <p>Packaging are taking an important regarding the impact of products on environment, social & health concerns.</p>
+        <div class="mt-3 text-center">
+          <h3>Packagings impact mainly :</h3>
+          <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
+          <p class=""><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
+          <p class="mb-2"><i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i> </p>
+          <h3>motto :</h3>
+          <p class="mb-2">The less plastic you buy, the better you are !</p>
+        </div>
       </div>
     </div>
   </div>
+
+<!-- Origin -->
+
   <div class="card my-1">
     <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 py-3 px-1'>
-        <h3>Origin of your products</h3>
+      <div class='col-12 pt-3 px-1'>
+        <h5>Products origin</h5>
 
         <%= pie_chart(
           @origin_score.values.map { |h| [h[:string], h[:total]] }.to_h,
@@ -88,7 +140,14 @@
           )
         %>
 
-        <p>Regarding the origin of your product, keep in mind that the furthest they come from, the worst it is for the environment.</p>
+        <div class="mt-3 text-center">
+          <h3>Origin impact mainly :</h3>
+          <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
+          <p class=""><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
+          <p class="mb-2"><i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i> </p>
+          <h3>motto :</h3>
+          <p class="mb-2">The closest your products come from, the better you are !</p>
+        </div>
       </div>
     </div>
   </div>

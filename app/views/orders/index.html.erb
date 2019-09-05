@@ -1,18 +1,22 @@
-    <h3>All my previous orders</h3>
-    <% if @orders != nil %>
-    <% current_user.orders.each do |order| %>
-    <div class="container justify-content-center">
-      <div class="row">
-        <button type="button" class="btn btn-white btn-lg rounded-lg col-10" style="border: none; text-align: left; background-color: white">
-          <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
-          <div class="row">
-            <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
-          </div>
-        </div>
-      </div>
-    </button>
 
+
+<div class="container m-0 p-0">
+
+  <div class="px-3 pt-3 pb-1">
+    <h4 class="text-center mb-0 pb-0"><i class="fas fa-shopping-cart"></i> My previous orders <i class="fas fa-shopping-cart"></i></h4>
   </div>
+
+
+  <% if @orders != nil %>
+  <% current_user.orders.each do |order| %>
+  <div class="card m-2">
+      <button type="button" class="btn btn-white btn-lg rounded-lg col-10" style="border: none; text-align: left; background-color: white">
+        <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
+        <div class="row">
+          <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
+        </div>
+      </button>
+    </div>
 </div>
 <% end %>
 <% end %>

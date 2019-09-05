@@ -51,11 +51,16 @@
           <div class="col-6">
             <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3 pl-2" >
           </div>
+
           <div class="col-6">
             <canvas class="polar-chart" width="170" height="170" data-values="[ <%= product.health_score %>, <%= product.compute_environmental_score %>, <%= product.social_score %> ]">
             </canvas>
           </div>
-          <p> <strong><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i>  <i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i>  <i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i>  </strong></p>
+        </div>
+        <div class="row m-0 pb-2">
+          <div class="col-12 text-right p-0">
+              <p> <strong><i class="fas fa-heart px-1" style="color: rgba(255, 60, 2, 0.8)"> Health</i>  <i class="fas fa-leaf px-1" style="color: rgba(1, 127, 61, 0.8)"> Env.</i>  <i class="fas fa-users px-1" style="color: rgba(1, 196, 238, 0.9)"> Social</i>  </strong></p>
+          </div>
         </div>
 
 
