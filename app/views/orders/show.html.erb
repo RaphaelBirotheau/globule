@@ -1,9 +1,10 @@
-<div class="container global p-0 m-0 ">
   <% order = @order  %>
-  <div class="px-3 pt-3 pb-1">
-    <h4 class="text-center mb-0 pb-0"><i class=“fas fa-shopping-cart”><%= l(order.purchase_date, format: ' %A %e %B') %>
-<i class=“fas fa-shopping-cart”></h4>
+
+  <div class="px-3 py-2 mb-2 newheader ">
+    <h1 class="text-center mb-0 pb-0 "><%= l(order.purchase_date, format: ' %A %e %B') %></h1>
   </div>
+
+
 
     <% if current_user.orders.count != 0  %>
     <% order_total_score = 0 %>
@@ -18,26 +19,29 @@
     <% order.products.each do |product| %>
     <% if product.image_front_url != nil  %>
 
+<div class="container global p-0 m-0 ">
+
+
   <div class="accordion" id="accordionExample">
     <div class="card" style="border: none;">
       <button class="btn btn-link m-0 p-0 rounded-lg" type="button" data-toggle="collapse" data-target="#collapse<%= product.id %>" aria-expanded="true" aria-controls="collapse<%= product.id %>" style="border: none;">
-        <div class="card m-0 p-0" id="heading<%= product.id %>" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25); background-color: white; box-sizing: content-box;">
-
-          <div class="row">
-
-            <div class="col-2 py-3" style="text-align: right;">
+        <div class="cart-card" id="heading<%= product.id %>">
               <%= image_tag "#{product.pnns_second_group.group_icon}", class: "product_icon" %>
-            </div>
-
-            <div class="col-7 p-0">
               <h2 class=" py-3 m-0" style="text-align: left;"><%= product.generic_name_fr %> </h2>
-            </div>
-
-            <div class="col-3 py-3 binary" style="text-align: center;">
-              <h3 class="p-0"> <% product_score = product.total_score / 3 %><%= product_score %> /100</h3>
-            </div>
-
-          </div>
+        <% product_score = product.total_score / 3 %>
+          <h3 class="product-score
+            <% if product_score <= 30 %>
+              poor-score
+            <% elsif product_score <= 50 %>
+              average-score
+            <% elsif product_score <= 80 %>
+              good-score
+            <% else %>
+              excellent-score
+            <% end %>
+            "
+          >
+            <%= product_score %></h3>
         </div>
       </button>
     </div>
