@@ -2,7 +2,8 @@
 
   <div class="px-3 pt-3 pb-1">
     <h4 class="text-center mb-0 pb-0"><i class="fas fa-hat-wizard"></i> My magic basket <i class="fas fa-hat-wizard"></i></h4>
-    <h4 class="text-center mt-0 mb-2 px-3 basketscore"> MAGIC SCORE : <B style="font-size: 17px;"> 63 /100 </B> </h4>
+    <% if @order %>
+    <h4 class="text-center mt-0 mb-2 px-3 basketscore"> MAGIC SCORE : <B style="font-size: 17px;"><%= @order.compute_reco_order_score%>/100 </B> ( + <%=  (@order.compute_reco_order_score - @order.total_score / 3) %> )</h4>
   </div>
 
    <% if @order %>
@@ -140,6 +141,7 @@
   <div class="col-12 text-center mt-20">
     <h2 class=> No orders yet ! Get your ass to the closest shop!</h2>
   </div>
-<% end %>
+  <% end %>
+    <% end %>
 
 
