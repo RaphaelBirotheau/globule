@@ -1,21 +1,67 @@
 
-<div class="footer">
-  <div class="footer-links">
-    <%= link_to orders_path, class: "navbar-brand" do %>
-      <i class="fas fa-history"></i>
-    <% end %>
+<%# if params[:controller] == 'orders' && ['show', 'last', 'recommendations'].include?(params[:action]) %>
+  <div class="footer">
+    <div class="footer-links">
+      <div class="footer-left">
+        <%= link_to lastbasket_path, class: "#{'active' if params[:action] == 'last'}" do %>
+          <i class="fas fa-shopping-basket"></i></a>
+        <% end %>
 
-    <% if @order && @order.persisted?  %>
-      <%= link_to recommendations_order_path(@order), class: "navbar-brand" do %>
-      <i class="fas fa-magic footer-toggle"></i>
-      <% end %>
-    <% end %>
+        <%= link_to orders_path, class: "#{'active' if params[:controller] == 'orders' && ["index", "show"].include?(params[:action])}" do %>
+          <i class="fas fa-history"></i>
+        <% end %>
+      </div>
 
-    <%= link_to lastbasket_path, class: "navbar-brand" do %>
-      <i class="fas fa-shopping-basket"></i></a>
+      <div class="">
+        <% if @order && @order.persisted? %>
+          <% if params[:action] == "recommendations" %>
+            <% magic_button_path = current_user.orders.last == @order ? lastbasket_path : order_path(@order) %>
+          <% else %>
+            <% magic_button_path = recommendations_order_path(@order) %>
+          <% end %>
+        <%end %>
+        <%= link_to magic_button_path, class: "#{'active' if params[:action] == 'recommendations'}" do %>
+          <i class="fas fa-magic footer-toggle"></i>
+        <% end %>
+      </div>
 
+      <div class="footer-right">
+        <%= link_to dashboard_path, class: "#{'active' if params[:action] == 'dashboard'}" do %>
+          <i class="fas fa-tachometer-alt tachometer"></i>
+        <% end %>
 
-    <% end %>
-
+         <%= link_to profile_path(:id), class: "#{'active' if params[:controller] == 'profiles' && params[:action] == 'show'}" do %>
+          <i class="fas fa-user-circle"></i></a>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
+
+<%# else %>
+<!--   <div class="footer">
+    <div class="footer-links">
+
+      <%#= link_to lastbasket_path, class: "#{'active' if params[:action] == 'last'}" do %>
+        <i class="fas fa-shopping-basket"></i></a>
+      <%# end %>
+
+      <%#= link_to orders_path, class: "#{'active' if params[:controller] == 'orders' && ["index", "show"].include?(params[:action])}" do %>
+        <i class="fas fa-history"></i>
+      <%# end %>
+
+      <%#= link_to dashboard_path, class: "#{'active' if params[:action] == 'dashboard'}" do %>
+        <i class="fas fa-tachometer-alt tachometer"></i>
+      <%# end %>
+
+       <%#= link_to profile_path(:id), class: "#{'active' if params[:controller] == 'profiles' && params[:action] == 'show'}" do %>
+        <i class="fas fa-user-circle"></i></a>
+      <%# end %>
+
+    </div>
+  </div> -->
+
+<%# end %>
+
+
+
+
