@@ -36,13 +36,13 @@ class Product < ApplicationRecord
         self.allergens_tags = product["product"]["allergens_tags"]
         self.generic_name_fr = product["product"]["product_name"]
         self.categories_hierarchy = product["product"]["categories_hierarchy"].select { |category| category.start_with?('en:') }
-        self.additives_tags = product["product"]["additives_tags"]
-        self.brands = product["product"]["brands"]
-        self.stores_tags = product["product"]["stores_tags"]
-        self.labels_tags = product["product"]["labels_tags"]
-        self.countries_tags = product["product"]["origins_tags"]
-        self.ingredients_tags = product["product"]["ingredients_tags"]
-        self.packaging_tags = product["product"]["packaging_tags"]
+        self.additives_tags = (product["product"]["additives_tags"] || '[]')
+        self.brands = (product["product"]["brands"] || '[]')
+        self.stores_tags = (product["product"]["stores_tags"] || '[]')
+        self.labels_tags = (product["product"]["labels_tags"] || '[]')
+        self.countries_tags = (product["product"]["origins_tags"] || '[]')
+        self.ingredients_tags = (product["product"]["ingredients_tags"] || '[]')
+        self.packaging_tags = (product["product"]["packaging_tags"] || '[]')
         self.product_quantity = product["product"]["product_quantity"]
         self.serving_quantity = product["product"]["serving_quantity"]
         self.ingredients_analysis_tags = product["product"]["ingredients_analysis_tags"]
@@ -77,17 +77,11 @@ class Product < ApplicationRecord
   end
 
   def compute_environmental_score
-    self.pnns_product.pnns_second_group.environmental_score + compute_label_score + self.origin_score + self.packaging_score + (nova_score(self.nova_group))
-
-    # if has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score && has_plastic?(self.packaging_tags)
-    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 50
-    # elsif has_labels_bio?(JSON.parse(self.labels_tags)) && origin_score
-    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 40
-    # elsif has_labels_bio?(JSON.parse(self.labels_tags))
-    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2) + 20
-    # else
-    #   self.pnns_product.pnns_second_group.environmental_score + (nova_score(self.nova_group) * 2)
-    # end
+    self.pnns_product.pnns_second_group.environmental_score +
+      compute_label_score +
+      self.origin_score +
+      self.packaging_score +
+      nova_score(self.nova_group)
   end
 
   def social_score
@@ -255,8 +249,9 @@ class Product < ApplicationRecord
       self.social_score = social_score
       self.total_score = health_score + compute_environmental_score + social_score
       self.save
-    rescue
+    rescue StandardError => e
       puts code
+      # binding.pry
     end
   end
 
@@ -267,7 +262,6 @@ class Product < ApplicationRecord
 
     product_categories.each do |product_cat|
       product = Product.
-        where.not(id: old_product.id).
         where('categories_hierarchy like ?', "%#{product_cat}%").
         where('health_score >= ?', old_product.health_score).
         where('social_score >= ?', old_product.social_score).

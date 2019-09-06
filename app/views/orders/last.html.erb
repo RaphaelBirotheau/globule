@@ -9,7 +9,7 @@
 
 
 <div class="">
-  <div class="px-3 py-2 mb-2 newheader ">
+  <div class="px-3 py-3 mb-2 newheader ">
     <h1 class="text-center mb-0 pb-0 ">My last basket</h1>
   </div>
 
@@ -63,15 +63,18 @@
           <div class="col-6">
             <img src="<%= product.image_front_url %>" alt="<%= product.generic_name_fr %>" class="products-imgs mb-3 pl-2" >
           </div>
-
-          <div class="col-6">
-            <canvas class="polar-chart" width="170" height="170" data-values="[ <%= product.health_score %>, <%= product.compute_environmental_score %>, <%= product.social_score %> ]">
-            </canvas>
+          <div class="col-6 polar-height">
+            <div class='polar-size'>
+              <canvas class="polar-chart" width="170" height="170" data-values="[ <%= product.health_score %>, <%= product.compute_environmental_score %>, <%= product.social_score %> ]">
+              </canvas>
+              <p class="health-icon"><i class="fas fa-heart"></i><br>Health</p>
+              <p class="env-icon"><i class="fas fa-leaf"></i><br>Env.</p>
+              <p class="social-icon"><i class="fas fa-users"></i><br>Social</p>
+            </div>
           </div>
         </div>
         <div class="row m-0 pb-2">
           <div class="col-12 text-right p-0">
-              <p> <strong><i class="fas fa-heart px-1" style="color: rgba(255, 60, 2, 0.8)"> Health</i>  <i class="fas fa-leaf px-1" style="color: rgba(1, 127, 61, 0.8)"> Env.</i>  <i class="fas fa-users px-1" style="color: rgba(1, 196, 238, 0.9)"> Social</i>  </strong></p>
           </div>
         </div>
 
