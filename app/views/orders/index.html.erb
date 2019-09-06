@@ -5,6 +5,9 @@
 
   <div class="px-3 py-2 mb-4 newheader ">
     <h1 class="text-center mb-0 pb-0 ">All my baskets</h1>
+    <% average_score = []  %>
+    <% current_user.orders.each { |order| average_score << (order.total_score / 3) }%>
+    <h2>Average basket score: <%= average_score.sum / average_score.count %>/100</h2>
   </div>
 
 
@@ -15,7 +18,22 @@
         <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
         <div class="row">
           <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
-          <h2 class="col-2" style="text-align: right;">score: <%= order.total_score / 3%>/100</h2>
+          <% order_score = order.total_score / 3 %>
+          <h3 class="product-score
+              <% if order_score <= 20 %>
+                very-poor-score
+              <% elsif order_score <= 40 %>
+                poor-score
+              <% elsif order_score <= 60 %>
+                average-score
+              <% elsif order_score <= 80 %>
+                good-score
+              <% else %>
+                excellent-score
+              <% end %>
+                                    "
+                                  >
+                                    <%= order_score %></h3>
 
         </div>
       </button>

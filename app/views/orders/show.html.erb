@@ -30,11 +30,13 @@
               <h2 class=" py-3 m-0" style="text-align: left;"><%= product.generic_name_fr %> </h2>
         <% product_score = product.total_score / 3 %>
           <h3 class="product-score
-            <% if product_score <= 30 %>
+            <% if recommended_product_score <= 20 %>
+              very-poor-score
+            <% elsif recommended_product_score <= 40 %>
               poor-score
-            <% elsif product_score <= 50 %>
+            <% elsif recommended_product_score <= 60 %>
               average-score
-            <% elsif product_score <= 80 %>
+            <% elsif recommended_product_score <= 80 %>
               good-score
             <% else %>
               excellent-score
