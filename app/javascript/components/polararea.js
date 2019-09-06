@@ -1,12 +1,12 @@
 import Chart from "chart.js"
 
 const chartPolarArea = (chart) => {
-  console.log("racoon");
+
 
 const datas = chart.dataset.values;
-console.dir(datas);
+
 const dataset = JSON.parse(datas);
-console.dir(dataset);
+
 
   var ctx = chart.getContext('2d');
 
@@ -16,7 +16,7 @@ console.dir(dataset);
       data: dataset,
       fill: true,
       lineTension: 0,
-      backgroundColor : ["rgba(39, 222, 189, 0.6)"],
+      backgroundColor : ["rgba(1, 196, 238, 0.6)", "rgba(39, 222, 189, 0.6)", "rgba(64, 135, 226, 0.6)"],
       pointRadius: 2, // supprimer si on veut faire apparaitre les points
       borderWidth: 2,
       borderJoinStyle: 'bevel',
@@ -32,7 +32,8 @@ console.dir(dataset);
     scale: {
       ticks: {
         max: 100,
-        display: true,
+        display: false,
+        stepSize: 50,
       }
     },
     responsive: true,
