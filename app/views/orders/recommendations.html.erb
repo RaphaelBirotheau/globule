@@ -24,6 +24,7 @@
 
             <% recommended_product_score = recommended_product.total_score / 3 %>
               <h3 class="product-score
+
               <% if recommended_product_score <= 20 %>
                 very-poor-score
               <% elsif recommended_product_score <= 40 %>
@@ -152,5 +153,6 @@
     <h2 class=> No orders yet ! Get your ass to the closest shop!</h2>
   </div>
   <% end %>
+
 
 

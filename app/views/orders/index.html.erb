@@ -13,7 +13,7 @@
   </div>
 
 
-    <% @average_score_dated = {}  %>
+  <% @average_score_dated = {}  %>
     <% current_user.orders.each do  |order|
       @average_score_dated[order.purchase_date] = ( order.total_score / 3 )%>
       <% end  %>
@@ -21,10 +21,11 @@
         <%= line_chart @average_score_dated, height: "150px",width: "320px", colors: ["rgba(1, 127, 61, 0.6)", "#666"] %>
     </div>
   <% current_user.orders.each do |order| %>
-  <div class="card m-2">
-      <button type="button" class="btn btn-white btn-lg rounded-lg col-10" style="border: none; text-align: left; background-color: white">
+  <div class="card mb-1" style="border: none;">
+      <button type="button" class="btn btn-white btn-lg rounded-lg" style="border: none; text-align: left; background-color: white">
         <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
         <div class="row">
+
           <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
           <% order_score = order.total_score / 3 %>
           <h3 class="product-score
