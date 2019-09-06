@@ -20,7 +20,7 @@
       <div class="m-4">
         <%= line_chart @average_score_dated, height: "150px",width: "320px", colors: ["rgba(1, 127, 61, 0.6)", "#666"] %>
     </div>
-  <% current_user.orders.each do |order| %>
+  <% current_user.orders.order(purchase_date: desc).each do |order| %>
   <%= link_to order_path(order) do %>
   <div class="card" style="border: none;">
     <button type="button" class="btn btn-link m-0 p-0 rounded-lg" style="border: none; text-align: left; background-color: white; margin-left: 10px;">
