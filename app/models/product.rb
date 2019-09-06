@@ -262,7 +262,6 @@ class Product < ApplicationRecord
 
     product_categories.each do |product_cat|
       product = Product.
-        where.not(id: old_product.id).
         where('categories_hierarchy like ?', "%#{product_cat}%").
         where('health_score >= ?', old_product.health_score).
         where('social_score >= ?', old_product.social_score).
