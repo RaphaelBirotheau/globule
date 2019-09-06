@@ -23,7 +23,7 @@
             @average_score_dated[order.purchase_date] = ( order.total_score / 3 )%>
             <% end  %>
         <div class="" style="align-items: center; margin-top: 35px;">
-            <%= line_chart @average_score_dated, height: "150px",width: "320px", colors: ["#27debd", "#666"] %>
+            <%= line_chart @average_score_dated, height: "250px",width: "310px", colors: ["#27debd", "#666"], max: 100 %>
 
 
 
