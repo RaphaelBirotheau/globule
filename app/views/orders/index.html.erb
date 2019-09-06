@@ -13,13 +13,9 @@
 
   <h4 class="text-center justify-content-center basketscore">AVERAGE BASKET SCORE : <B style="font-size: 17px; position: "><%= average_score.sum / average_score.count %>/100 </B> </h4>
 
-  <% @average_score_dated = {}  %>
-    <% current_user.orders.each do  |order|
-      @average_score_dated[order.purchase_date] = ( order.total_score / 3 )%>
-      <% end  %>
-      <div class="m-4">
-        <%= line_chart @average_score_dated, height: "150px",width: "320px", colors: ["rgba(1, 127, 61, 0.6)", "#666"] %>
-    </div>
+
+
+
   <% current_user.orders.each do |order| %>
   <%= link_to order_path(order) do %>
   <div class="card" style="border: none;">
