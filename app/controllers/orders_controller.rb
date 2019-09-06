@@ -4,7 +4,7 @@ after_action :create_user_profile, only: [:create]
 
 
   def last
-    @order = Order.last
+    @order = Order.where(user: current_user).last
   end
 
   def index
