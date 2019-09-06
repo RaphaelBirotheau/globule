@@ -5,13 +5,13 @@
 
   <div class="px-3 py-2 mb-4 newheader ">
     <h1 class="text-center mb-0 pb-0 ">All my baskets</h1>
+  <% if @orders != nil %>
     <% average_score = []  %>
     <% current_user.orders.each { |order| average_score << (order.total_score / 3) }%>
     <h2>Average basket score: <%= average_score.sum / average_score.count %>/100</h2>
   </div>
 
 
-  <% if @orders != nil %>
   <% current_user.orders.each do |order| %>
   <div class="card mb-1" style="border: none;">
       <button type="button" class="btn btn-white btn-lg rounded-lg" style="border: none; text-align: left; background-color: white">
