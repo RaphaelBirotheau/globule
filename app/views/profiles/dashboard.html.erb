@@ -7,10 +7,41 @@
 
 <div class="container global p-0 m-0 col-sm col-lg ">
 
+  <div class="dashboard">
+
+
+
+
+    <div class="card" id="heading" style="width: 340px;">
+      <div class='pt-3 px-1 m-0'>
+        <h5>basket score progression</h5>
+        <div class="text-center">
+          <h2 class="mb-2">Aim for a perfect 100!</h2>
+        </div>
+          <% @average_score_dated = {}  %>
+          <% current_user.orders.each do  |order|
+            @average_score_dated[order.purchase_date] = ( order.total_score / 3 )%>
+            <% end  %>
+        <div class="" style="align-items: center; margin-top: 35px;">
+            <%= area_chart @average_score_dated, height: "150px",width: "320px", colors: ["rgba(39, 222, 189, 0.4"], max: 100 %>
+
+
+
+        <% average_score = []  %>
+        <% current_user.orders.each { |order| average_score << (order.total_score / 3) }%>
+
+      <h4 class="text-center justify-content-center basketscore mt-2">AVERAGE BASKET SCORE : <B style="font-size: 17px; position: "><%= average_score.sum / average_score.count %>/100 </B> </h4>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
 <!--
 Nutriscore -->
 
-  <div class="dashboard">
     <div class="card" id="heading" style="width: 340px;">
       <div class='pt-3 px-1 m-0'>
         <h5>Nutri-Score total repartition</h5>
