@@ -1,39 +1,47 @@
 <%= javascript_pack_tag 'chartkick' %>
 
 
-  <div class="px-3 py-2 mb-4 newheader ">
+  <div class="px-3 py-3 mb-4 newheader ">
     <h1 class="text-center mb-0 pb-0 ">My consumption habits</h1>
   </div>
 
-<div class="container global">
+<div class="container global p-0 m-0 col-sm col-lg ">
 
 <!--
 Nutriscore -->
 
-  <div class="card my-1">
-    <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 pt-3 px-1'>
+  <div class="dashboard">
+    <div class="card" id="heading" style="width: 340px;">
+      <div class='pt-3 px-1 m-0'>
         <h5>Nutri-Score total repartition</h5>
+
+        <div class="text-center">
+          <h2 class="mb-2">The less of D & E you have, the better you are !</h2>
+        </div>
 
         <%= pie_chart(@nutriscores_rename, width: "320px", height: "240px",colors: ['#017F3D', '#8DC51E', '#FAD000', '#FF8F02', '#ff6384']) %>
 
         <div class="mt-3 text-center">
           <h3>Nutri-score impacts mainly :</h3>
           <p class="mb-2"><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
-          <h3>motto :</h3>
-          <p class="mb-2">The less of D & E you have, the better you are !</p>
         </div>
       </div>
     </div>
-  </div>
+
 
 
 <!-- Novascore-->
 
-  <div class="card my-1">
-    <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 pt-3 px-1'>
-        <h5>NovaScore total repartition</h5>
+
+    <div class="card" id="heading"style="width: 340px;">
+      <div class='pt-3 px-1'>
+        <h5 class="pb-2">NovaScore total repartition</h5>
+
+        <div class="text-center">
+
+          <h2 class="pb-2">The bigger the 1 & 2 slices are, the better you are !</h2>
+        </div>
+
         <%= pie_chart(@novascores, width: "320px", height: "240px", colors: ['#6FD082', '#FFCC00', '#FF6600', '#F90200']) %>
           <%#= pie_chart(
           @novascores.values.map { |h| [h[:string], h[:total]] }.to_h,
@@ -46,19 +54,20 @@ Nutriscore -->
           <h3>Novascore impacts mainly :</h3>
           <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
           <p class="mb-2"><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
-          <h3>motto :</h3>
-          <p class="mb-2">The bigger the 1 & 2 slices are, the better you are !</p>
         </div>
       </div>
     </div>
-  </div>
+
 
 <!-- Additives -->
 
-  <div class="card my-1">
-    <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 pt-3 px-1'>
-        <h5>Additives repartition</h5>
+
+    <div class="card" id="heading" style="width: 340px;">
+      <div class='py-3 px-1'>
+        <h5 class='pb-2'>Additives repartition</h5>
+        <div class="text-center">
+          <h2 class="pb-2">The less additives you have, the better you are !</h2>
+        </div>
         <%= pie_chart(
           @additives_score.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @additives_score.values.map { |h| h[:color] },
@@ -70,19 +79,23 @@ Nutriscore -->
           <h3>Additives impact mainly :</h3>
           <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
           <p class="mb-2"><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
-          <h3>motto :</h3>
-          <p class="mb-2">The less additives you have, the better you are !</p>
         </div>
       </div>
     </div>
-  </div>
+
 
 <!-- Labels -->
 
-  <div class="card my-1">
-    <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 pt-3 px-1'>
-        <h5>Products labels repartition</h5>
+
+    <div class="card" id="heading" style="width: 340px;">
+      <div class='pt-3 px-1'>
+        <h5 class='pb-2'>Products labels repartition</h5>
+
+        <div class="text-center">
+
+          <h2 class="pb-2">The more labels you have, the better you are !</h2>
+        </div>
+
            <%= pie_chart(
           @labels_score.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @labels_score.values.map { |h| h[:color] },
@@ -95,19 +108,21 @@ Nutriscore -->
           <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
           <p class=""><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
           <p class="mb-2"><i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i> </p>
-          <h3>motto :</h3>
-          <p class="mb-2">The more labels you have, the better you are !</p>
         </div>
       </div>
     </div>
-  </div>
+
 
 <!-- Packagings -->
 
-  <div class="card my-1">
-    <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 pt-3 px-1'>
-        <h5>Products packaging types</h5>
+
+    <div class="card" id="heading" style="width: 340px;">
+      <div class='pt-3 px-1'>
+        <h5 class='pb-2'>Products packaging types</h5>
+        <div class="text-center">
+
+          <h2 class="pb-2">The less plastic you buy, the better you are !</h2>
+        </div>
             <%= pie_chart(
           @packaging_score.values.map { |h| [h[:string], h[:total]] }.to_h,
           colors: @packaging_score.values.map { |h| h[:color] },
@@ -120,19 +135,22 @@ Nutriscore -->
           <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
           <p class=""><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
           <p class="mb-2"><i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i> </p>
-          <h3>motto :</h3>
-          <p class="mb-2">The less plastic you buy, the better you are !</p>
+
         </div>
       </div>
     </div>
-  </div>
+
 
 <!-- Origin -->
 
-  <div class="card my-1">
-    <div class="card-dashboard m-0 p-0 " id="heading">
-      <div class='col-12 pt-3 px-1'>
-        <h5>Products origin</h5>
+
+    <div class="card" id="heading" style="width: 340px;">
+      <div class='pt-3 px-1'>
+        <h5 class='pb-2'>Products origin</h5>
+        <div class="text-center">
+
+          <h2 class="pb-2">The closest your products come from, the better you are !</h2>
+        </div>
 
         <%= pie_chart(
           @origin_score.values.map { |h| [h[:string], h[:total]] }.to_h,
@@ -147,8 +165,7 @@ Nutriscore -->
           <p class=""><i class="fas fa-heart" style="color: rgba(255, 60, 2, 0.6)">Health</i> </p>
           <p class=""><i class="fas fa-leaf" style="color: rgba(1, 127, 61, 0.6)">Environment</i> </p>
           <p class="mb-2"><i class="fas fa-users" style="color: rgba(1, 196, 238, 0.6)">Social</i> </p>
-          <h3>motto :</h3>
-          <p class="mb-2">The closest your products come from, the better you are !</p>
+
         </div>
       </div>
     </div>

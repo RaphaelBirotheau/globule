@@ -1,17 +1,17 @@
 <%= javascript_pack_tag 'chartkick' %>
 
 
-<div class="container m-0 p-0">
 
-
-  <div class="px-3 py-2 mb-4 newheader ">
+  <div class="px-3 py-3 mb-4 newheader ">
     <h1 class="text-center mb-0 pb-0 ">All my baskets</h1>
   <% if @orders != nil %>
     <% average_score = []  %>
     <% current_user.orders.each { |order| average_score << (order.total_score / 3) }%>
-    <h2>Average basket score: <%= average_score.sum / average_score.count %>/100</h2>
   </div>
 
+<div class="container global p-0 m-0 col-sm col-lg">
+
+  <h4 class="text-center justify-content-center basketscore">AVERAGE BASKET SCORE : <B style="font-size: 17px; position: "><%= average_score.sum / average_score.count %>/100 </B> </h4>
 
   <% @average_score_dated = {}  %>
     <% current_user.orders.each do  |order|
@@ -21,33 +21,31 @@
         <%= line_chart @average_score_dated, height: "150px",width: "320px", colors: ["rgba(1, 127, 61, 0.6)", "#666"] %>
     </div>
   <% current_user.orders.each do |order| %>
-  <div class="card mb-1" style="border: none;">
-      <button type="button" class="btn btn-white btn-lg rounded-lg" style="border: none; text-align: left; background-color: white">
-        <%= link_to "#{l(order.purchase_date, format: ' %A %e %B')}", order_path(order) %>
-        <div class="row">
-
-          <h2 class="col-10" style="text-align: left;"><%= order.order_items.count%> products</h2>
-          <% order_score = order.total_score / 3 %>
-          <h3 class="product-score
-              <% if order_score <= 20 %>
-                very-poor-score
-              <% elsif order_score <= 40 %>
-                poor-score
-              <% elsif order_score <= 60 %>
-                average-score
-              <% elsif order_score <= 80 %>
-                good-score
-              <% else %>
-                excellent-score
-              <% end %>
-                                    "
-                                  >
-                                    <%= order_score %></h3>
-
-        </div>
-      </button>
-    </div>
-</div>
+  <%= link_to order_path(order) do %>
+  <div class="card" style="border: none;">
+    <button type="button" class="btn btn-link m-0 p-0 rounded-lg" style="border: none; text-align: left; background-color: white; margin-left: 10px;">
+      <div class="cart-card">
+        <h2 style="text-align: left; text-transform: uppercase;"> <B> <%= l(order.purchase_date, format: ' %A %e %B')%> </B> <h2/>
+        <h2 style="text-align: left; flex-grow: 1;"><%= order.order_items.count%> products</h2>
+        <% order_score = order.total_score / 3 %>
+        <h3 class="product-score
+          <% if order_score <= 20 %>
+            very-poor-score
+          <% elsif order_score <= 40 %>
+            poor-score
+          <% elsif order_score <= 60 %>
+            average-score
+          <% elsif order_score <= 80 %>
+            good-score
+          <% else %>
+            excellent-score
+          <% end %>">
+        <%= order_score %></h3>
+      </div>
+    </button>
+  </div>
+    <% end %>
 <% end %>
+</div>
 <% end %>
 

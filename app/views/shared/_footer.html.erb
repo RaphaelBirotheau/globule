@@ -12,7 +12,7 @@
         <% end %>
       </div>
 
-      <div class="">
+      <div class="footer-center">
         <% if @order && @order.persisted? %>
           <% if params[:action] == "recommendations" %>
             <% magic_button_path = current_user.orders.last == @order ? lastbasket_path : order_path(@order) %>
@@ -20,7 +20,7 @@
             <% magic_button_path = recommendations_order_path(@order) %>
           <% end %>
         <%end %>
-        <%= link_to magic_button_path, class: "#{'active' if params[:action] == 'recommendations'}" do %>
+        <%= link_to magic_button_path, class: "#{'active' if params[:action] == 'recommendations'} #{'magic-gray' unless params[:controller] == 'orders' && ['show', 'last', 'recommendations'].include?(params[:action])}", id: "magic-btn" do %>
           <i class="fas fa-magic footer-toggle"></i>
         <% end %>
       </div>
