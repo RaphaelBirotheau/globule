@@ -12,9 +12,7 @@
 <div class="container global p-0 m-0 col-sm col-lg">
 
   <h4 class="text-center justify-content-center basketscore">AVERAGE BASKET SCORE : <B style="font-size: 17px; position: "><%= average_score.sum / average_score.count %>/100 </B> </h4>
-
-
-  <% current_user.orders.order(purchase_date: desc).each do |order| %>
+  <% current_user.orders.order(purchase_date: :desc).each do |order| %>
   <%= link_to order_path(order) do %>
   <div class="card" style="border: none;">
     <button type="button" class="btn btn-link m-0 p-0 rounded-lg" style="border: none; text-align: left; background-color: white; margin-left: 10px;">
