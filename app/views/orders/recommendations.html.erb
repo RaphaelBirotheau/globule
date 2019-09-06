@@ -3,13 +3,11 @@
 
   <div class="px-3 py-2 mb-2 newheader ">
     <h1 class="text-center mb-0 pb-0 ">My magic basket</h1>
-  </div>
-
-    <h4 class="text-center mt-0 mb-2 px-3 basketscore"> MAGIC SCORE : <B style="font-size: 17px;"> 63 /100 </B> </h4>
-
-  </div>
-
-   <% if @order %>
+    </div>
+      <% if @order %>
+        <h4 class="text-center mt-0 mb-2 px-3 basketscore"> MAGIC SCORE : <B style="font-size: 17px;"><%= @order.compute_reco_order_score%>/100 </B>
+          <br>+ <%= (@order.compute_reco_order_score - (@order.total_score / 3)) %> points</h4>
+    </div>
       <% @order.products.uniq.map { |product| Product.recommendation(product.code) }.flatten.each do |recommended_product| %>
     <% if recommended_product && recommended_product.class != String %>
 
@@ -26,18 +24,21 @@
 
             <% recommended_product_score = recommended_product.total_score / 3 %>
               <h3 class="product-score
-                <% if recommended_product_score <= 30 %>
-                  poor-score
-                <% elsif recommended_product_score <= 50 %>
-                  average-score
-                <% elsif recommended_product_score <= 80 %>
-                  good-score
-                <% else %>
-                  excellent-score
-                <% end %>
-                "
-              >
-                <%= recommended_product_score %></h3>
+
+              <% if recommended_product_score <= 20 %>
+                very-poor-score
+              <% elsif recommended_product_score <= 40 %>
+                poor-score
+              <% elsif recommended_product_score <= 60 %>
+                average-score
+              <% elsif recommended_product_score <= 80 %>
+                good-score
+              <% else %>
+                excellent-score
+              <% end %>
+                                    "
+                                  >
+                                    <%= recommended_product_score %></h3>
             </div>
           </button>
         </div>

@@ -37,15 +37,17 @@
 
         <% product_score = product.total_score / 3 %>
           <h3 class="product-score
-            <% if product_score <= 30 %>
-              poor-score
-            <% elsif product_score <= 50 %>
-              average-score
-            <% elsif product_score <= 80 %>
-              good-score
-            <% else %>
-              excellent-score
-            <% end %>
+          <% if product_score <= 20 %>
+            very-poor-score
+          <% elsif product_score <= 40 %>
+            poor-score
+          <% elsif product_score <= 60 %>
+            average-score
+          <% elsif product_score <= 80 %>
+            good-score
+          <% else %>
+            excellent-score
+          <% end %>
             "
           >
             <%= product_score %></h3>
