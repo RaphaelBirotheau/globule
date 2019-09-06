@@ -12,9 +12,10 @@
   align-items: center;
 }
 
-.card-dashboard {
+.dashboard {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .product_icon {

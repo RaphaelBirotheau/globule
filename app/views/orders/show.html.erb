@@ -1,6 +1,6 @@
   <% order = @order  %>
 
-  <div class="px-3 py-2 mb-2 newheader ">
+  <div class="px-3 py-3 mb-2 newheader ">
     <h1 class="text-center mb-0 pb-0 "><%= l(order.purchase_date, format: ' %A %e %B') %></h1>
   </div>
 
@@ -19,7 +19,7 @@
     <% order.products.each do |product| %>
     <% if product.image_front_url != nil  %>
 
-<div class="container global p-0 m-0 ">
+<div class="container global p-0 m-0 col-sm col-lg">
 
 
   <div class="accordion" id="accordionExample">
