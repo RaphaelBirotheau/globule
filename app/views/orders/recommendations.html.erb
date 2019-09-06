@@ -26,18 +26,18 @@
 
             <% recommended_product_score = recommended_product.total_score / 3 %>
               <h3 class="product-score
-                                    <% if recommended_product_score <= 30 %>
-                                      poor-score
-                                    <% elsif recommended_product_score <= 50 %>
-                                      average-score
-                                    <% elsif recommended_product_score <= 80 %>
-                                      good-score
-                                    <% else %>
-                                      excellent-score
-                                    <% end %>
-                                    "
-                                  >
-                                    <%= recommended_product_score %></h3>
+                <% if recommended_product_score <= 30 %>
+                  poor-score
+                <% elsif recommended_product_score <= 50 %>
+                  average-score
+                <% elsif recommended_product_score <= 80 %>
+                  good-score
+                <% else %>
+                  excellent-score
+                <% end %>
+                "
+              >
+                <%= recommended_product_score %></h3>
             </div>
           </button>
         </div>
@@ -152,6 +152,6 @@
     <h2 class=> No orders yet ! Get your ass to the closest shop!</h2>
   </div>
   <% end %>
-    <% end %>
+
 
 
