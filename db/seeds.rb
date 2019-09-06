@@ -27,7 +27,7 @@ PnnsSecondGroup.create(name: 'Bread', health_score: 4, environmental_score: 18, 
 PnnsSecondGroup.create(name: 'Soups', health_score: 3, environmental_score: 18, group_icon: 'soup_icon.png')
 PnnsSecondGroup.create(name: 'Biscuits and cakes', health_score: -5, environmental_score: 15, group_icon: 'cake_icon.png')
 PnnsSecondGroup.create(name: 'Chocolate products', health_score: -5, environmental_score: 15, group_icon: 'chocolate_icon.png')
-PnnsSecondGroup.create(name: 'unknown', health_score: 0, environmental_score: 15, group_icon: 'unkown_icon.png')
+PnnsSecondGroup.create(name: 'unknown', health_score: 0, environmental_score: 15, group_icon: 'unknown_icon.png')
 PnnsSecondGroup.create(name: 'pastries', health_score: -2, environmental_score: 15, group_icon: 'pastries_icon.png')
 PnnsSecondGroup.create(name: 'Salty and fatty products', health_score: -3, environmental_score: 9, group_icon: 'salt-and-fatty_icon.png')
 PnnsSecondGroup.create(name: 'Dressings and sauces', health_score: -4, environmental_score: 9, group_icon: 'sauces_icon.png')
